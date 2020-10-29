@@ -4,41 +4,50 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
     <mat-card class="example-card">
         <mat-card-header>
-            <mat-card-title>Register</mat-card-title>
+            <mat-card-title>{{ 'AUTH.REGISTER' | translate }}</mat-card-title>
         </mat-card-header>
 
         <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly center">
             <mat-form-field appearance="fill">
-                <mat-label>Enter your email</mat-label>
+                <mat-label>{{ 'REGISTER.ENTER_EMAIL' | translate }}</mat-label>
                 <input matInput placeholder="name@example.com" [formControlName]="'email'" required>
-                <mat-error *ngIf="registerForm.get('email').errors?.required">You must enter a value</mat-error>
-                <mat-error *ngIf="registerForm.get('email').errors?.email">Not a valid email</mat-error>
+                <mat-error *ngIf="registerForm.get('email').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('email').errors?.email">{{ 'AUTH.INVALID_EMAIL' | translate }}
+                </mat-error>
                 <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">Email in already in use</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Enter your password</mat-label>
+                <mat-label>{{ 'REGISTER.ENTER_PASSWORD' | translate }}</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" [formControlName]="'password'" required>
                 <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button> -->
-                <mat-error *ngIf="registerForm.get('password').errors?.required">You must enter a value</mat-error>
-                <mat-error *ngIf="registerForm.get('password').errors?.minlength">Must be at least 6 characters long
+                <mat-error *ngIf="registerForm.get('password').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('password').errors?.minlength">
+                    {{ 'AUTH.PASSWORD_LENGTH_ERROR' | translate }}
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Confirm your password</mat-label>
+                <mat-label>{{ 'REGISTER.CONFIRM_PASSWORD' | translate }}</mat-label>
                 <input matInput [type]="'password'" [formControlName]="'confirmPassword'" required>
-                <mat-error *ngIf="registerForm.get('confirmPassword').errors?.required">You must enter a value
-                </mat-error>
-                <mat-error *ngIf="registerForm.get('confirmPassword').errors?.mustMatch">Passwords don't match
+                <mat-error *ngIf="registerForm.get('confirmPassword').errors?.required">
+                    {{ 'AUTH.ENTER_VALUE' | translate }} </mat-error>
+                <mat-error *ngIf="registerForm.get('confirmPassword').errors?.mustMatch">
+                    {{ 'REGISTER.PASSWORD_DONT_MATCH' | translate }}
                 </mat-error>
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button [disabled]="!registerForm.valid" type="submit" mat-button>Register</button>
+            <button [disabled]="!registerForm.valid" type="submit" mat-button>{{ 'AUTH.REGISTER' | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </form>
+
+<select #langselect (change)="translate.use(langselect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</option>
+</select>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './authentication.service';
 
 @Component({
@@ -8,7 +9,12 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   title = 'Hiking Around Romania';
-  constructor(public _authService: AuthenticationService) { }
+  constructor(public translate: TranslateService, public _authService: AuthenticationService) {
+    translate.addLangs(['en', 'ro']);
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|ro/) ? browserLang : 'en');
+  }
 
   ngOnInit(): void {
   }

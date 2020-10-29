@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 
 @Component({
@@ -11,7 +13,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   hide = true;
-  constructor(private formBuilder: FormBuilder, public _authSerivice: AuthenticationService) { }
+  constructor(private formBuilder: FormBuilder,
+    public _authSerivice: AuthenticationService,
+    public translate: TranslateService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
