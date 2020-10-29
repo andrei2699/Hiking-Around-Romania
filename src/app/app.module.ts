@@ -20,6 +20,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 
+import * as firebase from 'firebase';
+import { AuthenticationService } from './authentication.service';
+
+firebase.initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +48,9 @@ import { MatInputModule } from '@angular/material/input'
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

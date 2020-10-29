@@ -13,6 +13,7 @@
                 <input matInput placeholder="name@example.com" [formControlName]="'email'" required>
                 <mat-error *ngIf="registerForm.get('email').errors?.required">You must enter a value</mat-error>
                 <mat-error *ngIf="registerForm.get('email').errors?.email">Not a valid email</mat-error>
+                <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">Email in already in use</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">

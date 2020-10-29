@@ -1,32 +1,55 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private _loginUrl = '';
-  private _registerUrl = '';
 
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private _http: HttpClient, private _router: Router) { }
+  constructor(private _router: Router) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        this.isLoggedIn.next(true);
+        // var displayName = user.displayName;
+        // var email = user.email;
+        // var emailVerified = user.emailVerified;
+        // var photoURL = user.photoURL;
+        // var isAnonymous = user.isAnonymous;
+        // var uid = user.uid;
+        // var providerData = user.providerData;
+        // ...
+      } else {
+        // User is signed out.
+        this.isLoggedIn.next(false);
+      }
+    });
+
+  }
 
   login(email, password) {
-    this.isLoggedIn.next(true);
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
   }
 
   register(email, password) {
-    return this._http.post(this._registerUrl, JSON.stringify({
-      Email: email,
-      Password: password
-    }));
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
   }
 
   logout() {
-    this.isLoggedIn.next(false);
-    this._router.navigate(['/login']);
+    firebase.auth().signOut().then(() => {
+      this._router.navigate(['/login']);
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 }
