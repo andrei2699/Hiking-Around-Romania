@@ -2,9 +2,12 @@
   <span>{{title}}</span>
   <span fxFlex></span>
   <div>
-    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button [routerLink]="['/login']">Login</button>
-    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button [routerLink]="['/register']">Register</button>
-    <button *ngIf="(_authService.isLoggedIn | async)" mat-button (click)="logout()">Logout</button>
+    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button
+      [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate }}</button>
+    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button
+      [routerLink]="['/register']">{{ 'AUTH.REGISTER' | translate }}</button>
+    <button *ngIf="(_authService.isLoggedIn | async)" mat-button
+      (click)="logout()">{{ 'AUTH.LOGOUT' | translate }}</button>
   </div>
 </mat-toolbar>
 <div fxLayout="column" fxLayoutAlign="start center">

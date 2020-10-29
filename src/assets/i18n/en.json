@@ -1,0 +1,16 @@
+{
+    "AUTH": {
+        "ENTER_VALUE": "You must enter a value",
+        "INVALID_EMAIL": "Not a valid email",
+        "PASSWORD_LENGTH_ERROR": "Must be at least 6 characters long",
+        "LOGIN": "Login",
+        "REGISTER": "Register",
+        "LOGOUT": "Logout"
+    },
+    "REGISTER": {
+        "ENTER_EMAIL": "Enter your email",
+        "ENTER_PASSWORD": "Enter your password",
+        "CONFIRM_PASSWORD": "Confirm your password",
+        "PASSWORD_DONT_MATCH": "Passwords don't match"
+    }
+}

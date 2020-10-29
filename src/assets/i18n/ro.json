@@ -1,0 +1,16 @@
+{
+    "AUTH": {
+        "ENTER_VALUE": "Trebuie să introduce-ți o valoare",
+        "INVALID_EMAIL": "Adresă de email invalidă",
+        "PASSWORD_LENGTH_ERROR": "Trebuie să aibă cel puțin 6 caractere",
+        "LOGIN": "Autentificare",
+        "REGISTER": "Înregistrare",
+        "LOGOUT": "Delogare"
+    },
+    "REGISTER": {
+        "ENTER_EMAIL": "Introduce-ți adresa de email",
+        "ENTER_PASSWORD": "Introduce-ți parola",
+        "CONFIRM_PASSWORD": "Confirmă parola",
+        "PASSWORD_DONT_MATCH": "Parolele nu corespund"
+    }
+}

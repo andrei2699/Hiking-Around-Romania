@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class RegisterComponent implements OnInit {
   // password = new FormControl('', [Validators.required]);
   // confirmPassword = new FormControl('', [Validators.required]);
   hide = true;
-  constructor(private formBuilder: FormBuilder, public _authSerivice: AuthenticationService) { }
+  constructor(private formBuilder: FormBuilder,
+    public _authSerivice: AuthenticationService,
+    public translate: TranslateService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
