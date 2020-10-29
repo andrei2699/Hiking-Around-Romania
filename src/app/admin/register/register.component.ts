@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
@@ -11,9 +12,6 @@ import { AuthenticationService } from 'src/app/authentication.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  // email = new FormControl;
-  // password = new FormControl('', [Validators.required]);
-  // confirmPassword = new FormControl('', [Validators.required]);
   hide = true;
   constructor(private formBuilder: FormBuilder,
     public _authSerivice: AuthenticationService,
@@ -31,10 +29,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm.get('email'));
-    console.log(this.registerForm);
-    // this._authSerivice.register(this.userEmail, this.userPassword)
-    //   .subscribe(res => console.log(res));
+    this._authSerivice.register(this.registerForm.get('email').value, this.registerForm.get('password').value)
+      .then(res => console.log(res))
+      .catch((error) => {
+        this.showEmailInUseError();
+      });
   }
 
   matchPasswordsValidator(controlName: string, matchingControlName: string) {
@@ -56,4 +55,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  showEmailInUseError() {
+    let control = this.registerForm.get('email');
+    if (control.errors && !control.errors.mustMatch) {
+      return;
+    }
+    control.setErrors({ emailInUse: true });
+  }
 }

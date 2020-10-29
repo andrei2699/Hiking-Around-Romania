@@ -22,6 +22,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 
+import * as firebase from 'firebase';
+import { AuthenticationService } from './authentication.service';
+
+firebase.initializeApp(environment.firebase);
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -56,7 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
