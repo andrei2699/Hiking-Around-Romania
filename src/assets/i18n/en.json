@@ -12,5 +12,15 @@
         "ENTER_PASSWORD": "Enter your password",
         "CONFIRM_PASSWORD": "Confirm your password",
         "PASSWORD_DONT_MATCH": "Passwords don't match"
+    },
+    "PROFILE": {
+        "NOT_AVAILABLE": "Profile not available",
+        "EDIT": "Edit",
+        "SAVE": "Save",
+        "DESCRIPTION": "Description",
+        "EDIT_DESCRIPTION": "Edit Description"
+    },
+    "EVENT_ORGANIZER": {
+        "CREATE_EVENT": "Create Event"
     }
 }
