@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
 
@@ -9,29 +10,36 @@ import { AuthenticationService } from 'src/app/authentication.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
   registerForm: FormGroup;
   hide = true;
-  constructor(private formBuilder: FormBuilder,
-    public _authSerivice: AuthenticationService,
+  constructor(
+    private _router: Router,
+    private _formBuilder: FormBuilder,
+    public authSerivice: AuthenticationService,
     public translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-
+    this.registerForm = this._formBuilder.group({
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      userType: ['', [Validators.required]]
     }, {
       validator: this.matchPasswordsValidator('password', 'confirmPassword')
     });
   }
 
   onSubmit() {
-    this._authSerivice.register(this.registerForm.get('email').value, this.registerForm.get('password').value)
-      .then(res => console.log(res))
+    this.authSerivice.register(this.registerForm.get('name').value, this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
+      .then(() => {
+        this._router.navigate(['/']);
+      })
       .catch((error) => {
-        this.showEmailInUseError();
+        console.log(error);
+        if (error.code == "auth/email-already-in-use") {
+          this.showEmailInUseError();
+        }
       });
   }
 

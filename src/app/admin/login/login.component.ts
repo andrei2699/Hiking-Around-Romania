@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { error } from 'protractor';
 import { AuthenticationService } from 'src/app/authentication.service';
 
 @Component({
@@ -21,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     this._authSerivice.login(this.loginForm.get('email').value, this.loginForm.get('password').value)
       .then(res => console.log(res));
   }
