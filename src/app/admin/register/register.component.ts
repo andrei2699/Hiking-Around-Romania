@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   hide = true;
-  constructor(private formBuilder: FormBuilder,
-    public _authSerivice: AuthenticationService,
+  constructor(
+    private _router: Router,
+    private _formBuilder: FormBuilder,
+    public authSerivice: AuthenticationService,
     public translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
+    this.registerForm = this._formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -29,7 +31,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this._authSerivice.register(this.registerForm.get('name'), this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
+    this.authSerivice.register(this.registerForm.get('name').value, this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
+      .then(() => {
+        this._router.navigate(['/']);
+      })
       .catch((error) => {
         console.log(error);
         if (error.code == "auth/email-already-in-use") {
