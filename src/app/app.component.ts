@@ -23,8 +23,9 @@ export class AppComponent implements AfterViewInit {
     this._authService.logout();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#323232';
- }
+    this.elementRef.nativeElement.ownerDocument.body.style.margin = '0';
+  }
 
 }

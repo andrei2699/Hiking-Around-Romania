@@ -17,8 +17,10 @@
         "NOT_AVAILABLE": "Profil indisponibil",
         "EDIT": "Editare",
         "SAVE": "Salvare",
+        "DELETE": "Sterge",
         "DESCRIPTION": "Descriere",
-        "EDIT_DESCRIPTION": "Editare Descriere"
+        "EDIT_DESCRIPTION": "Editare Descriere",
+        "ADD_IMAGE": "Adaugă Imagine"
     },
     "EVENT_ORGANIZER": {
         "CREATE_EVENT": "Creare Eveniment"
