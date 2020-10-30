@@ -1,0 +1,78 @@
+<div *ngIf="!organizerProfile">
+    {{ 'PROFILE.NOT_AVAILABLE' | translate }}
+</div>
+
+<mat-toolbar *ngIf="organizerProfile" color="primary">
+    <button mat-button (click)="saveProfile()" [disabled]="!isEditing" fxLayout="row"
+        fxLayoutAlign="space-between center">
+        <mat-icon aria-hidden="false" aria-label="Save Icon">save</mat-icon>
+        <span>{{ 'PROFILE.SAVE' | translate }}</span>
+    </button>
+
+    <div fxFlex></div>
+    <div fxLayout="row">
+        <button mat-button [routerLink]="['/create-event']" fxLayout="row" fxLayoutAlign="space-between  center">
+            <mat-icon aria-hidden="false" aria-label="Create Event Icon">note_add</mat-icon>
+            <span>{{ 'EVENT_ORGANIZER.CREATE_EVENT' | translate }}</span>
+        </button>
+        <button mat-button (click)="editProfile()" [disabled]="isEditing" fxLayout="row"
+            fxLayoutAlign="space-between  center">
+            <mat-icon aria-hidden="false" aria-label="Edit Icon">create</mat-icon>
+            <span>{{ 'PROFILE.EDIT' | translate }}</span>
+        </button>
+    </div>
+</mat-toolbar>
+
+<input type="file" (change)="changeOtherPhoto($event.target.files)" accept="image/x-png,image/gif,image/jpeg"
+    ng2FileSelect hidden #otherPhotoFileInput />
+
+<div *ngIf="organizerProfile" fxLayout="column">
+    <mat-card class="profile-info">
+        <p *ngIf="!isEditing">
+            <img class="profile-photo"
+                src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
+            {{organizerProfile.description}}
+        </p>
+        <div *ngIf="isEditing" fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <img class="profile-photo"
+                    src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
+                <input id="uploadProfilePhoto" mat-button (change)="uploadPhoto($event.target.files)" fxLayout="row"
+                    type="file" accept="image/x-png,image/gif,image/jpeg">
+                <!-- <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
+                <span>{{ 'PROFILE.UPLOAD' | translate }}</span> -->
+            </div>
+            <mat-form-field fxFlex>
+                <mat-label>{{ 'PROFILE.DESCRIPTION' | translate}} </mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="30" matInput
+                    placeholder="{{ 'PROFILE.EDIT_DESCRIPTION' | translate}}"
+                    value="{{organizerProfile.description}}"></textarea>
+            </mat-form-field>
+        </div>
+    </mat-card>
+
+    <div class="profile-info" fxLayout="row wrap" fxLayoutAlign="center center">
+        <mat-card *ngFor="let photoUrl of organizerProfile.otherPhotosUrl; let index = index" style="margin: 16px;"
+            fxLayout="column" fxLayoutAlign="space-between stretch">
+            <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                <img class="other-photos" src="{{photoUrl ? photoUrl : unavailableImageUrl}}" alt="Photo">
+            </mat-card-content>
+            <mat-card-actions *ngIf="isEditing">
+
+                <button (click)="editOtherPhoto(index)" mat-button>{{ 'PROFILE.EDIT' | translate | uppercase }}</button>
+                <button (click)="deleteOtherPhoto(index)"
+                    mat-button>{{ 'PROFILE.DELETE' | translate | uppercase }}</button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-card *ngIf="isEditing && organizerProfile.otherPhotosUrl.length <= maximumNumberOfOtherPhotos"
+            fxLayout="column" fxLayoutAlign="space-between stretch" style="margin:16px;">
+            <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                <img class="other-photos" src="{{unavailableImageUrl}}" alt="Photo">
+            </mat-card-content>
+            <mat-card-actions>
+                <button (click)="addOtherPhoto()" mat-button>{{ 'PROFILE.ADD_IMAGE' | translate | uppercase }}</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

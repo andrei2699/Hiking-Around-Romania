@@ -16,5 +16,17 @@
         "SELECT_USER_TYPE": "Choose your user type",
         "REGULAR_USER": "Regular User",
         "EVENT_ORGANIZER": "Event Organizer"
+    },
+    "PROFILE": {
+        "NOT_AVAILABLE": "Profile not available",
+        "EDIT": "Edit",
+        "SAVE": "Save",
+        "DELETE": "Delete",
+        "DESCRIPTION": "Description",
+        "EDIT_DESCRIPTION": "Edit Description",
+        "ADD_IMAGE": "Add Image"
+    },
+    "EVENT_ORGANIZER": {
+        "CREATE_EVENT": "Create Event"
     }
 }
