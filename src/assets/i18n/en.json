@@ -8,9 +8,13 @@
         "LOGOUT": "Logout"
     },
     "REGISTER": {
+        "ENTER_NAME": "Enter your name",
         "ENTER_EMAIL": "Enter your email",
         "ENTER_PASSWORD": "Enter your password",
         "CONFIRM_PASSWORD": "Confirm your password",
-        "PASSWORD_DONT_MATCH": "Passwords don't match"
+        "PASSWORD_DONT_MATCH": "Passwords don't match",
+        "SELECT_USER_TYPE": "Choose your user type",
+        "REGULAR_USER": "Regular User",
+        "EVENT_ORGANIZER": "Event Organizer"
     }
 }

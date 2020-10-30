@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
-
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  userDisplayName;
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private firebaseFunctions: AngularFireFunctions, private firestore: AngularFirestore) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
         this.isLoggedIn.next(true);
-        // var displayName = user.displayName;
+        this.userDisplayName = user.displayName;
         // var email = user.email;
         // var emailVerified = user.emailVerified;
         // var photoURL = user.photoURL;
@@ -25,6 +27,8 @@ export class AuthenticationService {
         // ...
       } else {
         // User is signed out.
+
+        this.userDisplayName = "";
         this.isLoggedIn.next(false);
       }
     });
@@ -41,8 +45,27 @@ export class AuthenticationService {
       });
   }
 
-  register(email, password) {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  register(name, email, password, userType) {
+    if (name && email && password && userType) {
+      return firebase.auth().createUserWithEmailAndPassword(email, password).then((res) => {
+        console.log(res);
+        let promises = [];
+        promises.push(res.user.updateProfile({
+          displayName: name
+        }).then(() => {
+          this.userDisplayName = name;
+        }));
+        promises.push(this.firebaseFunctions.httpsCallable('writeUserProfile')({
+          name: name,
+          email: email,
+          type: userType
+        }).toPromise());
+        return Promise.all(promises).catch(err => {
+          console.log(err);
+        });
+      });
+    }
+    return new Promise(null);
   }
 
   logout() {

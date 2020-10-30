@@ -1,13 +1,17 @@
-<!-- Aici ar trebui modificat-->
-<!-- cod temporar -->
-
 <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
     <mat-card class="example-card">
-        <mat-card-header>
+        <mat-card-header fxLayoutAlign="center center">
             <mat-card-title>{{ 'AUTH.REGISTER' | translate }}</mat-card-title>
         </mat-card-header>
 
-        <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly center">
+        <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly left">
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'REGISTER.ENTER_NAME' | translate }}</mat-label>
+                <input matInput placeholder="Name" [formControlName]="'name'" required>
+                <mat-error *ngIf="registerForm.get('name').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                </mat-error>
+            </mat-form-field>
+
             <mat-form-field appearance="fill">
                 <mat-label>{{ 'REGISTER.ENTER_EMAIL' | translate }}</mat-label>
                 <input matInput placeholder="name@example.com" [formControlName]="'email'" required>
@@ -25,7 +29,8 @@
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="registerForm.get('password').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                <mat-error *ngIf="registerForm.get('password').errors?.required">
+                    {{ 'AUTH.ENTER_VALUE' | translate }}
                 </mat-error>
                 <mat-error *ngIf="registerForm.get('password').errors?.minlength">
                     {{ 'AUTH.PASSWORD_LENGTH_ERROR' | translate }}
@@ -34,20 +39,28 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>{{ 'REGISTER.CONFIRM_PASSWORD' | translate }}</mat-label>
-                <input matInput [type]="'password'" [formControlName]="'confirmPassword'" required>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControlName]="'confirmPassword'" required>
                 <mat-error *ngIf="registerForm.get('confirmPassword').errors?.required">
                     {{ 'AUTH.ENTER_VALUE' | translate }} </mat-error>
                 <mat-error *ngIf="registerForm.get('confirmPassword').errors?.mustMatch">
                     {{ 'REGISTER.PASSWORD_DONT_MATCH' | translate }}
                 </mat-error>
             </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'REGISTER.SELECT_USER_TYPE' | translate }}</mat-label>
+                <mat-select [formControlName]="'userType'">
+                    <mat-option value="regular_user">{{ 'REGISTER.REGULAR_USER' | translate }}</mat-option>
+                    <mat-option value="event_organizer">{{ 'REGISTER.EVENT_ORGANIZER' | translate }}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </mat-card-content>
+
         <mat-card-actions>
             <button [disabled]="!registerForm.valid" type="submit" mat-button>{{ 'AUTH.REGISTER' | translate }}</button>
         </mat-card-actions>
     </mat-card>
 </form>
-
-<select #langselect (change)="translate.use(langselect.value)">
+<!-- <select #langselect (change)="translate.use(langselect.value)">
     <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</option>
-</select>
+</select> -->

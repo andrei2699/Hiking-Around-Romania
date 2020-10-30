@@ -1,16 +1,20 @@
 {
     "AUTH": {
-        "ENTER_VALUE": "Trebuie să introduce-ți o valoare",
+        "ENTER_VALUE": "Trebuie să introduceți o valoare",
         "INVALID_EMAIL": "Adresă de email invalidă",
-        "PASSWORD_LENGTH_ERROR": "Trebuie să aibă cel puțin 6 caractere",
+        "PASSWORD_LENGTH_ERROR": "Sunt necesare cel puțin 6 caractere",
         "LOGIN": "Autentificare",
         "REGISTER": "Înregistrare",
         "LOGOUT": "Delogare"
     },
     "REGISTER": {
-        "ENTER_EMAIL": "Introduce-ți adresa de email",
-        "ENTER_PASSWORD": "Introduce-ți parola",
+        "ENTER_NAME": "Introduceți numele ",
+        "ENTER_EMAIL": "Introduceți adresa de email",
+        "ENTER_PASSWORD": "Introduceți parola",
         "CONFIRM_PASSWORD": "Confirmă parola",
-        "PASSWORD_DONT_MATCH": "Parolele nu corespund"
+        "PASSWORD_DONT_MATCH": "Parolele nu corespund",
+        "SELECT_USER_TYPE": "Alegeți tipul de utilizator",
+        "REGULAR_USER": "Utilizator Obisnuit",
+        "EVENT_ORGANIZER": "Organizator evenimente"
     }
 }
