@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input'
 
 import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 firebase.initializeApp(environment.firebase);
 
@@ -60,6 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     AuthenticationService
