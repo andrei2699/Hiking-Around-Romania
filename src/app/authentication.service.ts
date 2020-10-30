@@ -41,8 +41,11 @@ export class AuthenticationService {
       });
   }
 
-  register(name, email, password,userType) {
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  register(name, email, password, userType) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then((res) => {
+      res.user.displayName = name;
+      return firebase.auth().updateCurrentUser(res.user);
+    });
   }
 
   logout() {

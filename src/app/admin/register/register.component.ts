@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      userType: ['',[Validators.required]]
+      userType: ['', [Validators.required]]
     }, {
       validator: this.matchPasswordsValidator('password', 'confirmPassword')
     });
@@ -30,9 +30,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this._authSerivice.register(this.registerForm.get('name'), this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
-      .then(res => console.log(res))
       .catch((error) => {
-        this.showEmailInUseError();
+        console.log(error);
+        if (error.code == "auth/email-already-in-use") {
+          this.showEmailInUseError();
+        }
       });
   }
 
