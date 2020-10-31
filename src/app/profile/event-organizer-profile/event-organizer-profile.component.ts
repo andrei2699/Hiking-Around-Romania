@@ -38,7 +38,7 @@ export class EventOrganizerProfileComponent implements OnInit {
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
       const userId = params.get('userId');
-      this.isCurrentUser = this._authService.checkIfIdBelongsToLoggedUser(userId);
+      this.isCurrentUser = true || this._authService.checkIfIdBelongsToLoggedUser(userId);
 
       this._profileService.getProfile(userId)
         .subscribe(res => {

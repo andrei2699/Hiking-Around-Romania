@@ -1,6 +1,12 @@
+@import '../../../custom-app-theme.scss';
+
 .profile-info {
     margin: 32px;
     // padding-right: 48px;
+}
+
+.toolbar-lighter-color {
+    background-color: mat-color($candy-app-primary, lighter);
 }
 
 .profile-photo {

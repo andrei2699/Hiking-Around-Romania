@@ -5,13 +5,12 @@
 
 </mat-card>
 
-<mat-toolbar *ngIf="organizerProfile && isCurrentUser" color="primary">
+<mat-toolbar *ngIf="organizerProfile && isCurrentUser" class="toolbar-lighter-color">
     <button mat-button (click)="saveProfileAndShowSnackbar()" [disabled]="!isEditing" fxLayout="row"
         fxLayoutAlign="space-between center">
         <mat-icon aria-hidden="false" aria-label="Save Icon">save</mat-icon>
         <span>{{ 'PROFILE.SAVE' | translate }}</span>
     </button>
-
     <div fxFlex></div>
     <div fxLayout="row">
         <button mat-button [routerLink]="['/create-event']" fxLayout="row" fxLayoutAlign="space-between  center">
