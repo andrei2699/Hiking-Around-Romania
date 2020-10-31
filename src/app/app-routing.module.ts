@@ -11,7 +11,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'event-organizer-profile', component: EventOrganizerProfileComponent },
+  { path: 'event-organizer-profile/:userId', component: EventOrganizerProfileComponent },
   { path: 'create-event', component: CreateEventComponent },
   // canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   { path: '', redirectTo: '/login', pathMatch: 'full' },
