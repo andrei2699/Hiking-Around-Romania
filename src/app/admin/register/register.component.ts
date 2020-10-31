@@ -3,6 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -10,13 +15,17 @@ import { AuthenticationService } from 'src/app/authentication.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   registerForm: FormGroup;
   hide = true;
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
     public authSerivice: AuthenticationService,
-    public translate: TranslateService) { }
+    public translate: TranslateService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
@@ -34,10 +43,22 @@ export class RegisterComponent implements OnInit {
     this.authSerivice.register(this.registerForm.get('name').value, this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
       .then(() => {
         this._router.navigate(['/']);
+
+        let successful_register_message;
+        this.translate.get('REGISTER.SUCCESSFUL_REGISTRATION').subscribe(msg => {successful_register_message = msg });
+        let end_message;
+        this.translate.get('SNACKBAR.END_NOW').subscribe(msg => {end_message = msg });
+        this.openSnackBar(successful_register_message, end_message);
       })
       .catch((error) => {
         if (error.code == "auth/email-already-in-use") {
-          this.showEmailInUseError();
+          // this.showEmailInUseError();
+
+          let register_error;
+          this.translate.get('REGISTER.EMAIL_USED').subscribe(msg => {register_error = msg });
+          let end_message;
+          this.translate.get('SNACKBAR.END_NOW').subscribe(msg => {end_message = msg });
+          this.openSnackBar(register_error, end_message);
         }
       });
   }
@@ -67,5 +88,14 @@ export class RegisterComponent implements OnInit {
       return;
     }
     control.setErrors({ emailInUse: true });
+  }
+
+  openSnackBar(success, end_now)
+  {
+    this._snackBar.open(success, end_now, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 }

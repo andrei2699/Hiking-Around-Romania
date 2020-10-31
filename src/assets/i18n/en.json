@@ -10,12 +10,18 @@
     "REGISTER": {
         "ENTER_NAME": "Enter your name",
         "ENTER_EMAIL": "Enter your email",
+        "EMAIL_USED": "Email already in use",
         "ENTER_PASSWORD": "Enter your password",
         "CONFIRM_PASSWORD": "Confirm your password",
         "PASSWORD_DONT_MATCH": "Passwords don't match",
         "SELECT_USER_TYPE": "Choose your user type",
+        "SUCCESSFUL_REGISTRATION": "You registered successfully",
         "REGULAR_USER": "Regular User",
         "EVENT_ORGANIZER": "Event Organizer"
+    },
+    "LOGIN": {
+        "INVALID_CREDENTIALS": "The email or password you entered is incorrect",
+        "SUCCESSFUL_LOGIN": "You logged in successfully"
     },
     "PROFILE": {
         "NOT_AVAILABLE": "Profile not available",
@@ -31,6 +37,9 @@
     },
     "EVENT_ORGANIZER": {
         "CREATE_EVENT": "Create Event"
+    },
+    "SNACKBAR": {
+        "END_NOW": "Close"
     },
     "DIALOG": {
         "YES": "Yes",

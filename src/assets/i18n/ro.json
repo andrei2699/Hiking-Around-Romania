@@ -10,12 +10,18 @@
     "REGISTER": {
         "ENTER_NAME": "Introduceți numele ",
         "ENTER_EMAIL": "Introduceți adresa de email",
+        "EMAIL_USED": "Email deja folosit",
         "ENTER_PASSWORD": "Introduceți parola",
         "CONFIRM_PASSWORD": "Confirmă parola",
         "PASSWORD_DONT_MATCH": "Parolele nu corespund",
         "SELECT_USER_TYPE": "Alegeți tipul de utilizator",
+        "SUCCESSFUL_REGISTRATION": "Te-ai înregistrat cu succes",
         "REGULAR_USER": "Utilizator Obisnuit",
         "EVENT_ORGANIZER": "Organizator evenimente"
+    },
+    "LOGIN": {
+        "INVALID_CREDENTIALS": "E-mail sau parola incorecta",
+        "SUCCESSFUL_LOGIN": "Autentificare realizată cu succes"
     },
     "PROFILE": {
         "NOT_AVAILABLE": "Profil indisponibil",
@@ -32,6 +38,9 @@
     "EVENT_ORGANIZER": {
         "CREATE_EVENT": "Creare Eveniment"
     },
+    "SNACKBAR": {
+        "END_NOW": "Închide"
+    }, 
     "DIALOG": {
         "YES": "Da",
         "NO": "Nu",

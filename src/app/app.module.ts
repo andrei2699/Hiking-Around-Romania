@@ -33,6 +33,7 @@ import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
 import { EventOrganizerProfileComponent } from './profile/event-organizer-profile/event-organizer-profile.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { HomeComponent } from './home/home.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 
 firebase.initializeApp(environment.firebase);
@@ -48,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     EventOrganizerProfileComponent,
     CreateEventComponent,
+    HomeComponent,
     ConfirmationDialogComponent
   ],
   imports: [
