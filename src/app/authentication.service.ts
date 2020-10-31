@@ -48,7 +48,7 @@ export class AuthenticationService {
   register(name, email, password, userType) {
     if (name && email && password && userType) {
       return firebase.auth().createUserWithEmailAndPassword(email, password).then((res) => {
-        console.log(res);
+        // console.log(res)
         let promises = [];
         promises.push(res.user.updateProfile({
           displayName: name
@@ -56,8 +56,8 @@ export class AuthenticationService {
           this.userDisplayName = name;
         }));
         promises.push(this.firebaseFunctions.httpsCallable('writeUserProfile')({
+          userId: res.user.uid,
           name: name,
-          email: email,
           type: userType
         }).toPromise());
         return Promise.all(promises).catch(err => {
