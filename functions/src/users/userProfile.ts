@@ -19,18 +19,18 @@ export const getUserProfiles = functions.https.onRequest((request, response) => 
 });
 
 export const writeUserProfile = functions.https.onRequest((request, response) => {
-    cors(request, response, async () => {
+    cors(request, response, () => {
         if (request.body && request.body.data) {
             const data = request.body.data;
             if (data.userId && data.type) {
                 return admin.firestore().doc(`profiles/${data.userId}`).set({
                     userType: data.type,
-                    profileRef: db.doc(`/profiles/${profile.id}`)
+                    name: data.name
                 }, { merge: true })
                     .catch(error => {
                         return response.status(500).send(error);
                     }).then(res => {
-                        return response.send({ res });
+                        return response.send(res);
                     });
             }
         }
