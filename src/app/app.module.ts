@@ -9,6 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireFunctionsModule, ORIGIN, REGION } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage'
 import { environment } from '../environments/environment';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,6 +21,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +33,7 @@ import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
 import { EventOrganizerProfileComponent } from './profile/event-organizer-profile/event-organizer-profile.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -43,7 +47,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     RegisterComponent,
     EventOrganizerProfileComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // for firestore
     AngularFireFunctionsModule,
+    AngularFireStorageModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -71,7 +77,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatGridListModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthenticationService,
