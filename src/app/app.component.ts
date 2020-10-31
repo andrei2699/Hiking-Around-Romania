@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './authentication.service';
 
@@ -9,7 +10,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent implements AfterViewInit {
   title = 'Hiking Around Romania';
-  constructor(public translate: TranslateService, public _authService: AuthenticationService, private elementRef: ElementRef) {
+  constructor(public translate: TranslateService, public _authService: AuthenticationService, private elementRef: ElementRef,private _router: Router) {
     translate.addLangs(['en', 'ro']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
@@ -20,7 +21,11 @@ export class AppComponent implements AfterViewInit {
   }
 
   logout() {
-    this._authService.logout();
+    this._authService.logout().then(() => {
+      this._router.navigate(['/login']);
+    }).catch(error => {
+      console.log(error);
+    });;
   }
 
   ngAfterViewInit() {

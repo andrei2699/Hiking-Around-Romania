@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
 import { EventOrganizerProfileComponent } from './profile/event-organizer-profile/event-organizer-profile.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { HomeComponent } from './home/home.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -43,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     RegisterComponent,
     EventOrganizerProfileComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -71,7 +74,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatGridListModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthenticationService,

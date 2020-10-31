@@ -19,7 +19,7 @@
                 </mat-error>
                 <mat-error *ngIf="registerForm.get('email').errors?.email">{{ 'AUTH.INVALID_EMAIL' | translate }}
                 </mat-error>
-                <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">Email in already in use</mat-error>
+                <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">{{ 'REGISTER.EMAIL_USED' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">

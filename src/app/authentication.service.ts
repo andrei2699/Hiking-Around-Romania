@@ -63,10 +63,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    firebase.auth().signOut().then(() => {
-      this._router.navigate(['/login']);
-    }).catch(function (error) {
-      console.log(error);
-    });
+    return firebase.auth().signOut();
   }
 }
