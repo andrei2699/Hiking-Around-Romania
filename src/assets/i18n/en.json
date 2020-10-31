@@ -15,6 +15,7 @@
         "CONFIRM_PASSWORD": "Confirm your password",
         "PASSWORD_DONT_MATCH": "Passwords don't match",
         "SELECT_USER_TYPE": "Choose your user type",
+        "SUCCESSFUL_REGISTRATION": "You registered successfully",
         "REGULAR_USER": "Regular User",
         "EVENT_ORGANIZER": "Event Organizer"
     },

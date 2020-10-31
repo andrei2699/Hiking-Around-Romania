@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
       })
       .catch((error) => {
         if (error.code == "auth/user-not-found" || error.code == "auth/wrong-password") {
-          this._router.navigate(['/home']);
           let login_error;
           this.translate.get('LOGIN.INVALID_CREDENTIALS').subscribe(msg => {login_error = msg });
           let end_message;
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit {
   openSnackBar(success, end_now)
   {
     this._snackBar.open(success, end_now, {
-      duration: 1500,
+      duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
