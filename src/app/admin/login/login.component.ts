@@ -23,6 +23,15 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this._authSerivice.login(this.loginForm.get('email').value, this.loginForm.get('password').value)
-      .then(res => console.log(res));
+      .then(() => {
+        // todo: redirect user to other page; login succesful
+      })
+      .catch((error) => {
+        console.log(error);
+        // todo display error mesage to user
+        if (error.code == "auth/user-not-found" || error.code == "auth/wrong-password") {
+          console.log("Email or password incorrect");
+        }
+      });
   }
 }
