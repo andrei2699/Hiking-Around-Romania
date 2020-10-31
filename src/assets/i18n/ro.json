@@ -29,12 +29,22 @@
         "DELETE": "Sterge",
         "DESCRIPTION": "Descriere",
         "EDIT_DESCRIPTION": "Editare Descriere",
-        "ADD_IMAGE": "Adaugă Imagine"
+        "ADD_IMAGE": "Adaugă Imagine",
+        "UPLOAD": "Incarcă",
+        "PROFILE_SAVED": "Profil salvat!",
+        "CLOSE": "Inchide"
     },
     "EVENT_ORGANIZER": {
         "CREATE_EVENT": "Creare Eveniment"
     },
     "SNACKBAR": {
         "END_NOW": "Închide"
+    }, 
+    "DIALOG": {
+        "YES": "Da",
+        "NO": "Nu",
+        "CANCEL": "Anulare",
+        "DELETE_ELEMENT": "Sterge element",
+        "ARE_YOU_SURE_DELETE_ELEMENT": "Sunteți sigura ca doriți să ștergeți elementul ?"
     }
 }

@@ -1,14 +1,16 @@
-<div *ngIf="!organizerProfile">
-    {{ 'PROFILE.NOT_AVAILABLE' | translate }}
-</div>
+<mat-card *ngIf="!organizerProfile" style="margin: 16px;">
+    <mat-card-title>
+        {{ 'PROFILE.NOT_AVAILABLE' | translate }}
+    </mat-card-title>
 
-<mat-toolbar *ngIf="organizerProfile" color="primary">
-    <button mat-button (click)="saveProfile()" [disabled]="!isEditing" fxLayout="row"
+</mat-card>
+
+<mat-toolbar *ngIf="organizerProfile && isCurrentUser" class="toolbar-lighter-color">
+    <button mat-button (click)="saveProfileAndShowSnackbar()" [disabled]="!isEditing" fxLayout="row"
         fxLayoutAlign="space-between center">
         <mat-icon aria-hidden="false" aria-label="Save Icon">save</mat-icon>
         <span>{{ 'PROFILE.SAVE' | translate }}</span>
     </button>
-
     <div fxFlex></div>
     <div fxLayout="row">
         <button mat-button [routerLink]="['/create-event']" fxLayout="row" fxLayoutAlign="space-between  center">
@@ -28,6 +30,9 @@
 
 <div *ngIf="organizerProfile" fxLayout="column">
     <mat-card class="profile-info">
+        <mat-card-title>
+            {{organizerProfile.name}}
+        </mat-card-title>
         <p *ngIf="!isEditing">
             <img class="profile-photo"
                 src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
@@ -37,16 +42,20 @@
             <div fxLayout="column" fxLayoutAlign="start center">
                 <img class="profile-photo"
                     src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
-                <input id="uploadProfilePhoto" mat-button (change)="uploadPhoto($event.target.files)" fxLayout="row"
-                    type="file" accept="image/x-png,image/gif,image/jpeg">
-                <!-- <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
-                <span>{{ 'PROFILE.UPLOAD' | translate }}</span> -->
+                <input #profilePhotoFileInput id="uploadProfilePhoto" mat-button
+                    (change)="uploadPhoto($event.target.files)" hidden type="file"
+                    accept="image/x-png,image/gif,image/jpeg">
+                <button mat-button (click)="openProfilePhotoDialog()" fxLayout="row"
+                    fxLayoutAlign="space-between  center">
+                    <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
+                    <span>{{ 'PROFILE.UPLOAD' | translate }}</span>
+                </button>
             </div>
             <mat-form-field fxFlex>
                 <mat-label>{{ 'PROFILE.DESCRIPTION' | translate}} </mat-label>
                 <textarea cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="30" matInput
                     placeholder="{{ 'PROFILE.EDIT_DESCRIPTION' | translate}}"
-                    value="{{organizerProfile.description}}"></textarea>
+                    [(ngModel)]="organizerProfile.description"></textarea>
             </mat-form-field>
         </div>
     </mat-card>
@@ -58,14 +67,14 @@
                 <img class="other-photos" src="{{photoUrl ? photoUrl : unavailableImageUrl}}" alt="Photo">
             </mat-card-content>
             <mat-card-actions *ngIf="isEditing">
-
                 <button (click)="editOtherPhoto(index)" mat-button>{{ 'PROFILE.EDIT' | translate | uppercase }}</button>
                 <button (click)="deleteOtherPhoto(index)"
                     mat-button>{{ 'PROFILE.DELETE' | translate | uppercase }}</button>
             </mat-card-actions>
         </mat-card>
 
-        <mat-card *ngIf="isEditing && organizerProfile.otherPhotosUrl.length <= maximumNumberOfOtherPhotos"
+        <mat-card
+            *ngIf="isEditing && organizerProfile.otherPhotosUrl && organizerProfile.otherPhotosUrl.length < maximumNumberOfOtherPhotos"
             fxLayout="column" fxLayoutAlign="space-between stretch" style="margin:16px;">
             <mat-card-content fxLayout="row" fxLayoutAlign="center center">
                 <img class="other-photos" src="{{unavailableImageUrl}}" alt="Photo">

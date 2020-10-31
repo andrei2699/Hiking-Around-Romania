@@ -5,43 +5,32 @@ const cors = corsModule({ origin: true })
 
 // admin.initializeApp(functions.config().firebase)
 
-// export const getUserProfiles = functions.https.onRequest((request, response) => {
-//     cors(request, response, () => {
-//         return admin.firestore().doc('profiles/name@example.com').get()
-//             .then(snapshot => {
-//                 const data = snapshot.data();
-//                 return response.send({ data: data });
-//             })
-//             .catch(error => {
-//                 console.log(error);
-//                 // return error;
-//                 return response.status(500).send(error);
-//             })
-//     });
-// });
+export const getUserProfiles = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        const db = admin.firestore();
+        if (request.body && request.body.data && request.body.data.userId) {
+            const profile = await db.doc(`profiles/${request.body.data.userId}`).get();
+            return profile.data();
+        }
+
+        const allProfiles = await db.collection('profiles').get();
+        return allProfiles.docs.map(doc => doc.data);
+    });
+});
 
 export const writeUserProfile = functions.https.onRequest((request, response) => {
-    cors(request, response, async () => {
+    cors(request, response, () => {
         if (request.body && request.body.data) {
             const data = request.body.data;
-            if (data.email && data.type) {
-
-                const db = admin.firestore();
-
-                const profile = await db.collection('profiles').add({
-                    userName: data.name,
-                    userType: data.type
-                });
-
-                return db.doc(`userData/${data.email}`).set({
-                    userName: data.name,
+            if (data.userId && data.type) {
+                return admin.firestore().doc(`profiles/${data.userId}`).set({
                     userType: data.type,
-                    profileRef: db.doc(`/profiles/${profile.id}`)
+                    name: data.name
                 }, { merge: true })
                     .catch(error => {
                         return response.status(500).send(error);
                     }).then(res => {
-                        return response.send({ res });
+                        return response.send(res);
                     });
             }
         }

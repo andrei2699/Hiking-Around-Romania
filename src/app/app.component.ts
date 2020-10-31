@@ -10,7 +10,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent implements AfterViewInit {
   title = 'Hiking Around Romania';
-  constructor(public translate: TranslateService, public _authService: AuthenticationService, private elementRef: ElementRef,private _router: Router) {
+  constructor(public translate: TranslateService, public _authService: AuthenticationService, private _router: Router, private elementRef: ElementRef) {
     translate.addLangs(['en', 'ro']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
