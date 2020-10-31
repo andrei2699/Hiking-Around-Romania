@@ -36,13 +36,7 @@ export class AuthenticationService {
   }
 
   login(email, password) {
-    return firebase.auth().signInWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
   register(name, email, password, userType) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/authentication.service';
@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
         this._router.navigate(['/']);
       })
       .catch((error) => {
-        console.log(error);
         if (error.code == "auth/email-already-in-use") {
           this.showEmailInUseError();
         }
