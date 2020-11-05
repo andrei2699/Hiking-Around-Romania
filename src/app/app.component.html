@@ -26,6 +26,10 @@
     </button>
 
     <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/']">
+        <mat-icon>home</mat-icon>
+        <span>{{ 'AUTH.TO_MAIN_PAGE' | translate }}</span>
+      </button>
       <button mat-menu-item [routerLink]="['/about-us']">
         <mat-icon>help</mat-icon>
         <span>{{ 'SETTINGS.ABOUT_US' | translate }}</span>
