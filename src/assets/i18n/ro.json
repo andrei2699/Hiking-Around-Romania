@@ -54,6 +54,7 @@
         "CART": "Coș de cumpărături"
     },
     "SETTINGS": {
-        "LANGUAGE": "Limbă"
+        "LANGUAGE": "Limbă",
+        "ABOUT_US": "Despre Noi"
     }
 }

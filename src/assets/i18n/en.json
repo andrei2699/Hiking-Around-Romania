@@ -54,6 +54,7 @@
         "CART": "Shopping Cart"
     },
     "SETTINGS": {
-        "LANGUAGE": "Language"
+        "LANGUAGE": "Language",
+        "ABOUT_US": "About Us"
     }
 }

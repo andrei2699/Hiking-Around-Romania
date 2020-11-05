@@ -38,6 +38,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ShoppingCartPageComponent } from './shopping-cart-page/shopping-cart-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateEventComponent,
     HomeComponent,
     ConfirmationDialogComponent,
-    ShoppingCartPageComponent
+    ShoppingCartPageComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserAnimationsModule,

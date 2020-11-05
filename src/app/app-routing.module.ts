@@ -7,6 +7,7 @@ import { EventOrganizerProfileComponent } from './profile/event-organizer-profil
 import { CreateEventComponent } from './create-event/create-event.component';
 import { HomeComponent } from './home/home.component';
 import { ShoppingCartPageComponent } from './shopping-cart-page/shopping-cart-page.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'event-organizer-profile/:userId', component: EventOrganizerProfileComponent },
   { path: 'create-event', component: CreateEventComponent },
   { path: 'shopping-cart', component: ShoppingCartPageComponent },
+  { path: 'about-us', component: AboutUsComponent },
   // canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   { path: '', component: HomeComponent },
   { path: '**', redirectTo: '/' }
