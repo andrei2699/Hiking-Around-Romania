@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage'
@@ -90,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatBadgeModule,
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    // { provide: REGION, useValue: 'europe-west1' }
   ],
   bootstrap: [AppComponent]
 })

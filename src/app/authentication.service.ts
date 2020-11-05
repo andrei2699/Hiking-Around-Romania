@@ -51,7 +51,9 @@ export class AuthenticationService {
         }).then(() => {
           this.userDisplayName = name;
         }));
-        promises.push(this.firebaseFunctions.httpsCallable('writeUserProfile')({
+
+        const writeUserProfile = this.firebaseFunctions.httpsCallable('writeUserProfile');
+        promises.push(writeUserProfile({
           userId: res.user.uid,
           name: name,
           type: userType
