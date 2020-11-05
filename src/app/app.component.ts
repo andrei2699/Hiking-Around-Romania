@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './authentication.service';
@@ -10,7 +10,11 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent implements AfterViewInit {
   title = 'Hiking Around Romania';
-  constructor(public translate: TranslateService, public _authService: AuthenticationService, private _router: Router, private elementRef: ElementRef) {
+
+  constructor(public translate: TranslateService,
+    public authService: AuthenticationService,
+    public router: Router,
+    private _elementRef: ElementRef) {
     translate.addLangs(['en', 'ro']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
@@ -21,16 +25,22 @@ export class AppComponent implements AfterViewInit {
   }
 
   logout() {
-    this._authService.logout().then(() => {
-      this._router.navigate(['/login']);
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);
     }).catch(error => {
       console.log(error);
     });;
   }
 
   ngAfterViewInit() {
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#323232';
-    this.elementRef.nativeElement.ownerDocument.body.style.margin = '0';
+    this._elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#323232';
+    this._elementRef.nativeElement.ownerDocument.body.style.margin = '0';
   }
 
+  goToProfile() {
+    const userId = this.authService.getCurrentUserId();
+    if (userId) {
+      this.router.navigate(['/event-organizer-profile', userId]);
+    }
+  }
 }

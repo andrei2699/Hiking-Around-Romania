@@ -19,7 +19,8 @@
                 </mat-error>
                 <mat-error *ngIf="registerForm.get('email').errors?.email">{{ 'AUTH.INVALID_EMAIL' | translate }}
                 </mat-error>
-                <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">{{ 'REGISTER.EMAIL_USED' | translate }}</mat-error>
+                <mat-error *ngIf="registerForm.get('email').errors?.emailInUse">{{ 'REGISTER.EMAIL_USED' | translate }}
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -61,6 +62,3 @@
         </mat-card-actions>
     </mat-card>
 </form>
-<!-- <select #langselect (change)="translate.use(langselect.value)">
-    <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</option>
-</select> -->

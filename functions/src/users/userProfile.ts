@@ -1,39 +1,47 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin'
-import * as corsModule from 'cors';
-const cors = corsModule({ origin: true })
 
 // admin.initializeApp(functions.config().firebase)
 
-export const getUserProfiles = functions.https.onRequest((request, response) => {
-    cors(request, response, async () => {
+export const getUserProfiles = functions
+    .region('europe-west3')
+    .https.onRequest((request, response) => {
         const db = admin.firestore();
         if (request.body && request.body.data && request.body.data.userId) {
-            const profile = await db.doc(`profiles/${request.body.data.userId}`).get();
-            return profile.data();
+            db.doc(`profiles/${request.body.data.userId}`).get()
+                .then(profile => {
+                    response.send(profile.data());
+                }).catch(error => {
+                    response.status(500).send(error);
+                });
         }
 
-        const allProfiles = await db.collection('profiles').get();
-        return allProfiles.docs.map(doc => doc.data);
+        db.collection('profiles').get()
+            .then(allProfiles => {
+                const data = allProfiles.docs.map(doc => doc.data);
+                response.set(data);
+            }).catch(error => {
+                response.status(500).send(error);
+            });;
     });
-});
 
-export const writeUserProfile = functions.https.onRequest((request, response) => {
-    cors(request, response, () => {
+export const writeUserProfile = functions
+    .region('europe-west3')
+    .https.onRequest((request, response) => {
         if (request.body && request.body.data) {
             const data = request.body.data;
             if (data.userId && data.type) {
-                return admin.firestore().doc(`profiles/${data.userId}`).set({
+                admin.firestore().doc(`profiles/${data.userId}`).set({
                     userType: data.type,
                     name: data.name
                 }, { merge: true })
+                    .then(res => {
+                        response.send(res);
+                    })
                     .catch(error => {
-                        return response.status(500).send(error);
-                    }).then(res => {
-                        return response.send(res);
+                        response.status(500).send(error);
                     });
             }
         }
-        return response.status(500).send({ error: 'Invalid request', req: request.body });
+        response.status(500).send({ error: 'Invalid request', req: request.body });
     });
-});

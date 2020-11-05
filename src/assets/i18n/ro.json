@@ -5,7 +5,8 @@
         "PASSWORD_LENGTH_ERROR": "Sunt necesare cel puțin 6 caractere",
         "LOGIN": "Autentificare",
         "REGISTER": "Înregistrare",
-        "LOGOUT": "Delogare"
+        "LOGOUT": "Delogare",
+        "TO_MAIN_PAGE": "Spre Pagina Principală"
     },
     "REGISTER": {
         "ENTER_NAME": "Introduceți numele ",
@@ -33,19 +34,26 @@
         "ADD_IMAGE": "Adaugă Imagine",
         "UPLOAD": "Incarcă",
         "PROFILE_SAVED": "Profil salvat!",
-        "CLOSE": "Inchide"
+        "CLOSE": "Inchide",
+        "VIEW": "Vezi Profil"
     },
     "EVENT_ORGANIZER": {
         "CREATE_EVENT": "Creare Eveniment"
     },
     "SNACKBAR": {
         "END_NOW": "Închide"
-    }, 
+    },
     "DIALOG": {
         "YES": "Da",
         "NO": "Nu",
         "CANCEL": "Anulare",
         "DELETE_ELEMENT": "Sterge element",
         "ARE_YOU_SURE_DELETE_ELEMENT": "Sunteți sigura ca doriți să ștergeți elementul ?"
+    },
+    "SHOPPING": {
+        "CART": "Coș de cumpărături"
+    },
+    "SETTINGS": {
+        "LANGUAGE": "Limbă"
     }
 }
