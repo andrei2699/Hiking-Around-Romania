@@ -1,13 +1,44 @@
 <mat-toolbar color="primary">
-  <span>{{title}}</span>
+  <a routerLink="/">{{title}}</a>
   <span fxFlex></span>
   <div>
-    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button
+    <button *ngIf="!(authService.isLoggedIn | async) && (router.url == '/login' || router.url == '/register')"
+      mat-button [routerLink]="['/']">
+      <span>{{ 'AUTH.TO_MAIN_PAGE' | translate }}</span>
+      <mat-icon class="margin-left-8">home</mat-icon>
+    </button>
+    <button *ngIf="!(authService.isLoggedIn | async)" mat-button
       [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate }}</button>
-    <button *ngIf="!(_authService.isLoggedIn | async)" mat-button
+    <button *ngIf="!(authService.isLoggedIn | async)" mat-button
       [routerLink]="['/register']">{{ 'AUTH.REGISTER' | translate }}</button>
-    <button *ngIf="(_authService.isLoggedIn | async)" mat-button
-      (click)="logout()">{{ 'AUTH.LOGOUT' | translate }}</button>
+    <button *ngIf="(authService.isLoggedIn | async)" mat-button [routerLink]="['/shopping-cart']">
+      <span>{{ 'SHOPPING.CART' | translate }}</span>
+      <mat-icon class="margin-left-8" [matBadge]="7" matBadgeColor="accent">shopping_cart</mat-icon>
+    </button>
+    <button *ngIf="(authService.isLoggedIn | async)" mat-button (click)="goToProfile()">
+      <span>{{ 'PROFILE.VIEW' | translate }}</span>
+      <mat-icon class="margin-left-8">account_circle</mat-icon>
+    </button>
+
+    <button *ngIf="(authService.isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="menu"
+      aria-label="Icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="languageMenu">
+        <span>{{ 'SETTINGS.LANGUAGE' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{ 'AUTH.LOGOUT' | translate }}</span>
+      </button>
+    </mat-menu>
+    <mat-menu #languageMenu="matMenu">
+      <button (click)="translate.use('en')" mat-menu-item>English</button>
+      <button (click)="translate.use('ro')" mat-menu-item>Română</button>
+    </mat-menu>
+
   </div>
 </mat-toolbar>
 <div>

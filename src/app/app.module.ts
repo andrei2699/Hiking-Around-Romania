@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { AngularFireFunctionsModule, ORIGIN, REGION } from '@angular/fire/functions';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage'
@@ -23,6 +23,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +37,7 @@ import { EventOrganizerProfileComponent } from './profile/event-organizer-profil
 import { CreateEventComponent } from './create-event/create-event.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ShoppingCartPageComponent } from './shopping-cart-page/shopping-cart-page.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -50,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventOrganizerProfileComponent,
     CreateEventComponent,
     HomeComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ShoppingCartPageComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -81,12 +85,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatOptionModule,
     MatSelectModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatBadgeModule,
   ],
   providers: [
-    AuthenticationService,
-    { provide: REGION, useValue: 'us-central1' },
-    { provide: ORIGIN, useValue: 'http://localhost:5000' }
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
