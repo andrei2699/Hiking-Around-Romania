@@ -26,7 +26,12 @@
     </button>
 
     <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/about-us']">
+        <mat-icon>help</mat-icon>
+        <span>{{ 'SETTINGS.ABOUT_US' | translate }}</span>
+      </button>
       <button mat-menu-item [matMenuTriggerFor]="languageMenu">
+        <mat-icon>language</mat-icon>
         <span>{{ 'SETTINGS.LANGUAGE' | translate }}</span>
       </button>
       <button mat-menu-item (click)="logout()">
@@ -34,6 +39,7 @@
         <span>{{ 'AUTH.LOGOUT' | translate }}</span>
       </button>
     </mat-menu>
+
     <mat-menu #languageMenu="matMenu">
       <button (click)="translate.use('en')" mat-menu-item>English</button>
       <button (click)="translate.use('ro')" mat-menu-item>Română</button>
