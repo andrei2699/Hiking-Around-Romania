@@ -5,8 +5,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { GoogleMapsModule } from '@angular/google-maps';
 
-import { AngularFireFunctionsModule, REGION } from '@angular/fire/functions';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage'
@@ -25,20 +26,23 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
-
+import { MatDividerModule } from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './admin/login/login.component';
-import { RegisterComponent } from './admin/register/register.component';
+
 
 import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
 import { EventOrganizerProfileComponent } from './profile/event-organizer-profile/event-organizer-profile.component';
-import { CreateEventComponent } from './create-event/create-event.component';
+import { CreateEventComponent } from './events/create-event/create-event.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ShoppingCartPageComponent } from './shopping-cart-page/shopping-cart-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { EventDetailsComponent } from './events/event-details/event-details.component';
+import { PhotoArrayComponent } from './photo-array/photo-array.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -56,11 +60,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ConfirmationDialogComponent,
     ShoppingCartPageComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    EventDetailsComponent,
+    PhotoArrayComponent
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
+    GoogleMapsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -90,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSnackBarModule,
     MatMenuModule,
     MatBadgeModule,
+    MatDividerModule,
   ],
   providers: [
     AuthenticationService,

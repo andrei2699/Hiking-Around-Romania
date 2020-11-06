@@ -51,10 +51,24 @@
         "ARE_YOU_SURE_DELETE_ELEMENT": "Are you sure you want to delete this element?"
     },
     "SHOPPING": {
-        "CART": "Shopping Cart"
+        "CART": "Shopping Cart",
+        "ADD_TO_CART": "Add to Cart"
     },
     "SETTINGS": {
         "LANGUAGE": "Language",
         "ABOUT_US": "About Us"
+    },
+    "EVENT_DETAILS": {
+        "MAP": "Map",
+        "BILLING_INFORMATION": "Billing Information",
+        "EVENT_INFORMATION": "Event Information",
+        "NOT_AVAILABLE": "Event Informations Not Available",
+        "ORGANIZER_NAME": "Organizer Name",
+        "ACCOMODATION": "Accomodation",
+        "TRANSPORT": "Transport",
+        "EVENT_PRICE": "Event Price",
+        "TRANSPORT_PRICE": "Transport Price",
+        "ACCOMODATION_PRICE": "Accomodation Price",
+        "TOTAL_PRICE": "Total Price"
     }
 }

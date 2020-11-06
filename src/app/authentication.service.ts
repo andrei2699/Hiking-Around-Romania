@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { filter, flatMap, map, mergeMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +13,18 @@ export class AuthenticationService {
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   userDisplayName;
 
-  constructor(private firebaseFunctions: AngularFireFunctions) {
+  private currentUserBehaviorSubject: BehaviorSubject<firebase.User> = new BehaviorSubject(undefined);
+
+  constructor(private firebaseFunctions: AngularFireFunctions,
+    private firestore: AngularFirestore) {
+
     firebase.auth().onAuthStateChanged((user) => {
+      this.currentUserBehaviorSubject.next(user);
       if (user) {
         // User is signed in.
         this.isLoggedIn.next(true);
         this.userDisplayName = user.displayName;
+
         // var email = user.email;
         // var emailVerified = user.emailVerified;
         // var photoURL = user.photoURL;
@@ -33,8 +41,9 @@ export class AuthenticationService {
   }
 
   checkIfIdBelongsToLoggedUser(idToBeTested) {
-    const user = firebase.auth().currentUser;
-    return user && user.uid == idToBeTested;
+    return this.currentUserBehaviorSubject.pipe(map(user => {
+      return user && user.uid == idToBeTested;
+    }));
   }
 
   login(email, password) {
@@ -71,8 +80,50 @@ export class AuthenticationService {
   }
 
   getCurrentUserId() {
-    if (firebase.auth().currentUser)
-      return firebase.auth().currentUser.uid;
-    return undefined;
+    return this.currentUserBehaviorSubject.pipe(map(user => {
+      if (user)
+        return user.uid;
+      return undefined;
+    }));
+  }
+
+  isCurrentUserRegularUser() {
+    return this.currentUserBehaviorSubject.pipe(
+      filter(u => {
+        if (u && u.uid)
+          return true;
+        return false;
+      }), mergeMap(user => {
+        return this.firestore.doc(`profiles/${user.uid}`).get()
+          .pipe(map(profile => {
+            const data = profile.data();
+            if (data) {
+              if (data.userType == 'regular_user') {
+                return true;
+              }
+            }
+            return false;
+          }));
+      }));
+  }
+
+  isCurrentUserOrganizer() {
+    return this.currentUserBehaviorSubject.pipe(
+      filter(u => {
+        if (u && u.uid)
+          return true;
+        return false;
+      }), mergeMap(user => {
+        return this.firestore.doc(`profiles/${user.uid}`).get()
+          .pipe(map(profile => {
+            const data = profile.data();
+            if (data) {
+              if (data.userType == 'event_organizer') {
+                return true;
+              }
+            }
+            return false;
+          }));
+      }));
   }
 }
