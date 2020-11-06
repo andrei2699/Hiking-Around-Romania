@@ -51,10 +51,24 @@
         "ARE_YOU_SURE_DELETE_ELEMENT": "Sunteți sigura ca doriți să ștergeți elementul ?"
     },
     "SHOPPING": {
-        "CART": "Coș de cumpărături"
+        "CART": "Coș de cumpărături",
+        "ADD_TO_CART": "Adaugă în Coș"
     },
     "SETTINGS": {
         "LANGUAGE": "Limbă",
         "ABOUT_US": "Despre Noi"
+    },
+    "EVENT_DETAILS": {
+        "MAP": "Hartă",
+        "BILLING_INFORMATION": "Informații Plată",
+        "EVENT_INFORMATION": "Informații Eveniment",
+        "NOT_AVAILABLE": "Informații Eveniment Indisponibile",
+        "ORGANIZER_NAME": "Nume Organizator",
+        "ACCOMODATION": "Cazare",
+        "TRANSPORT": "Transport",
+        "EVENT_PRICE": "Preț Eveniment",
+        "TRANSPORT_PRICE": "Preț Transport",
+        "ACCOMODATION_PRICE": "Preț Cazare",
+        "TOTAL_PRICE": "Preț Total"
     }
 }

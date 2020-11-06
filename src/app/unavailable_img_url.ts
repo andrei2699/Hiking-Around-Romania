@@ -1,0 +1,1 @@
+export const UNAVAILABLE_IMG_URL: string = 'https://www.metrorollerdoors.com.au/wp-content/uploads/2018/02/unavailable-image.jpg';

@@ -1,0 +1,25 @@
+<input type="file" (change)="changeOtherPhoto($event.target.files)" accept="image/x-png,image/gif,image/jpeg"
+    ng2FileSelect hidden #otherPhotoFileInput />
+
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card *ngFor="let photoUrl of photoUrlArray; let index = index" style="margin: 16px;" fxLayout="column"
+        fxLayoutAlign="space-between stretch">
+        <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+            <img class="photo-in-card" src="{{photoUrl ? photoUrl : unavailableImageUrl}}" alt="Photo">
+        </mat-card-content>
+        <mat-card-actions *ngIf="isEditing">
+            <button (click)="editOtherPhoto(index)" mat-button>{{ 'PROFILE.EDIT' | translate | uppercase }}</button>
+            <button (click)="deleteOtherPhoto(index)" mat-button>{{ 'PROFILE.DELETE' | translate | uppercase }}</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="isEditing && photoUrlArray && photoUrlArray.length < maximumNumberOfOtherPhotos" fxLayout="column"
+        fxLayoutAlign="space-between stretch" style="margin:16px;">
+        <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+            <img class="photo-in-card" src="{{unavailableImageUrl}}" alt="Photo">
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="addOtherPhoto()" mat-button>{{ 'PROFILE.ADD_IMAGE' | translate | uppercase }}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,33 @@
+@import '../../../custom-app-theme.scss';
+
+.main-div {
+    margin: 32px;
+}
+
+.billing-info {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.main-event-photo {
+    max-width: 650px;
+    min-width: 400px;
+    margin: 16px;
+}
+
+.info-element-title {
+    margin-top: 16px;
+}
+
+.info-element-row {
+    margin-right: 16px;
+}
+
+.info-element-divider {
+    margin-bottom: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: mat-color($candy-app-primary);
+}

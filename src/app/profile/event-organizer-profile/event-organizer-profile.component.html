@@ -2,7 +2,6 @@
     <mat-card-title>
         {{ 'PROFILE.NOT_AVAILABLE' | translate }}
     </mat-card-title>
-
 </mat-card>
 
 <mat-toolbar *ngIf="organizerProfile && isCurrentUser" class="toolbar-lighter-color">
@@ -24,9 +23,6 @@
         </button>
     </div>
 </mat-toolbar>
-
-<input type="file" (change)="changeOtherPhoto($event.target.files)" accept="image/x-png,image/gif,image/jpeg"
-    ng2FileSelect hidden #otherPhotoFileInput />
 
 <div *ngIf="organizerProfile" fxLayout="column">
     <mat-card class="profile-info">
@@ -60,28 +56,6 @@
         </div>
     </mat-card>
 
-    <div class="profile-info" fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card *ngFor="let photoUrl of organizerProfile.otherPhotosUrl; let index = index" style="margin: 16px;"
-            fxLayout="column" fxLayoutAlign="space-between stretch">
-            <mat-card-content fxLayout="row" fxLayoutAlign="center center">
-                <img class="other-photos" src="{{photoUrl ? photoUrl : unavailableImageUrl}}" alt="Photo">
-            </mat-card-content>
-            <mat-card-actions *ngIf="isEditing">
-                <button (click)="editOtherPhoto(index)" mat-button>{{ 'PROFILE.EDIT' | translate | uppercase }}</button>
-                <button (click)="deleteOtherPhoto(index)"
-                    mat-button>{{ 'PROFILE.DELETE' | translate | uppercase }}</button>
-            </mat-card-actions>
-        </mat-card>
-
-        <mat-card
-            *ngIf="isEditing && organizerProfile.otherPhotosUrl && organizerProfile.otherPhotosUrl.length < maximumNumberOfOtherPhotos"
-            fxLayout="column" fxLayoutAlign="space-between stretch" style="margin:16px;">
-            <mat-card-content fxLayout="row" fxLayoutAlign="center center">
-                <img class="other-photos" src="{{unavailableImageUrl}}" alt="Photo">
-            </mat-card-content>
-            <mat-card-actions>
-                <button (click)="addOtherPhoto()" mat-button>{{ 'PROFILE.ADD_IMAGE' | translate | uppercase }}</button>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+    <app-photo-array class="profile-info" [(photoUrlArray)]="organizerProfile.otherPhotosUrl" [isEditing]="isEditing"
+        (requestPhotoChange)="changeOtherPhoto($event)"></app-photo-array>
 </div>
