@@ -38,9 +38,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   goToProfile() {
-    const userId = this.authService.getCurrentUserId();
-    if (userId) {
-      this.router.navigate(['/event-organizer-profile', userId]);
-    }
+    this.authService.getCurrentUserId().subscribe(userId => {
+      if (userId) {
+        this.router.navigate(['/event-organizer-profile', userId]);
+      }
+    });
   }
 }
