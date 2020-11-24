@@ -11,10 +11,21 @@
       [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate }}</button>
     <button *ngIf="!(authService.isLoggedIn | async)" mat-button
       [routerLink]="['/register']">{{ 'AUTH.REGISTER' | translate }}</button>
-    <button *ngIf="(authService.isLoggedIn | async)" mat-button [routerLink]="['/shopping-cart']">
-      <span>{{ 'SHOPPING.CART' | translate }}</span>
-      <mat-icon class="margin-left-8" [matBadge]="7" matBadgeColor="accent">shopping_cart</mat-icon>
-    </button>
+
+    <span *ngIf="(authService.isLoggedIn | async)">
+      <button mat-button (click)="shoppingCartPreviewIsOpen = !shoppingCartPreviewIsOpen" cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin">
+        <span>{{ 'SHOPPING.CART' | translate }}</span>
+        <mat-icon class="margin-left-8" [matBadge]="shoppingCartService.getShoppingCartItemCount()"
+          matBadgeColor="accent">shopping_cart</mat-icon>
+      </button>
+
+      <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="shoppingCartPreviewIsOpen">
+        <app-shopping-cart-navbar-preview></app-shopping-cart-navbar-preview>
+      </ng-template>
+    </span>
+
     <button *ngIf="(authService.isLoggedIn | async)" mat-button (click)="goToProfile()">
       <span>{{ 'PROFILE.VIEW' | translate }}</span>
       <mat-icon class="margin-left-8">account_circle</mat-icon>

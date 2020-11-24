@@ -52,7 +52,9 @@
     },
     "SHOPPING": {
         "CART": "Shopping Cart",
-        "ADD_TO_CART": "Add to Cart"
+        "ADD_TO_CART": "Add to Cart",
+        "TO_SHOPPING_CART": "To Shopping Cart",
+        "NO_ITEMS_IN_CART": "No Items in Cart"
     },
     "SETTINGS": {
         "LANGUAGE": "Language",

@@ -52,7 +52,9 @@
     },
     "SHOPPING": {
         "CART": "Coș de cumpărături",
-        "ADD_TO_CART": "Adaugă în Coș"
+        "ADD_TO_CART": "Adaugă în Coș",
+        "TO_SHOPPING_CART": "Către Coșul de Cumpăraturi",
+        "NO_ITEMS_IN_CART": "Fără Produse în Coș"
     },
     "SETTINGS": {
         "LANGUAGE": "Limbă",

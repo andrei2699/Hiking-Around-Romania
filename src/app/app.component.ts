@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './authentication.service';
+import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,22 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent implements AfterViewInit {
   title = 'Hiking Around Romania';
+  shoppingCartPreviewIsOpen = false;
 
   constructor(public translate: TranslateService,
+    public shoppingCartService: ShoppingCartService,
     public authService: AuthenticationService,
     public router: Router,
     private _elementRef: ElementRef) {
+
     translate.addLangs(['en', 'ro']);
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|ro/) ? browserLang : 'en');
+
+    router.events.subscribe(() => {
+      this.shoppingCartPreviewIsOpen = false;
+    })
   }
 
   ngOnInit(): void {

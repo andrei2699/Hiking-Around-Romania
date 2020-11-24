@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url'
-import { user } from 'firebase-functions/lib/providers/auth';
 
 @Component({
   selector: 'app-event-organizer-profile',

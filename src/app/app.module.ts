@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
@@ -39,10 +41,12 @@ import { EventOrganizerProfileComponent } from './profile/event-organizer-profil
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { HomeComponent } from './home/home.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
-import { ShoppingCartPageComponent } from './shopping-cart-page/shopping-cart-page.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { PhotoArrayComponent } from './photo-array/photo-array.component';
+import { ShoppingCartItemPreviewComponent } from './shopping-cart/shopping-cart-item-preview/shopping-cart-item-preview.component';
+import { ShoppingCartPageComponent } from './shopping-cart/shopping-cart-page/shopping-cart-page.component';
+import { ShoppingCartNavbarPreviewComponent } from './shopping-cart/shopping-cart-navbar-preview/shopping-cart-navbar-preview.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -62,7 +66,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShoppingCartPageComponent,
     AboutUsComponent,
     EventDetailsComponent,
-    PhotoArrayComponent
+    PhotoArrayComponent,
+    ShoppingCartItemPreviewComponent,
+    ShoppingCartNavbarPreviewComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -84,6 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFirestoreModule, // for firestore
     AngularFireFunctionsModule,
     AngularFireStorageModule,
+    OverlayModule,
+    ScrollingModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
