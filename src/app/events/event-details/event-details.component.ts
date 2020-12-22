@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { EventDetails } from '../event-organizer-profile';
+import { EventDetails } from '../event-details';
 import { EventService } from '../event.service';
 import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url'
 import { AuthenticationService } from 'src/app/authentication.service';

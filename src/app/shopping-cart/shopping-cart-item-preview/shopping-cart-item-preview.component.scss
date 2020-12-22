@@ -1,0 +1,13 @@
+@import '../../../custom-app-theme.scss';
+
+.shopping-cart-item-preview-image {
+    max-width: 100px;
+    margin: 2px 0px;
+}
+
+.item-preview-card {
+    margin: 8px 2px;
+    
+    background-color: mat-color($candy-app-primary, lighter);
+    color: black;
+}

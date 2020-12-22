@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ImagesFirestorageService } from '../images-firestorage.service';
-import { EventDetails } from './event-organizer-profile';
+import { EventDetails } from './event-details';
 
 @Injectable({
   providedIn: 'root'

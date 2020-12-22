@@ -1,0 +1,20 @@
+<mat-card class="item-preview-card">
+    <mat-card-header>
+        <mat-card-title>{{shoppingCartItem.eventName}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{shoppingCartItem.organizerName}}</mat-card-subtitle> -->
+    </mat-card-header>
+
+    <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <img mat-card-image class="shopping-cart-item-preview-image"
+            src="{{shoppingCartItem.eventMainPhotoUrl ? shoppingCartItem.eventMainPhotoUrl : unavailableImageUrl}}"
+            alt="Photo of Event">
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <p>
+                {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate }} : {{shoppingCartItem.organizerName}}
+            </p>
+            <p>
+                {{ 'EVENT_DETAILS.TOTAL_PRICE' | translate }} : {{shoppingCartItem.eventTotalPrice}}
+            </p>
+        </div>
+    </mat-card-content>
+</mat-card>
