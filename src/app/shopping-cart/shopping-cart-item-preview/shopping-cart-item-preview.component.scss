@@ -8,6 +8,6 @@
 .item-preview-card {
     margin: 8px 2px;
     
-    background-color: mat-color($candy-app-primary, lighter);
+    background-color: mat-color($candy-app-primary, lighter) !important;
     color: black;
 }
