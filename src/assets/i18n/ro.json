@@ -72,5 +72,16 @@
         "TRANSPORT_PRICE": "Preț Transport",
         "ACCOMODATION_PRICE": "Preț Cazare",
         "TOTAL_PRICE": "Preț Total"
+    },
+    "CREATE_EVENT": {
+        "CREATE_EVENT_FORM": "Formular pentru crearea unui eveniment",
+        "CREATE": "Creează",
+        "EVENT_DESCRIPTION": "Descriere Eveniment",
+        "EVENT_PRICE": "Preț Organizare",
+        "EVENT_NAME": "Nume Eveniment",
+        "BY_BUS": "Cu autocarul",
+        "BY_CAR": "Cu mașina",
+        "BY_TRAIN": "Cu trenul",
+        "INDIVIDUAL": "Individual"
     }
 }

@@ -30,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 import * as firebase from 'firebase';
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatBadgeModule,
     MatDividerModule,
+    MatStepperModule
   ],
   providers: [
     AuthenticationService,

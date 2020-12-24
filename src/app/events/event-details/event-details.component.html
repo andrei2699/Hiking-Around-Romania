@@ -107,8 +107,8 @@
                 </mat-card>
             </div>
 
-            <google-map class="map" [center]="eventDetails.mapCenter" [zoom]="12">
-                <map-marker [position]="eventDetails.mapCenter" [options]="{draggable: false}"></map-marker>
+            <google-map class="map" [center]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}" [zoom]="12">
+                <map-marker [position]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}" [options]="{draggable: false}"></map-marker>
             </google-map>
         </mat-card-content>
 

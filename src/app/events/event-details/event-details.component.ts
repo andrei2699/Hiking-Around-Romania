@@ -44,12 +44,14 @@ export class EventDetailsComponent implements OnInit {
               eventDescription: data.description ? data.description : "",
               organizerName: data.organizerName,
               organizerId: data.organizerId,
-              mapCenter: { lat: data.mapLat, lng: data.mapLng },
+              mapLat: data.mapLat,
+              mapLng: data.mapLng,
               accomodation: data.accomodation ? data.accomodation : "",
               accomodationPrice: data.accomodationPrice ? data.accomodationPrice : 0,
               transportPrice: data.transportPrice ? data.transportPrice : 0,
               transport: data.transport ? data.transport : "",
-              eventPhotosUrl: data.eventPhotosUrl ? data.eventPhotosUrl : []
+              eventPhotosUrl: data.eventPhotosUrl ? data.eventPhotosUrl : [],
+              dateOfCreation: data.dateOfCreation ? data.dateOfCreation : "",
             };
           } else {
             this.eventDetails = undefined;
