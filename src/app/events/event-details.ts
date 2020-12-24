@@ -10,6 +10,8 @@ export class EventDetails {
     transportPrice: number;
     accomodation: string;
     accomodationPrice: number;
-    mapCenter: google.maps.LatLngLiteral;
+    mapLat: number;
+    mapLng: number;
     eventPhotosUrl: string[];
+    dateOfCreation: string;
 }

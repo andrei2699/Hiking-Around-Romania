@@ -1,0 +1,32 @@
+@import '../../../custom-app-theme.scss';
+
+.example-card {
+    margin-top: 20px;
+    width: 40%;
+  }
+
+.lighter-card {
+   background-color: mat-color($candy-app-primary, lighter) !important;
+}
+
+.event-photo {
+  margin-top: 10px;
+  margin-bottom:10px;
+  max-width: 40%;
+}
+
+.bigstepper {
+  max-width: 60%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.map {
+  margin-bottom:10px;
+  max-width: 100%;
+  display: block;
+}
+
+.space-buttons > * {
+  margin-left: 10px;
+}

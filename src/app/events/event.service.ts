@@ -20,28 +20,43 @@ export class EventService {
       .getPhotoWithNameVariation('eventPhotos', eventDetails.eventId, nameVariation);
   }
 
-  uploadPhoto(organizerProfile: EventDetails, file, nameVariation?: number | string) {
+  uploadPhoto(eventDetails: EventDetails, file, nameVariation?: number | string) {
     return this._firestorageImageService
-      .uploadPhotoWithNameVariation('eventPhotos', organizerProfile.eventId, file, nameVariation);
+      .uploadPhotoWithNameVariation('eventPhotos', eventDetails.eventId, file, nameVariation);
   }
 
-  createEmptyEvent(organizerId, organizerName) {
+  formatDate(date)
+  {
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+    
+    return mm + '/' + dd + '/' + yyyy;
+  }
 
+  createEvent(eventDetails: EventDetails) {
     return this._firestore.collection('events').add({
-      accomodation: "",
-      accomodationPrice: 0,
-      description: "",
-      eventName: "",
-      eventMainPhotoUrl: "",
-      eventPhotosUrl: [],
-      eventPrice: 0,
-      mapLat: 0,
-      mapLng: 0,
-      organizerId: organizerId,
-      organizerName: organizerName,
-      transport: "",
-      transportPrice: "",
-    });
+        accomodation: eventDetails.accomodation,
+        accomodationPrice: eventDetails.accomodationPrice,
+        description: eventDetails.eventDescription,
+        eventName: eventDetails.eventName,
+        eventMainPhotoUrl: eventDetails.eventMainPhotoUrl,
+
+        eventPhotosUrl: eventDetails.eventPhotosUrl,
+
+        eventPrice: eventDetails.eventPrice,
+
+        mapLat: 45.7536209,
+        mapLng: 21.2219649,
+
+        organizerId: eventDetails.organizerId,
+        organizerName: eventDetails.organizerName,
+
+        transport: eventDetails.transport,
+        transportPrice: eventDetails.transportPrice,
+
+        dateOfCreation: this.formatDate(new Date())
+    }).then(res => res.get());
   }
 
   updateEvent(eventDetails: EventDetails) {
@@ -57,14 +72,17 @@ export class EventService {
         eventPhotosUrl: eventDetails.eventPhotosUrl,
 
         eventPrice: eventDetails.eventPrice,
-        mapLat: eventDetails.mapCenter.lat,
-        mapLng: eventDetails.mapCenter.lng,
+
+        mapLat: eventDetails.mapLat,
+        mapLng: eventDetails.mapLng,
 
         organizerId: eventDetails.organizerId,
         organizerName: eventDetails.organizerName,
 
         transport: eventDetails.transport,
         transportPrice: eventDetails.transportPrice,
+
+        dateOfCreation: eventDetails.dateOfCreation
       });
     }
   }

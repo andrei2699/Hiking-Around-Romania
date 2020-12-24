@@ -9,7 +9,7 @@ import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'Hiking Around Romania';
   shoppingCartPreviewIsOpen = false;
 
@@ -38,11 +38,6 @@ export class AppComponent implements AfterViewInit {
     }).catch(error => {
       console.log(error);
     });;
-  }
-
-  ngAfterViewInit() {
-    this._elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#323232';
-    this._elementRef.nativeElement.ownerDocument.body.style.margin = '0';
   }
 
   goToProfile() {

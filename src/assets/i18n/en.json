@@ -72,5 +72,16 @@
         "TRANSPORT_PRICE": "Transport Price",
         "ACCOMODATION_PRICE": "Accomodation Price",
         "TOTAL_PRICE": "Total Price"
+    },
+    "CREATE_EVENT": {
+        "CREATE_EVENT_FORM": "Create Event Form",
+        "CREATE": "Create",
+        "EVENT_DESCRIPTION": "Event Description",
+        "EVENT_PRICE": "Organization Price",
+        "EVENT_NAME": "Event Name",
+        "BY_BUS": "By Bus",
+        "BY_CAR": "By Car",
+        "BY_TRAIN": "By Train",
+        "INDIVIDUAL": "Individual"
     }
 }
