@@ -90,7 +90,8 @@
     },
     "UPDATE_EVENT": {
         "UPDATE_EVENT_FORM": "Update Event Form",
-        "UPDATE_LOCATION": "Update event location"
+        "UPDATE_LOCATION": "Update event location",
+        "NO_EVENT_AVAILABLE": "The event you are looking for does not exist!"
     },
     "BUTTONS": {
         "NEXT": "Next",

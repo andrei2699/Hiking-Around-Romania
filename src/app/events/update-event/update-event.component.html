@@ -1,7 +1,8 @@
 <div *ngIf="isUndefined; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
-    <mat-card class="errorMessage" >The event you are looking for does not exist!</mat-card>
+    <mat-card class="errorMessage">{{ 'UPDATE_EVENT.NO_EVENT_AVAILABLE' | translate }}</mat-card>
 </ng-template>
 <ng-template #elseBlock>
-    <app-create-update-event [eventDetails] = "givenEventDetails" [formTitle]="updateTitle" [finishButton]="updateButton"></app-create-update-event>
+    <app-create-update-event [eventDetails]="givenEventDetails" [formTitle]="updateTitle" [finishButton]="updateButton">
+    </app-create-update-event>
 </ng-template>

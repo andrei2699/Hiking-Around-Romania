@@ -90,7 +90,8 @@
     },
     "UPDATE_EVENT": {
         "UPDATE_EVENT_FORM": "Formular pentru editarea unui eveniment",
-        "UPDATE_LOCATION": "Modificați locația evenimentului"
+        "UPDATE_LOCATION": "Modificați locația evenimentului",
+        "NO_EVENT_AVAILABLE": "Evenimentul căutat nu exista!"
     },
     "BUTTONS": {
         "NEXT": "Înainte",
