@@ -1,0 +1,122 @@
+<mat-horizontal-stepper [linear]="!isLinear" #stepper class="bigstepper" *ngIf="eventDetails">
+    <mat-step [stepControl]="createEventForm">
+    <form [formGroup]="createEventForm" fxLayout="column" fxLayoutAlign="start center">
+        <ng-template matStepLabel>{{ 'EVENT_DETAILS.EVENT_DETAILS' | translate }}</ng-template>
+        <mat-card class="example-card lighter-card">
+
+            <mat-card-header fxLayoutAlign="center center">
+                <mat-card-title>{{formTitle | translate}}</mat-card-title>
+            </mat-card-header>
+    
+    
+            <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly left">
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'CREATE_EVENT.EVENT_NAME' | translate }}</mat-label>
+                    <input matInput autocomplete="off" [formControlName]="'eventName'" required name='eventName' [(ngModel)]='eventDetails.eventName'>
+                    <mat-error *ngIf="createEventForm.get('eventName').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'CREATE_EVENT.EVENT_PRICE' | translate }}</mat-label>
+                    <input matInput type="number" autocomplete="off" [formControlName]="'eventPrice'" name='eventPrice' [(ngModel)]='eventDetails.eventPrice'>
+                    <span matSuffix>RON</span>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'CREATE_EVENT.EVENT_DESCRIPTION' | translate }}</mat-label>
+                    <textarea matInput autocomplete="off" [formControlName]="'description'" name='description' [(ngModel)]='eventDetails.eventDescription'></textarea>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'EVENT_DETAILS.TRANSPORT' | translate }}</mat-label>
+                    <mat-select [formControlName]="'transport'" required name='transport' [(ngModel)]='eventDetails.transport'>
+                        <mat-option value="by_car">{{ 'CREATE_EVENT.BY_CAR' | translate }}</mat-option>
+                        <mat-option value="by_bus">{{ 'CREATE_EVENT.BY_BUS' | translate }}</mat-option>
+                        <mat-option value="by_train">{{ 'CREATE_EVENT.BY_TRAIN' | translate }}</mat-option>
+                        <mat-option value="individual">{{ 'CREATE_EVENT.INDIVIDUAL' | translate }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'EVENT_DETAILS.TRANSPORT_PRICE' | translate }}</mat-label>
+                    <input matInput type="number" class="example-right-align" autocomplete="off" [formControlName]="'transportPrice'" required name='transportPrice' [(ngModel)]='eventDetails.transportPrice'>
+                    <span matSuffix>RON</span>
+                    <mat-error *ngIf="createEventForm.get('transportPrice').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'EVENT_DETAILS.ACCOMODATION' | translate }}</mat-label>
+                    <input matInput autocomplete="off" [formControlName]="'accomodation'" required name='accomodation' [(ngModel)]='eventDetails.accomodation'>
+                    <mat-error *ngIf="createEventForm.get('accomodation').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'EVENT_DETAILS.ACCOMODATION_PRICE' | translate }}</mat-label>
+                    <input matInput type="number" class="example-right-align" autocomplete="off" [formControlName]="'accomodationPrice'" required name='accomodationPrice' [(ngModel)]='eventDetails.accomodationPrice'>
+                    <span matSuffix>RON</span>
+                    <mat-error *ngIf="createEventForm.get('accomodationPrice').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'EVENT_DETAILS.TOTAL_TICKETS' | translate }}</mat-label>
+                    <input matInput type="number" class="example-right-align" autocomplete="off" [formControlName]="'totalTickets'" required name='totalTickets' [(ngModel)]='eventDetails.totalTickets'>
+                    <mat-error *ngIf="createEventForm.get('totalTickets').errors?.required">{{ 'AUTH.ENTER_VALUE' | translate }}
+                    </mat-error>
+                </mat-form-field>
+
+            </mat-card-content>
+
+            <div>
+                <button mat-raised-button color="primary" matStepperNext>{{ 'BUTTONS.NEXT' | translate }}</button>
+            </div> 
+    
+        </mat-card>
+
+    </form>
+    </mat-step>
+
+    <mat-step fxLayout="column" fxLayoutAlign="start center">
+        <mat-card class="lighter-card">
+            <ng-template matStepLabel>{{ 'CREATE_EVENT.CHOOSE_PHOTO' | translate }}</ng-template>
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <img class="event-photo"
+                    src="{{eventDetails.eventMainPhotoUrl? eventDetails.eventMainPhotoUrl : unavailableImageUrl}}">
+                <input #eventPhotoFileInput id="uploadEventPhoto" mat-raised-button
+                    (change)="uploadPhoto($event.target.files)" hidden type="file"
+                    accept="image/x-png,image/gif,image/jpeg">
+                <button mat-raised-button color="primary" (click)="openEventPhotoDialog()" fxLayout="row"
+                    fxLayoutAlign="space-between  center">
+                    <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
+                    <span>{{ 'PROFILE.UPLOAD' | translate }}</span>
+                </button>
+            </div> 
+
+            <div class="space-buttons">
+                <button mat-raised-button color="primary" matStepperPrevious>{{ 'BUTTONS.BACK' | translate }}</button>
+                <button mat-raised-button color="primary" matStepperNext>{{ 'BUTTONS.NEXT' | translate }}</button>
+            </div>
+        </mat-card>
+    </mat-step>
+
+    <mat-step fxLayout="column" fxLayoutAlign="start center">
+        <mat-card class="lighter-card">
+            <ng-template matStepLabel>{{ 'CREATE_EVENT.CHOOSE_LOCATION' | translate }}</ng-template>
+            <mat-card-content fxLayout="row" fxLayoutAlign="space-evenly center">
+                <google-map class="map" [center]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}" [zoom]="12" (mapClick)="selectLocation($event)">
+                    <map-marker *ngIf="mapClicked" [position]="markerCenter" [options]="{draggable: false}"></map-marker>
+                </google-map>
+            </mat-card-content>
+
+            <div class="space-buttons">
+                <button mat-raised-button color="primary" matStepperPrevious>{{ 'BUTTONS.BACK' | translate }}</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()">{{finishButton | translate}}</button>
+            </div>
+        </mat-card>
+    </mat-step>
+</mat-horizontal-stepper>
+

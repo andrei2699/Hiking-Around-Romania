@@ -61,6 +61,7 @@
         "ABOUT_US": "Despre Noi"
     },
     "EVENT_DETAILS": {
+        "EVENT_DETAILS": "Detaliile evenimentului",
         "MAP": "Hartă",
         "BILLING_INFORMATION": "Informații Plată",
         "EVENT_INFORMATION": "Informații Eveniment",
@@ -71,7 +72,8 @@
         "EVENT_PRICE": "Preț Eveniment",
         "TRANSPORT_PRICE": "Preț Transport",
         "ACCOMODATION_PRICE": "Preț Cazare",
-        "TOTAL_PRICE": "Preț Total"
+        "TOTAL_PRICE": "Preț Total",
+        "TOTAL_TICKETS": "Numărul de locuri disponibile"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Formular pentru crearea unui eveniment",
@@ -82,6 +84,18 @@
         "BY_BUS": "Cu autocarul",
         "BY_CAR": "Cu mașina",
         "BY_TRAIN": "Cu trenul",
-        "INDIVIDUAL": "Individual"
+        "INDIVIDUAL": "Individual",
+        "CHOOSE_PHOTO": "Alegeți o fotografie pentru eveniment",
+        "CHOOSE_LOCATION": "Alegeți locația evenimentului"
+    },
+    "UPDATE_EVENT": {
+        "UPDATE_EVENT_FORM": "Formular pentru editarea unui eveniment",
+        "UPDATE_LOCATION": "Modificați locația evenimentului"
+    },
+    "BUTTONS": {
+        "NEXT": "Înainte",
+        "BACK": "Înapoi",
+        "CREATE": "Crează evenimentul",
+        "UPDATE": "Modifică evenimentul"
     }
 }

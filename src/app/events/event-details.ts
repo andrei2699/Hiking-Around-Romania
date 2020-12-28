@@ -14,4 +14,6 @@ export class EventDetails {
     mapLng: number;
     eventPhotosUrl: string[];
     dateOfCreation: string;
+    reservedTickets: number;
+    totalTickets: number;
 }
