@@ -61,6 +61,7 @@
         "ABOUT_US": "About Us"
     },
     "EVENT_DETAILS": {
+        "EVENT_DETAILS": "Event Details",
         "MAP": "Map",
         "BILLING_INFORMATION": "Billing Information",
         "EVENT_INFORMATION": "Event Information",
@@ -71,7 +72,8 @@
         "EVENT_PRICE": "Event Price",
         "TRANSPORT_PRICE": "Transport Price",
         "ACCOMODATION_PRICE": "Accomodation Price",
-        "TOTAL_PRICE": "Total Price"
+        "TOTAL_PRICE": "Total Price",
+        "TOTAL_TICKETS": "Number of Available Tickets"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Create Event Form",
@@ -82,6 +84,18 @@
         "BY_BUS": "By Bus",
         "BY_CAR": "By Car",
         "BY_TRAIN": "By Train",
-        "INDIVIDUAL": "Individual"
+        "INDIVIDUAL": "Individual",
+        "CHOOSE_PHOTO": "Choose event photo",
+        "CHOOSE_LOCATION": "Choose event location"
+    },
+    "UPDATE_EVENT": {
+        "UPDATE_EVENT_FORM": "Update Event Form",
+        "UPDATE_LOCATION": "Update event location"
+    },
+    "BUTTONS": {
+        "NEXT": "Next",
+        "BACK": "Back",
+        "CREATE": "Create",
+        "UPDATE": "Update"
     }
 }

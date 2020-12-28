@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { ShoppingCartPageComponent } from './shopping-cart/shopping-cart-page/shopping-cart-page.component';
+import { UpdateEventComponent } from './events/update-event/update-event.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -18,6 +19,10 @@ const routes: Routes = [
   { path: 'event-organizer-profile/:userId', component: EventOrganizerProfileComponent },
   {
     path: 'create-event', component: CreateEventComponent,
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'update-event/:eventId', component: UpdateEventComponent,
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {

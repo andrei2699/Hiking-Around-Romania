@@ -48,6 +48,8 @@ import { PhotoArrayComponent } from './photo-array/photo-array.component';
 import { ShoppingCartItemPreviewComponent } from './shopping-cart/shopping-cart-item-preview/shopping-cart-item-preview.component';
 import { ShoppingCartPageComponent } from './shopping-cart/shopping-cart-page/shopping-cart-page.component';
 import { ShoppingCartNavbarPreviewComponent } from './shopping-cart/shopping-cart-navbar-preview/shopping-cart-navbar-preview.component';
+import { UpdateEventComponent } from './events/update-event/update-event.component';
+import { CreateUpdateEventComponent } from './events/create-update-event/create-update-event.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -69,7 +71,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventDetailsComponent,
     PhotoArrayComponent,
     ShoppingCartItemPreviewComponent,
-    ShoppingCartNavbarPreviewComponent
+    ShoppingCartNavbarPreviewComponent,
+    UpdateEventComponent,
+    CreateUpdateEventComponent
   ],
   imports: [
     BrowserAnimationsModule,

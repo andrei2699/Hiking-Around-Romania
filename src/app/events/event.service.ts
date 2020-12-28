@@ -8,6 +8,9 @@ import { EventDetails } from './event-details';
 })
 export class EventService {
 
+  defaultLatitude = 45.7571357;
+  defaultLongitude = 21.2286974;
+
   constructor(private _firestore: AngularFirestore,
     private _firestorageImageService: ImagesFirestorageService) { }
 
@@ -25,37 +28,40 @@ export class EventService {
       .uploadPhotoWithNameVariation('eventPhotos', eventDetails.eventId, file, nameVariation);
   }
 
-  formatDate(date)
-  {
+  formatDate(date) {
     var dd = String(date.getDate()).padStart(2, '0');
     var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = date.getFullYear();
-    
+
     return mm + '/' + dd + '/' + yyyy;
   }
 
   createEvent(eventDetails: EventDetails) {
     return this._firestore.collection('events').add({
-        accomodation: eventDetails.accomodation,
-        accomodationPrice: eventDetails.accomodationPrice,
-        description: eventDetails.eventDescription,
-        eventName: eventDetails.eventName,
-        eventMainPhotoUrl: eventDetails.eventMainPhotoUrl,
+      accomodation: eventDetails.accomodation,
+      accomodationPrice: eventDetails.accomodationPrice,
+      eventDescription: eventDetails.eventDescription,
+      eventName: eventDetails.eventName,
+      eventMainPhotoUrl: eventDetails.eventMainPhotoUrl,
 
-        eventPhotosUrl: eventDetails.eventPhotosUrl,
+      eventPhotosUrl: eventDetails.eventPhotosUrl,
 
-        eventPrice: eventDetails.eventPrice,
+      eventPrice: eventDetails.eventPrice,
 
-        mapLat: 45.7536209,
-        mapLng: 21.2219649,
+      mapLat: this.defaultLatitude,
+      mapLng: this.defaultLongitude,
 
-        organizerId: eventDetails.organizerId,
-        organizerName: eventDetails.organizerName,
+      organizerId: eventDetails.organizerId,
+      organizerName: eventDetails.organizerName,
 
-        transport: eventDetails.transport,
-        transportPrice: eventDetails.transportPrice,
+      transport: eventDetails.transport,
+      transportPrice: eventDetails.transportPrice,
 
-        dateOfCreation: this.formatDate(new Date())
+      dateOfCreation: this.formatDate(new Date()),
+
+      totalTickets: eventDetails.totalTickets,
+      reservedTickets: 0
+
     }).then(res => res.get());
   }
 
@@ -65,7 +71,7 @@ export class EventService {
       return this._firestore.doc(`events/${eventDetails.eventId}`).set({
         accomodation: eventDetails.accomodation,
         accomodationPrice: eventDetails.accomodationPrice,
-        description: eventDetails.eventDescription,
+        eventDescription: eventDetails.eventDescription,
         eventName: eventDetails.eventName,
         eventMainPhotoUrl: eventDetails.eventMainPhotoUrl,
 
@@ -82,7 +88,11 @@ export class EventService {
         transport: eventDetails.transport,
         transportPrice: eventDetails.transportPrice,
 
-        dateOfCreation: eventDetails.dateOfCreation
+        dateOfCreation: eventDetails.dateOfCreation,
+
+        totalTickets: eventDetails.totalTickets,
+        reservedTickets: eventDetails.reservedTickets
+
       });
     }
   }
