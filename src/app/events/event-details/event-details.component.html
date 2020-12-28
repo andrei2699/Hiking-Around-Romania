@@ -6,8 +6,14 @@
 
 <div *ngIf="eventDetails" class="main-div" fxLayout="column">
     <mat-card fxLayout="column">
-        <mat-card-title>
+        <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
             {{eventDetails.eventName}}
+
+            <button mat-raised-button color="primary" *ngIf="isCurrentUser" (click)="updateEvent()" fxLayout="row"
+                fxLayoutAlign="space-evenly  center">
+                <mat-icon aria-hidden="false" aria-label="Edit Icon">create</mat-icon>
+                <span>{{ 'PROFILE.EDIT' | translate }}</span>
+            </button>
         </mat-card-title>
 
         <mat-card-content fxLayout="row" fxLayoutAlign="space-between start">
@@ -58,7 +64,7 @@
             </div>
 
             <div class="billing-info" fxFlex="15">
-                <mat-card>
+                <mat-card class="billing-info-card">
                     <mat-card-title>{{ 'EVENT_DETAILS.BILLING_INFORMATION' | translate }}</mat-card-title>
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -100,7 +106,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions *ngIf="showAddToCartButton" fxLayoutAlign="end stretch">
-                        <button mat-button color="accent">
+                        <button mat-raised-button color="primary">
                             {{ 'SHOPPING.ADD_TO_CART' | translate | uppercase}}
                         </button>
                     </mat-card-actions>
@@ -108,7 +114,8 @@
             </div>
 
             <google-map class="map" [center]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}" [zoom]="12">
-                <map-marker [position]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}" [options]="{draggable: false}"></map-marker>
+                <map-marker [position]="{lat: eventDetails.mapLat, lng: eventDetails.mapLng}"
+                    [options]="{draggable: false}"></map-marker>
             </google-map>
         </mat-card-content>
 
