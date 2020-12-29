@@ -16,4 +16,7 @@ export class EventDetails {
     dateOfCreation: string;
     reservedTickets: number;
     totalTickets: number;
+    startDate: Date;
+    endDate: Date;
+    region: string;
 }

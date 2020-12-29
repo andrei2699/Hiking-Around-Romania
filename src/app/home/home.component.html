@@ -1,1 +1,89 @@
-<p>home works!</p>
+<div class="tabs">
+    <mat-tab-group mat-stretch-tabs animationDuration="0ms">
+        <mat-tab class="oneTab" label="{{'HOME_PAGE.FUTURE_EVENTS' | translate}}">
+            <div class="tab-content" fxLayout="column">
+
+                <mat-form-field class="search-field" fxFlex>
+                    <mat-label>Filter Events</mat-label>
+                    <input type="search" matInput placeholder="Search" [(ngModel)]="searchText">
+                </mat-form-field>
+
+                <mat-accordion class="accordion">
+                    <mat-expansion-panel *ngFor="let eventDetails of events | eventFilter: searchText">
+
+                        <mat-expansion-panel-header fxLayout="row">
+                            <mat-panel-title fxFlex='47'>
+                                {{eventDetails.eventName}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{eventDetails.region}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-card class="list-card" fxLayout="row" fxLayoutAlign="space-between start">
+
+                            <div fxLayout="column" fxLayoutAlign="space-between start">
+
+                                <div fxLayout="row" class="info-element-title">
+                                    <mat-card-subtitle class="info-element-row">
+                                        {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}:
+                                    </mat-card-subtitle>
+                                    <div>
+                                        {{eventDetails.organizerName}}
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" class="info-element-title">
+                                    <mat-card-subtitle class="info-element-row">
+                                        {{ 'EVENT_DETAILS.TOTAL_PRICE' | translate}}:
+                                    </mat-card-subtitle>
+                                    <div>
+                                        580
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" class="info-element-title">
+                                    <mat-card-subtitle class="info-element-row">
+                                        {{ 'EVENT_DETAILS.PERIOD' | translate}}:
+                                    </mat-card-subtitle>
+                                    <div>
+                                        {{eventDetails.startDate | date: 'dd/MM/yyyy'}} - {{eventDetails.endDate | date:
+                                        'dd/MM/yyyy'}}
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" class="info-element-title">
+                                    <mat-card-subtitle class="info-element-row">
+                                        {{ 'EVENT_DETAILS.AVAILABLE_TICKETS' | translate}}:
+                                    </mat-card-subtitle>
+                                    <div>
+                                        20
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <img *ngIf="eventDetails.eventMainPhotoUrl" class="main-event-photo"
+                                    [src]="eventDetails.eventMainPhotoUrl">
+                            </div>
+
+                            <div>
+                                <button class="button" mat-raised-button color="primary"
+                                    [routerLink]="['/event-details', eventDetails.eventId]"> {{
+                                    'EVENT_DETAILS.EVENT_DETAILS' | translate}}</button>
+                            </div>
+
+                        </mat-card>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="{{'HOME_PAGE.REGIONS' | translate}}">
+            Content 2
+        </mat-tab>
+
+    </mat-tab-group>
+</div>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { map } from 'rxjs/operators';
 import { ImagesFirestorageService } from '../images-firestorage.service';
 import { EventDetails } from './event-details';
 
@@ -12,10 +14,45 @@ export class EventService {
   defaultLongitude = 21.2286974;
 
   constructor(private _firestore: AngularFirestore,
+    private firebaseFunctions: AngularFireFunctions,
     private _firestorageImageService: ImagesFirestorageService) { }
 
   getEvent(eventId) {
-    return this._firestore.doc(`events/${eventId}`).get();
+    return this._firestore.doc(`events/${eventId}`).get().pipe(map(doc => {
+      var data = doc.data();
+      if (data) {
+        var eventDetails = <EventDetails>data;
+        eventDetails.eventId = eventId;
+        if (data.startDate) {
+          eventDetails.startDate = data.startDate.toDate();
+        }
+        if (data.endDate) {
+          eventDetails.endDate = data.endDate.toDate();
+        }
+
+        return eventDetails;
+      }
+
+      return undefined;
+    }));
+  }
+
+  getAllEvents() {
+    return this._firestore.collection('events').get().pipe(map(collection => collection.docs.map(document => {
+      var eventDetails = <EventDetails>document.data();
+      eventDetails.eventId = document.id;
+      if (document.data().startDate) {
+        eventDetails.startDate = document.data().startDate.toDate();
+      }
+      if (document.data().endDate) {
+        eventDetails.endDate = document.data().endDate.toDate();
+      }
+      return eventDetails;
+    })));
+  }
+
+  getFutureEvents() {
+    return this.firebaseFunctions.httpsCallable('getFutureEvents');
   }
 
   getPhoto(eventDetails: EventDetails, nameVariation?: number | string) {
@@ -60,7 +97,12 @@ export class EventService {
       dateOfCreation: this.formatDate(new Date()),
 
       totalTickets: eventDetails.totalTickets,
-      reservedTickets: 0
+      reservedTickets: 0,
+
+      startDate: eventDetails.startDate,
+      endDate: eventDetails.endDate,
+
+      region: eventDetails.region
 
     }).then(res => res.get());
   }
@@ -91,7 +133,12 @@ export class EventService {
         dateOfCreation: eventDetails.dateOfCreation,
 
         totalTickets: eventDetails.totalTickets,
-        reservedTickets: eventDetails.reservedTickets
+        reservedTickets: eventDetails.reservedTickets,
+
+        startDate: eventDetails.startDate,
+        endDate: eventDetails.endDate,
+
+        region: eventDetails.region
 
       });
     }

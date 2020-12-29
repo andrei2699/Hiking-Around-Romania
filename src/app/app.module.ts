@@ -31,6 +31,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 import * as firebase from 'firebase';
@@ -50,6 +54,7 @@ import { ShoppingCartPageComponent } from './shopping-cart/shopping-cart-page/sh
 import { ShoppingCartNavbarPreviewComponent } from './shopping-cart/shopping-cart-navbar-preview/shopping-cart-navbar-preview.component';
 import { UpdateEventComponent } from './events/update-event/update-event.component';
 import { CreateUpdateEventComponent } from './events/create-update-event/create-update-event.component';
+import { EventFilterPipe } from './home/event-filter.pipe';
 
 firebase.initializeApp(environment.firebase);
 
@@ -73,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShoppingCartItemPreviewComponent,
     ShoppingCartNavbarPreviewComponent,
     UpdateEventComponent,
-    CreateUpdateEventComponent
+    CreateUpdateEventComponent,
+    EventFilterPipe
   ],
   imports: [
     BrowserAnimationsModule,
@@ -111,7 +117,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatBadgeModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     AuthenticationService,

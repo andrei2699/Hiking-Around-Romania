@@ -61,7 +61,7 @@
         "ABOUT_US": "Despre Noi"
     },
     "EVENT_DETAILS": {
-        "EVENT_DETAILS": "Detaliile evenimentului",
+        "EVENT_DETAILS": "Detalii eveniment",
         "MAP": "Hartă",
         "BILLING_INFORMATION": "Informații Plată",
         "EVENT_INFORMATION": "Informații Eveniment",
@@ -73,7 +73,10 @@
         "TRANSPORT_PRICE": "Preț Transport",
         "ACCOMODATION_PRICE": "Preț Cazare",
         "TOTAL_PRICE": "Preț Total",
-        "TOTAL_TICKETS": "Numărul de locuri disponibile"
+        "TOTAL_TICKETS": "Numărul total de locuri ",
+        "REGION": "Regiune",
+        "PERIOD": "Perioada",
+        "AVAILABLE_TICKETS": "Numărul de locuri disponibile"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Formular pentru crearea unui eveniment",
@@ -91,12 +94,18 @@
     "UPDATE_EVENT": {
         "UPDATE_EVENT_FORM": "Formular pentru editarea unui eveniment",
         "UPDATE_LOCATION": "Modificați locația evenimentului",
-        "NO_EVENT_AVAILABLE": "Evenimentul căutat nu exista!"
+        "NO_EVENT_AVAILABLE": "Evenimentul căutat nu exista!",
+        "CHOOSE_START_DATE": "Alegeți data de început",
+        "CHOOSE_END_DATE": "Alegeți data de sfârșit"
     },
     "BUTTONS": {
         "NEXT": "Înainte",
         "BACK": "Înapoi",
         "CREATE": "Crează evenimentul",
         "UPDATE": "Modifică evenimentul"
+    },
+    "HOME_PAGE": {
+        "FUTURE_EVENTS": "Evenimente viitoare",
+        "REGIONS": "Descrierea regiunilor montane"
     }
 }

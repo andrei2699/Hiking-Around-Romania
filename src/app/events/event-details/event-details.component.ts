@@ -36,20 +36,14 @@ export class EventDetailsComponent implements OnInit {
       });
 
       this._eventService.getEvent(eventId)
-        .subscribe(res => {
-          const data = res.data();
-          if (data) {
-            this.eventDetails = <EventDetails>data;
-            this.eventDetails.eventId = eventId;
-            var userId = this.eventDetails.organizerId;
-            this._authService.checkIfIdBelongsToLoggedUser(userId)
-              .subscribe(r => {
-                console.log(r)
-                this.isCurrentUser = r;
-              });
-          } else {
-            this.eventDetails = undefined;
-          }
+        .subscribe(eventDetails => {
+          this.eventDetails = eventDetails;
+          var userId = this.eventDetails.organizerId;
+          this._authService.checkIfIdBelongsToLoggedUser(userId)
+            .subscribe(r => {
+              console.log(r)
+              this.isCurrentUser = r;
+            });
         }, err => {
           console.log(err);
         });
