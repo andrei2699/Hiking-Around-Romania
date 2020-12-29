@@ -17,7 +17,7 @@ export class UpdateEventComponent implements OnInit {
   updateButton = 'BUTTONS.UPDATE';
 
   constructor(
-    private _eventService:EventService,
+    private _eventService: EventService,
     private _route: ActivatedRoute,
     public translate: TranslateService,
   ) { }
@@ -26,9 +26,16 @@ export class UpdateEventComponent implements OnInit {
     this._route.paramMap.subscribe(params => {
       const eventId = params.get('eventId');
       this._eventService.getEvent(eventId).subscribe(x => {
-        if (x.data()) {
-          this.givenEventDetails = <EventDetails> x.data();
+        var xdata = x.data();
+        if (xdata) {
+          this.givenEventDetails = <EventDetails>xdata;
           this.givenEventDetails.eventId = eventId;
+          if (xdata.startDate) {
+            this.givenEventDetails.startDate = xdata.startDate.toDate();
+          }
+          if (xdata.endDate) {
+            this.givenEventDetails.endDate = xdata.endDate.toDate();
+          }
         }
         else {
           this.isUndefined = true;

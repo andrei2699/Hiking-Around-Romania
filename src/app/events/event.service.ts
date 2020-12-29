@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { map, tap } from 'rxjs/operators';
 import { ImagesFirestorageService } from '../images-firestorage.service';
 import { EventDetails } from './event-details';
 
@@ -16,6 +17,14 @@ export class EventService {
 
   getEvent(eventId) {
     return this._firestore.doc(`events/${eventId}`).get();
+  }
+
+  getAllEvents() {
+    return this._firestore.collection('events').get().pipe(map(collection => collection.docs.map(document => {
+      var eventDetails = <EventDetails>document.data();
+      eventDetails.eventId = document.id;
+      return eventDetails;
+    })));
   }
 
   getPhoto(eventDetails: EventDetails, nameVariation?: number | string) {
@@ -60,7 +69,12 @@ export class EventService {
       dateOfCreation: this.formatDate(new Date()),
 
       totalTickets: eventDetails.totalTickets,
-      reservedTickets: 0
+      reservedTickets: 0,
+
+      startDate: eventDetails.startDate,
+      endDate: eventDetails.endDate,
+
+      region: eventDetails.region
 
     }).then(res => res.get());
   }
@@ -91,7 +105,12 @@ export class EventService {
         dateOfCreation: eventDetails.dateOfCreation,
 
         totalTickets: eventDetails.totalTickets,
-        reservedTickets: eventDetails.reservedTickets
+        reservedTickets: eventDetails.reservedTickets,
+
+        startDate: eventDetails.startDate,
+        endDate: eventDetails.endDate,
+
+        region: eventDetails.region
 
       });
     }

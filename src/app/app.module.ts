@@ -31,6 +31,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 import * as firebase from 'firebase';
@@ -111,7 +115,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatMenuModule,
     MatBadgeModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     AuthenticationService,

@@ -73,7 +73,8 @@
         "TRANSPORT_PRICE": "Preț Transport",
         "ACCOMODATION_PRICE": "Preț Cazare",
         "TOTAL_PRICE": "Preț Total",
-        "TOTAL_TICKETS": "Numărul de locuri disponibile"
+        "TOTAL_TICKETS": "Numărul de locuri disponibile",
+        "REGION": "Regiune"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Formular pentru crearea unui eveniment",
@@ -98,5 +99,9 @@
         "BACK": "Înapoi",
         "CREATE": "Crează evenimentul",
         "UPDATE": "Modifică evenimentul"
+    },
+    "HOME_PAGE": {
+        "FUTURE_EVENTS": "Evenimente viitoare",
+        "REGIONS": "Descrierea regiunilor montane"
     }
 }

@@ -73,7 +73,8 @@
         "TRANSPORT_PRICE": "Transport Price",
         "ACCOMODATION_PRICE": "Accomodation Price",
         "TOTAL_PRICE": "Total Price",
-        "TOTAL_TICKETS": "Number of Available Tickets"
+        "TOTAL_TICKETS": "Number of Available Tickets",
+        "REGION": "Region"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Create Event Form",
@@ -98,5 +99,9 @@
         "BACK": "Back",
         "CREATE": "Create",
         "UPDATE": "Update"
+    },
+    "HOME_PAGE": {
+        "FUTURE_EVENTS": "Future events",
+        "REGIONS": "Description of mountain regions"
     }
 }

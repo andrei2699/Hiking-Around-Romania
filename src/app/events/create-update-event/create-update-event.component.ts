@@ -8,6 +8,7 @@ import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { ElementRef } from '@angular/core';
 import { Input } from '@angular/core';
+import { RegionService } from 'src/app/regions/region.service';
 
 @Component({
 	selector: 'app-create-update-event',
@@ -34,10 +35,12 @@ export class CreateUpdateEventComponent implements OnInit {
 	createEventForm: FormGroup;
 	markerCenter: google.maps.LatLngLiteral;
 	mapClicked = false;
+	regions = [];
 
 	constructor(
 		private _eventService: EventService,
 		private _authService: AuthenticationService,
+		private _regionService: RegionService,
 		private _router: Router,
 		private _formBuilder: FormBuilder,
 		public translate: TranslateService,
@@ -48,6 +51,11 @@ export class CreateUpdateEventComponent implements OnInit {
 	unavailableImageUrl = UNAVAILABLE_IMG_URL;
 
 	ngOnInit(): void {
+
+		this._regionService.getAllRegions().subscribe(reg => {
+			this.regions = reg;
+		});
+
 		this.createEventForm = this._formBuilder.group({
 			eventName: ['', [Validators.required]],
 			eventPrice: [''],
@@ -57,7 +65,10 @@ export class CreateUpdateEventComponent implements OnInit {
 			transportPrice: ['', [Validators.required]],
 			accomodation: ['', Validators.required],
 			accomodationPrice: ['', [Validators.required]],
-			totalTickets: ['', [Validators.required]]
+			totalTickets: ['', [Validators.required]],
+			region: ['', [Validators.required]],
+			startDate: ['', [Validators.required]],
+			endDate: ['', [Validators.required]]
 		});
 	}
 
