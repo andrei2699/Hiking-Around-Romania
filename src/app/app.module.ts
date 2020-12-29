@@ -54,6 +54,7 @@ import { ShoppingCartPageComponent } from './shopping-cart/shopping-cart-page/sh
 import { ShoppingCartNavbarPreviewComponent } from './shopping-cart/shopping-cart-navbar-preview/shopping-cart-navbar-preview.component';
 import { UpdateEventComponent } from './events/update-event/update-event.component';
 import { CreateUpdateEventComponent } from './events/create-update-event/create-update-event.component';
+import { EventFilterPipe } from './home/event-filter.pipe';
 
 firebase.initializeApp(environment.firebase);
 
@@ -77,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShoppingCartItemPreviewComponent,
     ShoppingCartNavbarPreviewComponent,
     UpdateEventComponent,
-    CreateUpdateEventComponent
+    CreateUpdateEventComponent,
+    EventFilterPipe
   ],
   imports: [
     BrowserAnimationsModule,

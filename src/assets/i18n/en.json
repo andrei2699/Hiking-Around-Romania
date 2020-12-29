@@ -73,8 +73,10 @@
         "TRANSPORT_PRICE": "Transport Price",
         "ACCOMODATION_PRICE": "Accomodation Price",
         "TOTAL_PRICE": "Total Price",
-        "TOTAL_TICKETS": "Number of Available Tickets",
-        "REGION": "Region"
+        "TOTAL_TICKETS": "Number of Total Tickets",
+        "REGION": "Region",
+        "PERIOD": "Period",
+        "AVAILABLE_TICKETS": "Number of Available Tickets"
     },
     "CREATE_EVENT": {
         "CREATE_EVENT_FORM": "Create Event Form",
@@ -92,7 +94,9 @@
     "UPDATE_EVENT": {
         "UPDATE_EVENT_FORM": "Update Event Form",
         "UPDATE_LOCATION": "Update event location",
-        "NO_EVENT_AVAILABLE": "The event you are looking for does not exist!"
+        "NO_EVENT_AVAILABLE": "The event you are looking for does not exist!",
+        "CHOOSE_START_DATE": "Choose start date",
+        "CHOOSE_END_DATE": "Choose end date"
     },
     "BUTTONS": {
         "NEXT": "Next",

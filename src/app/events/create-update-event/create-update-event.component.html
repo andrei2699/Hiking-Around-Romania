@@ -103,12 +103,12 @@
                         <mat-label>{{ 'EVENT_DETAILS.REGION' | translate }}</mat-label>
                         <mat-select [formControlName]="'region'" required name='region'
                             [(ngModel)]='eventDetails.region'>
-                            <mat-option *ngFor='let region of regions' value="region.name">{{region.name}}</mat-option>
+                            <mat-option *ngFor='let region of regionNames' value="{{region}}">{{region}}</mat-option>
                         </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Choose a date</mat-label>
+                        <mat-label> {{ 'UPDATE_EVENT.CHOOSE_START_DATE' | translate}}</mat-label>
                         <input matInput [matDatepicker]="startDate" [(ngModel)]='eventDetails.startDate'
                             [formControlName]="'startDate'">
                         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
@@ -119,7 +119,7 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Choose a date</mat-label>
+                        <mat-label> {{ 'UPDATE_EVENT.CHOOSE_END_DATE' | translate}}</mat-label>
                         <input matInput [min]="eventDetails.startDate" [matDatepicker]="endDate"
                             [(ngModel)]='eventDetails.endDate' [formControlName]="'endDate'">
                         <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map, tap } from 'rxjs/operators';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { map } from 'rxjs/operators';
 import { ImagesFirestorageService } from '../images-firestorage.service';
 import { EventDetails } from './event-details';
 
@@ -13,18 +14,45 @@ export class EventService {
   defaultLongitude = 21.2286974;
 
   constructor(private _firestore: AngularFirestore,
+    private firebaseFunctions: AngularFireFunctions,
     private _firestorageImageService: ImagesFirestorageService) { }
 
   getEvent(eventId) {
-    return this._firestore.doc(`events/${eventId}`).get();
+    return this._firestore.doc(`events/${eventId}`).get().pipe(map(doc => {
+      var data = doc.data();
+      if (data) {
+        var eventDetails = <EventDetails>data;
+        eventDetails.eventId = eventId;
+        if (data.startDate) {
+          eventDetails.startDate = data.startDate.toDate();
+        }
+        if (data.endDate) {
+          eventDetails.endDate = data.endDate.toDate();
+        }
+
+        return eventDetails;
+      }
+
+      return undefined;
+    }));
   }
 
   getAllEvents() {
     return this._firestore.collection('events').get().pipe(map(collection => collection.docs.map(document => {
       var eventDetails = <EventDetails>document.data();
       eventDetails.eventId = document.id;
+      if (document.data().startDate) {
+        eventDetails.startDate = document.data().startDate.toDate();
+      }
+      if (document.data().endDate) {
+        eventDetails.endDate = document.data().endDate.toDate();
+      }
       return eventDetails;
     })));
+  }
+
+  getFutureEvents() {
+    return this.firebaseFunctions.httpsCallable('getFutureEvents');
   }
 
   getPhoto(eventDetails: EventDetails, nameVariation?: number | string) {

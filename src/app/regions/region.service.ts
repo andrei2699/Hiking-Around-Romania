@@ -19,4 +19,10 @@ export class RegionService {
       return region;
     })));
   }
+
+  getAllRegionNames() {
+    return this._firestore.collection('regions').get().pipe(map(collection => collection.docs.map(document => {
+      return document.data().name;
+    })));
+  }
 }

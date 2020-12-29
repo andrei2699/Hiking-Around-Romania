@@ -35,7 +35,7 @@ export class CreateUpdateEventComponent implements OnInit {
 	createEventForm: FormGroup;
 	markerCenter: google.maps.LatLngLiteral;
 	mapClicked = false;
-	regions = [];
+	regionNames = [];
 
 	constructor(
 		private _eventService: EventService,
@@ -52,8 +52,8 @@ export class CreateUpdateEventComponent implements OnInit {
 
 	ngOnInit(): void {
 
-		this._regionService.getAllRegions().subscribe(reg => {
-			this.regions = reg;
+		this._regionService.getAllRegionNames().subscribe(reg => {
+			this.regionNames = reg;
 		});
 
 		this.createEventForm = this._formBuilder.group({

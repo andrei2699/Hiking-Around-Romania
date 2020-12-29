@@ -26,21 +26,9 @@ export class UpdateEventComponent implements OnInit {
     this._route.paramMap.subscribe(params => {
       const eventId = params.get('eventId');
       this._eventService.getEvent(eventId).subscribe(x => {
-        var xdata = x.data();
-        if (xdata) {
-          this.givenEventDetails = <EventDetails>xdata;
-          this.givenEventDetails.eventId = eventId;
-          if (xdata.startDate) {
-            this.givenEventDetails.startDate = xdata.startDate.toDate();
-          }
-          if (xdata.endDate) {
-            this.givenEventDetails.endDate = xdata.endDate.toDate();
-          }
-        }
-        else {
-          this.isUndefined = true;
-        }
-      });
+        this.givenEventDetails = x;
+      }
+      );
     });
   }
 

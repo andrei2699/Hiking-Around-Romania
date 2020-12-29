@@ -1,16 +1,22 @@
 <div class="tabs">
     <mat-tab-group mat-stretch-tabs animationDuration="0ms">
         <mat-tab class="oneTab" label="{{'HOME_PAGE.FUTURE_EVENTS' | translate}}">
-            <div class="tab-content">
+            <div class="tab-content" fxLayout="column">
+
+                <mat-form-field class="search-field" fxFlex>
+                    <mat-label>Filter Events</mat-label>
+                    <input type="search" matInput placeholder="Search" [(ngModel)]="searchText">
+                </mat-form-field>
+
                 <mat-accordion class="accordion">
-                    <mat-expansion-panel *ngFor="let eventDetails of events">
+                    <mat-expansion-panel *ngFor="let eventDetails of events | eventFilter: searchText">
 
                         <mat-expansion-panel-header fxLayout="row">
                             <mat-panel-title fxFlex='47'>
                                 {{eventDetails.eventName}}
                             </mat-panel-title>
                             <mat-panel-description>
-                                Regiunea
+                                {{eventDetails.region}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
@@ -20,7 +26,7 @@
 
                                 <div fxLayout="row" class="info-element-title">
                                     <mat-card-subtitle class="info-element-row">
-                                        {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}
+                                        {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}:
                                     </mat-card-subtitle>
                                     <div>
                                         {{eventDetails.organizerName}}
@@ -29,7 +35,7 @@
 
                                 <div fxLayout="row" class="info-element-title">
                                     <mat-card-subtitle class="info-element-row">
-                                        Pretul total
+                                        {{ 'EVENT_DETAILS.TOTAL_PRICE' | translate}}:
                                     </mat-card-subtitle>
                                     <div>
                                         580
@@ -38,19 +44,20 @@
 
                                 <div fxLayout="row" class="info-element-title">
                                     <mat-card-subtitle class="info-element-row">
-                                        Perioada
+                                        {{ 'EVENT_DETAILS.PERIOD' | translate}}:
                                     </mat-card-subtitle>
                                     <div>
-                                        12.03 - 15.03
+                                        {{eventDetails.startDate | date: 'dd/MM/yyyy'}} - {{eventDetails.endDate | date:
+                                        'dd/MM/yyyy'}}
                                     </div>
                                 </div>
 
                                 <div fxLayout="row" class="info-element-title">
                                     <mat-card-subtitle class="info-element-row">
-                                        Locuri disponibile
+                                        {{ 'EVENT_DETAILS.AVAILABLE_TICKETS' | translate}}:
                                     </mat-card-subtitle>
                                     <div>
-                                        30
+                                        20
                                     </div>
                                 </div>
 
@@ -62,7 +69,9 @@
                             </div>
 
                             <div>
-                                <button class="button" mat-raised-button color="primary">Detalii eveniment</button>
+                                <button class="button" mat-raised-button color="primary"
+                                    [routerLink]="['/event-details', eventDetails.eventId]"> {{
+                                    'EVENT_DETAILS.EVENT_DETAILS' | translate}}</button>
                             </div>
 
                         </mat-card>

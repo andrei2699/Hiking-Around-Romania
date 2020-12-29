@@ -10,7 +10,7 @@ import { EventService } from '../events/event.service';
 export class HomeComponent implements OnInit {
 
   totalPrice: number;
-
+  searchText: string;
   events = [];
 
   constructor(
