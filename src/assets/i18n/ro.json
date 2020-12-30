@@ -107,5 +107,8 @@
     "HOME_PAGE": {
         "FUTURE_EVENTS": "Evenimente viitoare",
         "REGIONS": "Descrierea regiunilor montane"
+    },
+    "ABOUT_US": {
+        "VIEW_PROFILE": "Vezi profilul"
     }
 }

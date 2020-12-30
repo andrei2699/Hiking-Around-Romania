@@ -107,5 +107,8 @@
     "HOME_PAGE": {
         "FUTURE_EVENTS": "Future events",
         "REGIONS": "Description of mountain regions"
+    },
+    "ABOUT_US": {
+        "VIEW_PROFILE": "View Profile"
     }
 }

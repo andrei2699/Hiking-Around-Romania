@@ -1,0 +1,42 @@
+@import '../../custom-app-theme.scss';
+
+// mat-grid-tile {
+//     margin-right: 10px !important;
+// }
+
+mat-card {
+    width:80%;
+    height:80%;
+}
+
+mat-card:hover {
+    box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+.main-profile-photo {
+    max-height: 170px;
+    max-width:95%;
+    height:100%;
+    width:auto;
+}
+
+.outside-button {
+    width: 100%;
+    margin-bottom: 1px !important;
+}
+
+.button {
+    margin-bottom: 10px;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+}
+
+.module {
+    width: 260px;
+    overflow: hidden;
+}
+  
