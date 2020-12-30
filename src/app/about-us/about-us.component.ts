@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile/profile.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about-us',
@@ -9,10 +10,11 @@ import { ProfileService } from '../profile/profile.service';
 export class AboutUsComponent implements OnInit {
 
   profiles = [];
-  empty_description = '                                                         ';
+  searchText: string;
 
   constructor(
     private _profileService: ProfileService,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {

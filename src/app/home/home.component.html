@@ -4,8 +4,9 @@
             <div class="tab-content" fxLayout="column">
 
                 <mat-form-field class="search-field" fxFlex>
-                    <mat-label>Filter Events</mat-label>
-                    <input type="search" matInput placeholder="Search" [(ngModel)]="searchText">
+                    <mat-label>{{ 'HOME_PAGE.FILTER_EVENTS' | translate}}</mat-label>
+                    <input type="search" matInput placeholder="{{ 'HOME_PAGE.SEARCH' | translate}}"
+                        [(ngModel)]="searchText">
                 </mat-form-field>
 
                 <mat-accordion class="accordion">

@@ -106,7 +106,9 @@
     },
     "HOME_PAGE": {
         "FUTURE_EVENTS": "Future events",
-        "REGIONS": "Description of mountain regions"
+        "REGIONS": "Description of mountain regions",
+        "FILTER_EVENTS": "Filter events",
+        "SEARCH": "Search"
     },
     "ABOUT_US": {
         "VIEW_PROFILE": "View Profile"

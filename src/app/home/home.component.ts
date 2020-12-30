@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventDetails } from '../events/event-details';
 import { EventService } from '../events/event.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _eventService: EventService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {

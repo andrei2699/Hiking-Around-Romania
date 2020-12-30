@@ -36,7 +36,13 @@ mat-card:hover {
 }
 
 .module {
-    width: 260px;
+    width: 100%;
     overflow: hidden;
+}
+
+.search-field {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
   
