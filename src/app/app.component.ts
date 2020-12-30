@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './authentication.service';
 import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 
@@ -17,7 +18,7 @@ export class AppComponent {
     public shoppingCartService: ShoppingCartService,
     public authService: AuthenticationService,
     public router: Router,
-    private _elementRef: ElementRef) {
+    private _cookieService: CookieService) {
 
     translate.addLangs(['en', 'ro']);
     translate.setDefaultLang('en');
@@ -26,7 +27,12 @@ export class AppComponent {
 
     router.events.subscribe(() => {
       this.shoppingCartPreviewIsOpen = false;
-    })
+    });
+
+    const storedLang = this._cookieService.get('language');
+    if (storedLang) {
+      this.translate.use(storedLang);
+    }
   }
 
   ngOnInit(): void {
@@ -46,5 +52,10 @@ export class AppComponent {
         this.router.navigate(['/event-organizer-profile', userId]);
       }
     });
+  }
+
+  changeLanguage(lang) {
+    this.translate.use(lang)
+    this._cookieService.set('language', lang);
   }
 }

@@ -7,10 +7,10 @@
       <span>{{ 'AUTH.TO_MAIN_PAGE' | translate }}</span>
       <mat-icon class="margin-left-8">home</mat-icon>
     </button>
-    <button *ngIf="!(authService.isLoggedIn | async)" mat-button
-      [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate }}</button>
-    <button *ngIf="!(authService.isLoggedIn | async)" mat-button
-      [routerLink]="['/register']">{{ 'AUTH.REGISTER' | translate }}</button>
+    <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate
+      }}</button>
+    <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/register']">{{ 'AUTH.REGISTER' |
+      translate }}</button>
 
     <span *ngIf="(authService.isLoggedIn | async)">
       <button mat-button (click)="shoppingCartPreviewIsOpen = !shoppingCartPreviewIsOpen" cdkOverlayOrigin
@@ -56,8 +56,8 @@
     </mat-menu>
 
     <mat-menu #languageMenu="matMenu">
-      <button (click)="translate.use('en')" mat-menu-item>English</button>
-      <button (click)="translate.use('ro')" mat-menu-item>Română</button>
+      <button (click)="changeLanguage('en')" mat-menu-item>English</button>
+      <button (click)="changeLanguage('ro')" mat-menu-item>Română</button>
     </mat-menu>
 
   </div>
