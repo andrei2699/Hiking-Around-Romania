@@ -1,1 +1,30 @@
-<p>about-us works!</p>
+<div fxLayout="column">
+    <mat-form-field class="search-field" fxFlex>
+        <mat-label>{{ 'HOME_PAGE.FILTER_EVENTS' | translate}}</mat-label>
+        <input type="search" matInput placeholder="{{ 'HOME_PAGE.SEARCH' | translate}}" [(ngModel)]="searchText">
+    </mat-form-field>
+
+    <div>
+        <mat-grid-list cols="10" rowHeight="100px">
+            <mat-grid-tile *ngFor="let profile of profiles | organizerFilter: searchText" [colspan]="2" [rowspan]="5">
+                <mat-card class="example-card mat-elevation-z8" fxLayout="column" fxLayoutAlign="space-between center">
+                    <mat-card-header fxLayoutAlign="center center">
+                        <mat-card-title>{{profile.name}}</mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image *ngIf="profile.profilePhotoUrl" class="main-profile-photo"
+                        [src]="profile.profilePhotoUrl">
+                    <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="module line-clamp" *ngIf="profile.description">
+                            <p>{{profile.description}}</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="outside-button" fxLayoutAlign="start start">
+                        <button class="button" mat-raised-button color="primary"
+                            [routerLink]="['/event-organizer-profile', profile.userId]">{{
+                            'ABOUT_US.VIEW_PROFILE' | translate}}</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
