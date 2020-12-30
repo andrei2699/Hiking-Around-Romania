@@ -69,12 +69,18 @@ body {
     padding-right: 24px;
 }
 
-.auth-bg-photo {
-  background-image: url(https://images.unsplash.com/photo-1516112173450-2e73c1acc637?ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
 .mat-card {
     background-color: mat-color($candy-app-primary, darker) !important;
+}
+
+.login-bg {
+    background-image: url(https://images.unsplash.com/photo-1531497825193-b208e39d008f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.register-bg {
+    background-image: url(https://images.unsplash.com/photo-1531497825193-b208e39d008f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+    background-size: 100%;
+    background-repeat: no-repeat;
 }

@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthenticationService } from './authentication.service';
@@ -25,10 +25,6 @@ export class AppComponent {
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/en|ro/) ? browserLang : 'en');
 
-    router.events.subscribe(() => {
-      this.shoppingCartPreviewIsOpen = false;
-    });
-
     const storedLang = this._cookieService.get('language');
     if (storedLang) {
       this.translate.use(storedLang);
@@ -36,6 +32,21 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((val) => {
+      this.shoppingCartPreviewIsOpen = false;
+
+      if (val instanceof NavigationEnd) {
+        document.body.classList.remove('login-bg');
+        document.body.classList.remove('register-bg');
+
+        if (val.url == '/login') {
+          document.body.classList.add('login-bg');
+        }
+        else if (val.url == '/register') {
+          document.body.classList.add('register-bg');
+        }
+      }
+    });
   }
 
   logout() {
