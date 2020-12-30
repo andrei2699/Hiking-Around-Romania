@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -9,6 +9,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+import { CookieService } from 'ngx-cookie-service';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -124,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatNativeDateModule,
   ],
   providers: [
+    CookieService,
     AuthenticationService,
     // { provide: REGION, useValue: 'europe-west1' }
   ],
