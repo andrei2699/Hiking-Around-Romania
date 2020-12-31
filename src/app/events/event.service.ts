@@ -55,6 +55,10 @@ export class EventService {
     return this.firebaseFunctions.httpsCallable('getFutureEvents');
   }
 
+  getAvailableTickets(eventDetails) {
+    return eventDetails.totalTickets - eventDetails.reservedTickets;
+  }
+
   getPhoto(eventDetails: EventDetails, nameVariation?: number | string) {
     return this._firestorageImageService
       .getPhotoWithNameVariation('eventPhotos', eventDetails.eventId, nameVariation);

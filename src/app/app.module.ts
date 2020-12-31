@@ -57,6 +57,7 @@ import { UpdateEventComponent } from './events/update-event/update-event.compone
 import { CreateUpdateEventComponent } from './events/create-update-event/create-update-event.component';
 import { EventFilterPipe } from './pipes/event-filter.pipe';
 import { OrganizerFilterPipe } from './pipes/organizer-filter.pipe';
+import { RegionFilterPipe } from './pipes/region-filter.pipe';
 
 firebase.initializeApp(environment.firebase);
 
@@ -82,7 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpdateEventComponent,
     CreateUpdateEventComponent,
     EventFilterPipe,
-    OrganizerFilterPipe
+    OrganizerFilterPipe,
+    RegionFilterPipe
   ],
   imports: [
     BrowserAnimationsModule,
