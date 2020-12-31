@@ -15,19 +15,12 @@
                     <mat-grid-tile *ngFor="let region of regions | regionFilter: searchTextRegions" [colspan]="2"
                         [rowspan]="5">
                         <mat-card class="example-card mat-elevation-z6" fxLayout="column"
-                            fxLayoutAlign="space-between center" [ngStyle]="{
-                                'background-image': (region.photoUrl) ? 'url(' + region.photoUrl + ')' : ''         
-                            }">
+                            fxLayoutAlign="space-between center"
+                            [ngStyle]="{'background-image': (region.photoUrl) ? 'url(' + region.photoUrl + ')' : '' }">
 
-                            <div fxLayout="column" fxLayoutAlign="center center">
-                                <h2 class="name">{{region.name}}</h2>
-                                <div fxFlex='10'>
-
-                                </div>
-                                <div class="module line-clamp" *ngIf="region.description">
-                                    <p>{{region.description}}</p>
-                                </div>
-
+                            <h2 class="name">{{region.name}}</h2>
+                            <div class="module" *ngIf="region.description">
+                                {{region.description}}
                             </div>
                         </mat-card>
                     </mat-grid-tile>
