@@ -1,7 +1,42 @@
 <div class="tabs">
     <mat-tab-group mat-stretch-tabs animationDuration="0ms">
+
+        <mat-tab label="{{'HOME_PAGE.REGIONS' | translate}}">
+            <div fxLayout="column">
+                <mat-form-field class="search-field-regions" fxFlex>
+                    <mat-label>{{ 'HOME_PAGE.FILTER_REGIONS' | translate}}</mat-label>
+                    <input type="search" matInput placeholder="{{ 'HOME_PAGE.SEARCH' | translate}}"
+                        [(ngModel)]="searchTextRegions">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-grid-list cols="10" rowHeight="100px">
+                    <mat-grid-tile *ngFor="let region of regions | regionFilter: searchTextRegions" [colspan]="2"
+                        [rowspan]="5">
+                        <mat-card class="example-card mat-elevation-z6" fxLayout="column"
+                            fxLayoutAlign="space-between center" [ngStyle]="{
+                                'background-image': (region.photoUrl) ? 'url(' + region.photoUrl + ')' : ''         
+                            }">
+
+                            <div fxLayout="column" fxLayoutAlign="center center">
+                                <h2 class="name">{{region.name}}</h2>
+                                <div fxFlex='10'>
+
+                                </div>
+                                <div class="module line-clamp" *ngIf="region.description">
+                                    <p>{{region.description}}</p>
+                                </div>
+
+                            </div>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </mat-tab>
+
         <mat-tab class="oneTab" label="{{'HOME_PAGE.FUTURE_EVENTS' | translate}}">
-            <div class="tab-content" fxLayout="column">
+            <div class="tab-content" fxLayout="column" fxLayoutAlign="center center">
 
                 <mat-form-field class="search-field" fxFlex>
                     <mat-label>{{ 'HOME_PAGE.FILTER_EVENTS' | translate}}</mat-label>
@@ -10,10 +45,10 @@
                 </mat-form-field>
 
                 <mat-accordion class="accordion">
-                    <mat-expansion-panel *ngFor="let eventDetails of events | eventFilter: searchText">
+                    <mat-expansion-panel class="panel" *ngFor="let eventDetails of events | eventFilter: searchText">
 
                         <mat-expansion-panel-header fxLayout="row">
-                            <mat-panel-title fxFlex='47'>
+                            <mat-panel-title fxFlex='48'>
                                 {{eventDetails.eventName}}
                             </mat-panel-title>
                             <mat-panel-description>
@@ -58,7 +93,7 @@
                                         {{ 'EVENT_DETAILS.AVAILABLE_TICKETS' | translate}}:
                                     </mat-card-subtitle>
                                     <div>
-                                        20
+                                        {{ eventService.getAvailableTickets(eventDetails)}}
                                     </div>
                                 </div>
 
@@ -70,20 +105,15 @@
                             </div>
 
                             <div>
-                                <button class="button" mat-raised-button color="primary"
+                                <button class="button-details" mat-raised-button color="primary"
                                     [routerLink]="['/event-details', eventDetails.eventId]"> {{
                                     'EVENT_DETAILS.EVENT_DETAILS' | translate}}</button>
                             </div>
 
                         </mat-card>
                     </mat-expansion-panel>
-
                 </mat-accordion>
             </div>
-        </mat-tab>
-
-        <mat-tab label="{{'HOME_PAGE.REGIONS' | translate}}">
-            Content 2
         </mat-tab>
 
     </mat-tab-group>

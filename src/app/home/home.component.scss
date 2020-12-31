@@ -6,10 +6,12 @@
 
 .mat-tab-group {
     margin-bottom: 48px;
+    margin-top: 10px;
 }
 
 .tab-content {
-    margin-top: 30px;
+    margin-top: 10px;
+    width:100%;
 }
 
 .info-element-title {
@@ -22,19 +24,105 @@
 }
 
 .list-card {
-    background-color: mat-color($candy-app-primary, lighter) !important;;
+    background-color: mat-color($candy-app-primary, lighter) !important;
 }
 
 .main-event-photo {
+    // height:100%;
+    // max-height:400px;
+
+    max-height: 300px;
+    max-width:100%;
     height:100%;
-    max-height:400px;
+    width:auto;
 }
 
-.button {
+.button-details {
     margin-top: 15px;
     margin-right: 15px;
 }
 
+.search-field-regions {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .search-field {
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.panel {
+    background-color:mat-color($candy-app-primary, darker) !important; 
+    margin-top: 5px;
+    // width: 80%;
+}
+
+.example-card {
+    width:90%;
+    height:90%;
+
+    box-sizing: border-box;
+    background-position: center;
+    background-color: #333;
+    padding: 37px 25px;
+    text-align: center;
+    flex: 1 0 52%;
+    margin: 5px;
+    font-weight: 400;
+    display: block;
+    color: #fff;
+    position: relative;
+    transition: all .2s ease-in-out;
+    overflow: hidden;
+    border-radius: 5px;
+    // opacity: 0.8;
+}
+
+h2 {
+    color: #fff;
+    font-size: 30px;
+    margin: 0;
+    font-family: var(--header_font);
+    font-weight: 550;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 20px rgba(0,0,0,.25);
+}
+
+// .example-card:hover {
+//     box-shadow:0 11px 15px -7px rgba(0,0,0,.2),0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12);
+// }
+
+.main-profile-photo {
+    max-height: 170px;
+    max-width:95%;
+    height:100%;
+    width:auto;
+}
+
+.outside-button {
+    width: 100%;
+    margin-bottom: 1px !important;
+}
+
+.line-clamp {
+    // display: -webkit-box;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;  
+}
+
+.module {
+    width: 100%;
+    overflow: hidden;
+    font-size: 18px;
+}
+
+.region-card-header {
+    background-color: mat-color($candy-app-primary) !important;
+    width: 100%;
+}
+
+.accordion {
+    width: 80%;
 }
