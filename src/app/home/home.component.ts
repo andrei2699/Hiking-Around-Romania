@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../events/event.service';
 import { TranslateService } from '@ngx-translate/core';
 import { RegionService } from '../regions/region.service';
+import { PricesCalculatorService } from '../events/prices-calculator.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public eventService: EventService,
+    public pricesCalculatorService: PricesCalculatorService,
     private _regionService: RegionService,
     public translate: TranslateService
   ) { }
