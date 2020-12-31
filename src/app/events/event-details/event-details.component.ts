@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddToShoppingCartDialogComponent } from './add-to-shopping-cart-dialog/add-to-shopping-cart-dialog.component';
 import { ShoppingCartService } from 'src/app/shopping-cart/shopping-cart.service';
+import { PricesCalculatorService } from '../prices-calculator.service';
 
 @Component({
   selector: 'app-event-details',
@@ -28,6 +29,7 @@ export class EventDetailsComponent implements OnInit {
     public translate: TranslateService,
     public dialog: MatDialog,
     public eventService: EventService,
+    public pricesCalculatorService: PricesCalculatorService,
     private _authService: AuthenticationService,
     private _shoppingCartService: ShoppingCartService,
     private _route: ActivatedRoute,
@@ -57,10 +59,6 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
-  calculateTotalPrice() {
-    return this.eventDetails.eventPrice + this.eventDetails.accomodationPrice + this.eventDetails.transportPrice;
-  }
-
   updateEvent() {
     this._router.navigate(['update-event', this.eventDetails.eventId])
   }
@@ -75,7 +73,6 @@ export class EventDetailsComponent implements OnInit {
       if (result > 0) {
         this._shoppingCartService.addItemToShoppingCart(this.eventDetails, result);
       }
-      console.log('The dialog was closed');
       this.numberOfTickets = result;
     });
   }

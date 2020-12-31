@@ -134,7 +134,7 @@
                                 {{ 'EVENT_DETAILS.TOTAL_PRICE' | translate}}
                             </mat-card-subtitle>
                             <div>
-                                {{ calculateTotalPrice() }}
+                                {{ pricesCalculatorService.getTotalPriceEvent(eventDetails)}}
                             </div>
                         </div>
                     </mat-card-content>
