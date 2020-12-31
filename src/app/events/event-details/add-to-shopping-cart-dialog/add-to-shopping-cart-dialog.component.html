@@ -1,0 +1,26 @@
+<div *ngIf="data">
+    <div fxLayout="column" fxLayoutAlign="space-between center">
+        <h1 mat-dialog-title>
+            {{ 'SHOPPING_CART_DIALOG.RESERVE_TICKETS' | translate}}
+        </h1>
+        <div mat-dialog-content>
+            <p>
+                {{ 'SHOPPING_CART_DIALOG.HOW_MANY_TICKETS' | translate}}
+            </p>
+            <mat-form-field appearance="fill" [color]="primary">
+                <mat-label>
+                    {{ 'SHOPPING_CART_DIALOG.SELECT_NUMBER_OF_TICKETS' | translate}}
+                </mat-label>
+                <input matInput type="number" placeholder="Locuri" [(ngModel)]="data.numberOfTickets">
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="noButtonClick()">
+                {{ 'DIALOG.CANCEL' | translate}}
+            </button>
+            <button mat-raised-button color="primary" [mat-dialog-close]="data.numberOfTickets" cdkFocusInitial>
+                {{ 'SHOPPING.ADD_TO_CART' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

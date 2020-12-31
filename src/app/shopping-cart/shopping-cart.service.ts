@@ -59,7 +59,7 @@ export class ShoppingCartService {
     return this.orderedEvents.length > 0;
   }
 
-  addItemToShoppingCart(event: EventDetails) {
+  addItemToShoppingCart(event: EventDetails, ticketCount: number) {
     const shoppingCartItem: ShoppingCartItem = {
       eventId: event.eventId,
       eventMainPhotoUrl: event.eventMainPhotoUrl,
@@ -70,11 +70,11 @@ export class ShoppingCartService {
     }
 
     this.orderedEvents.push(shoppingCartItem);
-    this._authenticationService.getCurrentUserId().subscribe(userid => {
-      if (userid) {
-        this._firestore.doc(`orders/${userid}`).set(this.orderedEvents);
-      }
-    })
+    // this._authenticationService.getCurrentUserId().subscribe(userid => {
+    //   if (userid) {
+    //     this._firestore.doc(`orders/${userid}`).set(this.orderedEvents);
+    //   }
+    // })
   }
 
   completeOrder() {

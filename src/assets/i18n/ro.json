@@ -114,5 +114,10 @@
     "ABOUT_US": {
         "VIEW_PROFILE": "Vezi profilul",
         "FILTER_ORGANIZERS": "Filtrează organizatorii"
+    },
+    "SHOPPING_CART_DIALOG": {
+        "RESERVE_TICKETS": "Rezervare Locuri Eveniment",
+        "HOW_MANY_TICKETS": "Câte locuri doriți să rezervați?",
+        "SELECT_NUMBER_OF_TICKETS": "Alegeți numărul de locuri"
     }
 }
