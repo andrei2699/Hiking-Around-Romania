@@ -58,6 +58,7 @@ import { CreateUpdateEventComponent } from './events/create-update-event/create-
 import { EventFilterPipe } from './pipes/event-filter.pipe';
 import { OrganizerFilterPipe } from './pipes/organizer-filter.pipe';
 import { RegionFilterPipe } from './pipes/region-filter.pipe';
+import { AddToShoppingCartDialogComponent } from './events/event-details/add-to-shopping-cart-dialog/add-to-shopping-cart-dialog.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -84,7 +85,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateUpdateEventComponent,
     EventFilterPipe,
     OrganizerFilterPipe,
-    RegionFilterPipe
+    RegionFilterPipe,
+    AddToShoppingCartDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,

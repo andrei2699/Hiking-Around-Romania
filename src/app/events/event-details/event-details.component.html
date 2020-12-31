@@ -6,7 +6,7 @@
 
 <div *ngIf="eventDetails" class="main-div" fxLayout="column">
     <mat-card fxLayout="column">
-        <mat-card-title fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title class="event-title" fxLayout="row" fxLayoutAlign="space-between center">
             {{eventDetails.eventName}}
 
             <button mat-raised-button color="primary" *ngIf="isCurrentUser" (click)="updateEvent()" fxLayout="row"
@@ -23,19 +23,12 @@
                     [src]="eventDetails.eventMainPhotoUrl">
             </div>
 
-            <div fxLayout="column" fxFlex>
-                <div fxLayout="column" class="info-element-title">
-                    <mat-card-title>
-                        {{ 'PROFILE.DESCRIPTION' | translate}}
-                    </mat-card-title>
-                    <div>
-                        {{eventDetails.eventDescription}}
-                    </div>
-                </div>
+            <mat-card class="details-card" fxLayout="column" fxFlex>
+                <mat-card-title>{{ 'EVENT_DETAILS.EVENT_DETAILS' | translate }}</mat-card-title>
 
                 <div fxLayout="row" class="info-element-title">
                     <mat-card-subtitle class="info-element-row">
-                        {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}
+                        {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}:
                     </mat-card-subtitle>
                     <span>
                         <a [routerLink]="['/event-organizer-profile', eventDetails.organizerId]"
@@ -47,34 +40,74 @@
 
                 <div fxLayout="row">
                     <mat-card-subtitle class="info-element-row">
-                        {{ 'EVENT_DETAILS.ACCOMODATION' | translate}}
+                        {{ 'EVENT_DETAILS.REGION' | translate}}:
+                    </mat-card-subtitle>
+                    <div>
+                        {{eventDetails.region}}
+                    </div>
+                </div>
+
+                <div fxLayout="row">
+                    <mat-card-subtitle class="info-element-row">
+                        {{ 'EVENT_DETAILS.PERIOD' | translate}}:
+                    </mat-card-subtitle>
+                    <div>
+                        {{eventDetails.startDate | date: 'dd/MM/yyyy'}} - {{eventDetails.endDate | date:
+                        'dd/MM/yyyy'}}
+                    </div>
+                </div>
+
+                <div fxLayout="row">
+                    <mat-card-subtitle class="info-element-row">
+                        {{ 'EVENT_DETAILS.ACCOMODATION' | translate}}:
                     </mat-card-subtitle>
                     <div>
                         {{eventDetails.accomodation}}
                     </div>
                 </div>
+
                 <div fxLayout="row">
                     <mat-card-subtitle class="info-element-row">
-                        {{ 'EVENT_DETAILS.TRANSPORT' | translate}}
+                        {{ 'EVENT_DETAILS.TRANSPORT' | translate}}:
                     </mat-card-subtitle>
                     <div>
                         {{eventDetails.transport}}
                     </div>
                 </div>
-            </div>
+
+                <div fxLayout="row">
+                    <mat-card-subtitle class="info-element-row">
+                        {{ 'EVENT_DETAILS.AVAILABLE_TICKETS' | translate}}:
+                    </mat-card-subtitle>
+                    <div>
+                        {{ eventService.getAvailableTickets(eventDetails)}}
+                    </div>
+                </div>
+
+                <div fxLayout="row">
+                    <mat-card-subtitle class="info-element-row">
+                        {{ 'CREATE_EVENT.EVENT_DESCRIPTION' | translate}}:
+                    </mat-card-subtitle>
+                    <div>
+                        {{ eventDetails.eventDescription}}
+                    </div>
+                </div>
+
+            </mat-card>
 
             <div class="billing-info" fxFlex="15">
                 <mat-card class="billing-info-card">
                     <mat-card-title>{{ 'EVENT_DETAILS.BILLING_INFORMATION' | translate }}</mat-card-title>
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="space-between center">
-                            <mat-card-subtitle class="info-element-row">
+                            <mat-card-subtitle class="info-element-title">
                                 {{ 'EVENT_DETAILS.EVENT_PRICE' | translate}}
                             </mat-card-subtitle>
                             <div>
                                 {{eventDetails.eventPrice}}
                             </div>
                         </div>
+
                         <div fxLayout="row" fxLayoutAlign="space-between center">
                             <mat-card-subtitle class="info-element-row">
                                 {{ 'EVENT_DETAILS.ACCOMODATION_PRICE' | translate}}
@@ -105,9 +138,10 @@
                             </div>
                         </div>
                     </mat-card-content>
+
                     <mat-card-actions *ngIf="showAddToCartButton" fxLayoutAlign="end stretch">
-                        <button mat-raised-button color="primary">
-                            {{ 'SHOPPING.ADD_TO_CART' | translate | uppercase}}
+                        <button mat-raised-button color="primary" (click)="openDialog()">
+                            Cumpara bilete
                         </button>
                     </mat-card-actions>
                 </mat-card>

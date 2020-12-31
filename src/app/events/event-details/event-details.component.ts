@@ -6,6 +6,9 @@ import { EventService } from '../event.service';
 import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url'
 import { AuthenticationService } from 'src/app/authentication.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddToShoppingCartDialogComponent } from './add-to-shopping-cart-dialog/add-to-shopping-cart-dialog.component';
+import { ShoppingCartService } from 'src/app/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-event-details',
@@ -14,14 +17,19 @@ import { Router } from '@angular/router';
 })
 export class EventDetailsComponent implements OnInit {
 
+  numberOfTickets: number;
+
   eventDetails: EventDetails;
   unavailablePhotoUrl = UNAVAILABLE_IMG_URL;
   showAddToCartButton = true;
   isCurrentUser = false;
 
-  constructor(public translate: TranslateService,
-    private _eventService: EventService,
+  constructor(
+    public translate: TranslateService,
+    public dialog: MatDialog,
+    public eventService: EventService,
     private _authService: AuthenticationService,
+    private _shoppingCartService: ShoppingCartService,
     private _route: ActivatedRoute,
     private _router: Router) { }
 
@@ -35,13 +43,12 @@ export class EventDetailsComponent implements OnInit {
         console.log(err);
       });
 
-      this._eventService.getEvent(eventId)
+      this.eventService.getEvent(eventId)
         .subscribe(eventDetails => {
           this.eventDetails = eventDetails;
           var userId = this.eventDetails.organizerId;
           this._authService.checkIfIdBelongsToLoggedUser(userId)
             .subscribe(r => {
-              console.log(r)
               this.isCurrentUser = r;
             });
         }, err => {
@@ -57,4 +64,20 @@ export class EventDetailsComponent implements OnInit {
   updateEvent() {
     this._router.navigate(['update-event', this.eventDetails.eventId])
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddToShoppingCartDialogComponent, {
+      width: '300px',
+      data: { numberOfTickets: this.numberOfTickets }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result > 0) {
+        this._shoppingCartService.addItemToShoppingCart(this.eventDetails, result);
+      }
+      console.log('The dialog was closed');
+      this.numberOfTickets = result;
+    });
+  }
 }
+
