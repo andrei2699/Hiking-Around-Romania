@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -52,7 +53,14 @@ export class EventService {
   }
 
   getFutureEvents() {
-    return this.firebaseFunctions.httpsCallable('getFutureEvents');
+    return this.firebaseFunctions.httpsCallable('getFutureEvents')({}).pipe(map(d => {
+      var events: EventDetails[] = [];
+      for (let event of d) {
+        events.push(event);
+      }
+
+      return events;
+    }));
   }
 
   getAvailableTickets(eventDetails) {

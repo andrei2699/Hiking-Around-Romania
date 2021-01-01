@@ -3,6 +3,7 @@ import { EventService } from '../events/event.service';
 import { TranslateService } from '@ngx-translate/core';
 import { RegionService } from '../regions/region.service';
 import { PricesCalculatorService } from '../events/prices-calculator.service';
+import { EventDetails } from '../events/event-details';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   totalPrice: number;
   searchText: string;
-  events = [];
+  events: EventDetails[];
   regions = [];
   searchTextRegions: string;
 
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.eventService.getAllEvents()
+    this.eventService.getFutureEvents()
       .subscribe(res => {
         this.events = res;
       })
@@ -35,4 +36,5 @@ export class HomeComponent implements OnInit {
         this.regions = res;
       })
   }
+
 }

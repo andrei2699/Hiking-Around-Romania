@@ -86,7 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventFilterPipe,
     OrganizerFilterPipe,
     RegionFilterPipe,
-    AddToShoppingCartDialogComponent
+    AddToShoppingCartDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,

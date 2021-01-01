@@ -13,7 +13,8 @@ export class EventFilterPipe implements PipeTransform {
 			return events;
 
 		return events.filter(event => {
-			return event.eventName.toLowerCase().includes(searchText.toLowerCase()) || (event.region && event.region.toLowerCase().includes(searchText.toLowerCase()));
+			return (event.eventName.toLowerCase().includes(searchText.toLowerCase()) || (event.region && event.region.toLowerCase().includes(searchText.toLowerCase()))
+				|| event.organizerName.toLowerCase().includes(searchText.toLowerCase()));
 		})
 	}
 }

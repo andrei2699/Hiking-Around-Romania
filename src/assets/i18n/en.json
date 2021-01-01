@@ -116,8 +116,8 @@
         "FILTER_ORGANIZERS": "Filter organizers"
     },
     "SHOPPING_CART_DIALOG": {
-        "RESERVE_TICKETS": "Reserve Tickets",
-        "HOW_MANY_TICKETS": "How many tickets would you like to reserve?",
-        "SELECT_NUMBER_OF_TICKETS": "Select number of tickets"
+        "HOW_MANY_TICKETS": "How many tickets would you like to select?",
+        "SELECT_NUMBER_OF_TICKETS": "Select number of tickets",
+        "SELECT_TICKETS": "Select Tickets"
     }
 }
