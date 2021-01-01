@@ -116,8 +116,8 @@
         "FILTER_ORGANIZERS": "Filtrează organizatorii"
     },
     "SHOPPING_CART_DIALOG": {
-        "RESERVE_TICKETS": "Rezervare Locuri Eveniment",
-        "HOW_MANY_TICKETS": "Câte locuri doriți să rezervați?",
-        "SELECT_NUMBER_OF_TICKETS": "Alegeți numărul de locuri"
+        "HOW_MANY_TICKETS": "Câte locuri doriți să selectați?",
+        "SELECT_NUMBER_OF_TICKETS": "Alegeți numărul de locuri",
+        "SELECT_TICKETS": "Selectați locuri"
     }
 }

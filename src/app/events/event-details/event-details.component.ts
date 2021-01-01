@@ -66,7 +66,7 @@ export class EventDetailsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddToShoppingCartDialogComponent, {
       width: '300px',
-      data: { numberOfTickets: this.numberOfTickets }
+      data: { numberOfTickets: this.numberOfTickets, maxim: this.eventService.getAvailableTickets(this.eventDetails) }
     });
 
     dialogRef.afterClosed().subscribe(result => {
