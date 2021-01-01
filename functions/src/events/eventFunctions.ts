@@ -7,12 +7,13 @@ export const getFutureEvents = functions
         cors(request, response, async () => {
 
             if (request.body && request.body.data) {
+                const currentDate = new Date();
+
                 const data = await admin.firestore().collection('events').get()
                     .then(res => res.docs
                         .filter(doc => {
                             if (doc.data().startDate) {
                                 const eventStartDate = doc.data().startDate.toDate();
-                                const currentDate = new Date();
 
                                 eventStartDate.setTime(eventStartDate.getTime() - eventStartDate.getTimezoneOffset() * 60 * 1000);
 
@@ -54,5 +55,57 @@ export const getFutureEvents = functions
                 return response.status(500).send({ error: 'Invalid request received', req: request.body });
             }
         })
+
+    });
+
+export const getPastEventsOfOrganizer = functions
+    .https.onRequest((request, response) => {
+        cors(request, response, async () => {
+
+            if (request.body && request.body.data) {
+                const organizerId = request.body.data.organizerId;
+                if (organizerId) {
+                    const currentDate = new Date();
+
+                    const data = await admin.firestore().collection('events').get()
+                        .then(res => res.docs
+                            .filter(doc => {
+                                const docData = doc.data();
+                                if (docData && docData.organizerId === organizerId) {
+                                    if (docData.endDate) {
+                                        const eventEndDate = doc.data().endDate.toDate();
+
+                                        return eventEndDate <= currentDate;
+                                    }
+                                }
+
+                                return false;
+                            })
+                            .map(x => {
+                                const event = x.data();
+                                if (event.startDate) {
+                                    event.startDate = event.startDate.toDate();
+                                    event.startDate.setTime(event.startDate.getTime() - event.startDate.getTimezoneOffset() * 60 * 1000);
+                                }
+                                if (event.endDate) {
+                                    event.endDate = event.endDate.toDate();
+                                    event.endDate.setTime(event.endDate.getTime() - event.endDate.getTimezoneOffset() * 60 * 1000);
+                                }
+
+                                event.eventId = x.id;
+                                return event;
+                            }))
+                        .catch(error => {
+                            response.status(500).send(error)
+                        });
+
+                    response.status(200).send({
+                        data: data
+                    });
+                    return data;
+                }
+            }
+            return response.status(500).send({ error: 'Invalid request received', req: request.body });
+        });
 
     });

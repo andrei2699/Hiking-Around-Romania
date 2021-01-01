@@ -2,7 +2,8 @@ import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { map } from 'rxjs/operators';
+import { user } from 'firebase-functions/lib/providers/auth';
+import { filter, map } from 'rxjs/operators';
 import { ImagesFirestorageService } from '../images-firestorage.service';
 import { EventDetails } from './event-details';
 
@@ -54,13 +55,23 @@ export class EventService {
 
   getFutureEvents() {
     return this.firebaseFunctions.httpsCallable('getFutureEvents')({}).pipe(map(d => {
-      var events: EventDetails[] = [];
-      for (let event of d) {
-        events.push(event);
-      }
-
-      return events;
+      return <EventDetails[]>d;
     }));
+  }
+
+  getFutureEventsBelongingToOrganizer(organizerId) {
+    return this.getFutureEvents().pipe(map(events => {
+      return events.filter(event => event.organizerId == organizerId)
+    }));
+  }
+
+  getPastEventsBelongingToOrganizer(organizerId) {
+    return this.firebaseFunctions.httpsCallable('getPastEventsOfOrganizer')({ organizerId: organizerId })
+      .pipe(map(events => {
+        return <EventDetails[]>events;
+      }))
+    // return this.getFutureEvents().pipe(map(events =>
+    //   events.filter(event => event.organizerId == organizerId)));
   }
 
   getAvailableTickets(eventDetails) {
