@@ -16,8 +16,8 @@
       <button mat-button (click)="shoppingCartPreviewIsOpen = !shoppingCartPreviewIsOpen" cdkOverlayOrigin
         #trigger="cdkOverlayOrigin">
         <span>{{ 'SHOPPING.CART' | translate }}</span>
-        <mat-icon class="margin-left-8" [matBadge]="shoppingCartService.getShoppingCartItemCount()"
-          matBadgeColor="accent">shopping_cart</mat-icon>
+        <mat-icon class="margin-left-8" [matBadge]="shoppingCartItemsCount" matBadgeColor="accent">shopping_cart
+        </mat-icon>
       </button>
 
       <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"

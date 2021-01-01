@@ -1,79 +1,137 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { ReplaySubject } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { EventDetails } from '../events/event-details';
 import { EventService } from '../events/event.service';
 import { ShoppingCartItem } from './shopping-cart-item'
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  private orderedEvents: ShoppingCartItem[] = [{
-    eventId: "1444",
-    eventMainPhotoUrl: "https://firebasestorage.googleapis.com/v0/b/hiking-around-romania.appspot.com/o/profilePhotos%2FXVeCDu0pEUP43YB95JI2oiQabEp2?alt=media&token=00884b41-31b9-4819-b0a6-ee7bf7002244",
-    eventName: "EventName1",
-    eventTotalPrice: 40,
-    organizerId: "4551515",
-    organizerName: "John Doe",
-    reservedTickets: 1,
-    availableTickets: 15,
+	cartItemsSubject = new ReplaySubject(1);
 
-  }, {
-    eventId: "1444",
-    eventMainPhotoUrl: "https://firebasestorage.googleapis.com/v0/b/hiking-around-romania.appspot.com/o/profilePhotos%2FZTRhJ9YdxNbNtDsFKMi259FfMU63?alt=media&token=4106474c-dea9-4908-a59b-4d4a68202377",
-    eventName: "EventName1",
-    eventTotalPrice: 40,
-    organizerId: "4551515",
-    organizerName: "John Doe",
-    reservedTickets: 3,
-    availableTickets: 40
-  }
-  ];
+	constructor(private _firestore: AngularFirestore,
+		private eventService: EventService,
+		private _authenticationService: AuthenticationService) { }
 
-  constructor(private _firestore: AngularFirestore,
-    private eventService: EventService,
-    private _authenticationService: AuthenticationService) { }
+	getShoppingCartItems() {
 
-  getShoppingCartItemCount() {
-    return this.orderedEvents.length;
-  }
+		this._authenticationService.getCurrentUserId().subscribe(id => {
+			if (id) {
+				this._firestore.doc(`orders/${id}`).get().subscribe(res => {
+					if (res.data()) {
+						this.cartItemsSubject.next(res.data().events);
+					} else {
+						this.cartItemsSubject.next([]);
+					}
+				})
+			} else {
+				this.cartItemsSubject.next([]);
+			}
+		})
+		return this.cartItemsSubject;
+	}
 
-  getShoppingCartItems() {
-    return this.orderedEvents;
-  }
+	addItemToShoppingCart(event: EventDetails, ticketCount: number, totalPrice: number) {
+		const shoppingCartItem: ShoppingCartItem = {
+			eventId: event.eventId,
+			eventMainPhotoUrl: event.eventMainPhotoUrl,
+			eventName: event.eventName,
+			eventTotalPrice: totalPrice,
+			organizerId: event.organizerId,
+			organizerName: event.organizerName,
+			reservedTickets: ticketCount,
+			availableTickets: this.eventService.getAvailableTickets(event)
+		}
 
-  hasItems() {
-    return this.orderedEvents.length > 0;
-  }
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					var found = false;
+					if (!order) {
+						order = {};
+					}
+					if (order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							if (shoppingCartItem.eventId === order.events[i].eventId) {
+								order.events[i].reservedTickets += shoppingCartItem.reservedTickets;
+								found = true;
+								break;
+							}
+						}
+						if (!found) {
+							order.events.push(shoppingCartItem);
+						}
+					} else {
+						order.events = [];
+						order.events.push(shoppingCartItem);
+					}
 
-  addItemToShoppingCart(event: EventDetails, ticketCount: number, totalPrice: number) {
-    const shoppingCartItem: ShoppingCartItem = {
-      eventId: event.eventId,
-      eventMainPhotoUrl: event.eventMainPhotoUrl,
-      eventName: event.eventName,
-      eventTotalPrice: totalPrice,
-      organizerId: event.organizerId,
-      organizerName: event.organizerName,
-      reservedTickets: ticketCount,
-      availableTickets: this.eventService.getAvailableTickets(event)
-    }
+					this._firestore.doc(`orders/${userid}`).set(order).then();
+					this.cartItemsSubject.next(order.events);
+				});
+			}
+		})
+	}
 
-    this.orderedEvents.push(shoppingCartItem);
-    // this._authenticationService.getCurrentUserId().subscribe(userid => {
-    //   if (userid) {
-    //     this._firestore.doc(`orders/${userid}`).set(this.orderedEvents);
-    //   }
-    // })
-  }
+	removeItem(shoppingCartItem: ShoppingCartItem) {
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					var found = false;
+					if (order && order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							if (shoppingCartItem.eventId === order.events[i].eventId) {
+								order.events.splice(i, 1);
+								found = true;
+								break;
+							}
+						}
+						if (found) {
+							this._firestore.doc(`orders/${userid}`).set(order).then(() => {
 
-  removeItem(shoppingCartItem: ShoppingCartItem) {
-    this.orderedEvents.splice(this.orderedEvents.indexOf(shoppingCartItem), 1);
-  }
+								this.cartItemsSubject.next(order.events);
 
-  completeOrder() {
-    this.orderedEvents = [];
-    console.log('Order Sent');
-  }
+							});
+						}
+					}
+				});
+			}
+		})
+	}
+
+	completeOrder() {
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					if (order && order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							this.eventService.updateEventReservedTickets(order.events[i].eventId, order.events[i].reservedTickets).subscribe();
+						}
+
+						this._firestore.doc(`completedOrders/${userid}`).get().subscribe(d => {
+							var data = d.data();
+							if (!data) {
+								data = { orders: [] };
+							}
+
+							data.orders.push(order);
+
+							this._firestore.doc(`completedOrders/${userid}`).set(data).then(() => {
+								this._firestore.doc(`orders/${userid}`).delete();
+								this.cartItemsSubject.next([]);
+							});
+						});
+					}
+				});
+			}
+		})
+	}
 }

@@ -14,6 +14,7 @@ export class AppComponent {
   title = 'Hiking Around Romania';
   shoppingCartPreviewIsOpen = false;
   isCurrentUserAnOrganizer = true;
+  shoppingCartItemsCount = 0;
 
   constructor(public translate: TranslateService,
     public shoppingCartService: ShoppingCartService,
@@ -48,6 +49,11 @@ export class AppComponent {
         }
       }
     });
+
+    this.shoppingCartService.getShoppingCartItems().subscribe(items => {
+      this.shoppingCartItemsCount = (<Array<any>>items).length;
+
+    })
 
     this.authService.isCurrentUserOrganizer().subscribe(isOrganizer => {
       this.isCurrentUserAnOrganizer = isOrganizer;

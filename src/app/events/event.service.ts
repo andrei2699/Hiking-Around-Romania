@@ -155,4 +155,14 @@ export class EventService {
       });
     }
   }
+
+  updateEventReservedTickets(eventId, reservedTickets) {
+    return this._firestore.doc(`events/${eventId}`).get().pipe(map(document => {
+      var eventDetails = <EventDetails>document.data();
+      eventDetails.eventId = document.id;
+      eventDetails.reservedTickets += reservedTickets;
+      this.updateEvent(eventDetails).then();
+    }));
+
+  }
 }

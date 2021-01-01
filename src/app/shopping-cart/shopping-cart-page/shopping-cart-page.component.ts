@@ -16,7 +16,10 @@ export class ShoppingCartPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.shoppingCartItems = this.shoppingCartService.getShoppingCartItems();
+
+    this.shoppingCartService.getShoppingCartItems().subscribe(items => {
+      this.shoppingCartItems = <ShoppingCartItem[]>items;
+    })
   }
 
   removeCard(card) {
@@ -33,7 +36,7 @@ export class ShoppingCartPageComponent implements OnInit {
 
   placeOrder() {
     this.shoppingCartService.completeOrder();
-    this.shoppingCartItems = this.shoppingCartService.getShoppingCartItems();
+    //this.shoppingCartItems = this.shoppingCartService.getShoppingCartItems();
   }
 
 }
