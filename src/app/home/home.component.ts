@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../events/event.service';
 import { TranslateService } from '@ngx-translate/core';
 import { RegionService } from '../regions/region.service';
-import { PricesCalculatorService } from '../events/prices-calculator.service';
 import { EventDetails } from '../events/event-details';
 
 @Component({
@@ -18,12 +17,9 @@ export class HomeComponent implements OnInit {
   regions = [];
   searchTextRegions: string;
 
-  constructor(
-    public eventService: EventService,
-    public pricesCalculatorService: PricesCalculatorService,
+  constructor(public eventService: EventService,
     private _regionService: RegionService,
-    public translate: TranslateService
-  ) { }
+    public translate: TranslateService) { }
 
   ngOnInit(): void {
     this.eventService.getFutureEvents()

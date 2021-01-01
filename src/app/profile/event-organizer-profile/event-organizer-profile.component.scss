@@ -2,7 +2,8 @@
 
 .profile-info {
     margin: 32px;
-    // padding-right: 48px;
+    width: 68%;
+    padding-left: 32px;
 }
 
 .toolbar-lighter-color {
@@ -15,5 +16,12 @@
     margin-bottom: 16px;
     width: auto;
     height: auto;
-    max-width: 800px;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.events-accordion {
+    width: 70%;
+    padding: 2px;
+    background-color: white;
 }
