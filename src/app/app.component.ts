@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,6 +13,7 @@ import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 export class AppComponent {
   title = 'Hiking Around Romania';
   shoppingCartPreviewIsOpen = false;
+  isCurrentUserAnOrganizer = true;
 
   constructor(public translate: TranslateService,
     public shoppingCartService: ShoppingCartService,
@@ -47,6 +48,10 @@ export class AppComponent {
         }
       }
     });
+
+    this.authService.isCurrentUserOrganizer().subscribe(isOrganizer => {
+      this.isCurrentUserAnOrganizer = isOrganizer;
+    })
   }
 
   logout() {
