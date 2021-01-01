@@ -1,0 +1,44 @@
+@import '../../../custom-app-theme.scss';
+
+.accordion {
+    width: 80%;
+}
+
+.list-card {
+    background-color: mat-color($candy-app-primary, lighter) !important;
+}
+
+.lighter-list-card {
+    background-color: white !important;
+}
+
+.panel {
+    background-color:mat-color($candy-app-primary, darker) !important; 
+    margin-top: 5px;
+}
+
+.lighter-panel {
+    background-color:mat-color($candy-app-primary, lighter) !important; 
+    margin-top: 5px;
+}
+
+.info-element-title {
+    margin-top: 16px;
+}
+
+.info-element-row {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-event-photo {
+    max-height: 300px;
+    max-width:100%;
+    height:100%;
+    width:auto;
+}
+
+.button-details {
+    margin-top: 15px;
+    margin-right: 15px;
+}

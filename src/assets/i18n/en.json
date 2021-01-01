@@ -38,7 +38,10 @@
         "VIEW": "View Profile"
     },
     "EVENT_ORGANIZER": {
-        "CREATE_EVENT": "Create Event"
+        "CREATE_EVENT": "Create Event",
+        "GENERAL_INFO": "General Information",
+        "GALERY": "Galery",
+        "PAST_EVENTS": "Past Events"
     },
     "SNACKBAR": {
         "END_NOW": "Close"
@@ -106,7 +109,7 @@
         "UPDATE": "Update"
     },
     "HOME_PAGE": {
-        "FUTURE_EVENTS": "Future events",
+        "FUTURE_EVENTS": "Future Events",
         "REGIONS": "Description of mountain regions",
         "FILTER_EVENTS": "Filter events",
         "FILTER_REGIONS": "Filter regions",

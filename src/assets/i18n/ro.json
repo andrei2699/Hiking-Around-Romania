@@ -38,7 +38,10 @@
         "VIEW": "Vezi Profil"
     },
     "EVENT_ORGANIZER": {
-        "CREATE_EVENT": "Creare Eveniment"
+        "CREATE_EVENT": "Creare Eveniment",
+        "GENERAL_INFO": "Informații Generale",
+        "GALERY": "Galerie",
+        "PAST_EVENTS": "Evenimente Trecute"
     },
     "SNACKBAR": {
         "END_NOW": "Închide"
@@ -106,7 +109,7 @@
         "UPDATE": "Modifică evenimentul"
     },
     "HOME_PAGE": {
-        "FUTURE_EVENTS": "Evenimente viitoare",
+        "FUTURE_EVENTS": "Evenimente Viitoare",
         "REGIONS": "Descrierea regiunilor montane",
         "FILTER_EVENTS": "Filtrează evenimentele",
         "FILTER_REGIONS": "Filtrează regiunile",

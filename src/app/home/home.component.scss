@@ -14,31 +14,6 @@
     width:100%;
 }
 
-.info-element-title {
-    margin-top: 16px;
-}
-
-.info-element-row {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.list-card {
-    background-color: mat-color($candy-app-primary, lighter) !important;
-}
-
-.main-event-photo {
-    max-height: 300px;
-    max-width:100%;
-    height:100%;
-    width:auto;
-}
-
-.button-details {
-    margin-top: 15px;
-    margin-right: 15px;
-}
-
 .search-field-regions {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -48,11 +23,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
     width: 80%;
-}
-
-.panel {
-    background-color:mat-color($candy-app-primary, darker) !important; 
-    margin-top: 5px;
 }
 
 .example-card {
@@ -100,8 +70,4 @@ h2 {
 .region-card-header {
     background-color: mat-color($candy-app-primary) !important;
     width: 100%;
-}
-
-.accordion {
-    width: 80%;
 }

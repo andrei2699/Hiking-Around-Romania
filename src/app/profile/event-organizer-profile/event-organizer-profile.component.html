@@ -24,38 +24,68 @@
     </div>
 </mat-toolbar>
 
-<div *ngIf="organizerProfile" fxLayout="column">
-    <mat-card class="profile-info">
-        <mat-card-title>
-            {{organizerProfile.name}}
-        </mat-card-title>
-        <p *ngIf="!isEditing">
-            <img class="profile-photo"
-                src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
-            {{organizerProfile.description}}
-        </p>
-        <div *ngIf="isEditing" fxLayout="row" fxLayoutAlign="start center">
-            <div fxLayout="column" fxLayoutAlign="start center">
-                <img class="profile-photo"
-                    src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
-                <input #profilePhotoFileInput id="uploadProfilePhoto" mat-button
-                    (change)="uploadPhoto($event.target.files)" hidden type="file"
-                    accept="image/x-png,image/gif,image/jpeg">
-                <button mat-button (click)="openProfilePhotoDialog()" fxLayout="row"
-                    fxLayoutAlign="space-between  center">
-                    <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
-                    <span>{{ 'PROFILE.UPLOAD' | translate }}</span>
-                </button>
-            </div>
-            <mat-form-field fxFlex>
-                <mat-label>{{ 'PROFILE.DESCRIPTION' | translate}} </mat-label>
-                <textarea cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="30" matInput
-                    placeholder="{{ 'PROFILE.EDIT_DESCRIPTION' | translate}}"
-                    [(ngModel)]="organizerProfile.description"></textarea>
-            </mat-form-field>
-        </div>
-    </mat-card>
+<mat-tab-group mat-stretch-tabs *ngIf="organizerProfile">
+    <mat-tab label="{{ 'EVENT_ORGANIZER.GENERAL_INFO' | translate }}">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-card class="profile-info">
+                <mat-card-title>
+                    {{organizerProfile.name}}
+                </mat-card-title>
+                <p *ngIf="!isEditing">
+                    <img class="profile-photo"
+                        src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
+                    {{organizerProfile.description}}
+                </p>
+                <div *ngIf="isEditing" fxLayout="row" fxLayoutAlign="start center">
+                    <div fxLayout="column" fxLayoutAlign="start start">
+                        <img class="profile-photo"
+                            src="{{organizerProfile.profilePhotoUrl ? organizerProfile.profilePhotoUrl : unavailableImageUrl}}">
+                        <input #profilePhotoFileInput id="uploadProfilePhoto" mat-button
+                            (change)="uploadPhoto($event.target.files)" hidden type="file"
+                            accept="image/x-png,image/gif,image/jpeg">
+                        <button mat-raised-button color="primary" (click)="openProfilePhotoDialog()" fxLayout="row"
+                            fxLayoutAlign="space-between center">
+                            <mat-icon aria-hidden="false" aria-label="Edit Icon">publish</mat-icon>
+                            <span>{{ 'PROFILE.UPLOAD' | translate }}</span>
+                        </button>
+                    </div>
+                    <mat-form-field fxFlex>
+                        <mat-label>{{ 'PROFILE.DESCRIPTION' | translate}} </mat-label>
+                        <textarea cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="30" matInput
+                            placeholder="{{ 'PROFILE.EDIT_DESCRIPTION' | translate}}"
+                            [(ngModel)]="organizerProfile.description"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-card>
 
-    <app-photo-array class="profile-info" [(photoUrlArray)]="organizerProfile.otherPhotosUrl" [isEditing]="isEditing"
-        (requestPhotoChange)="changeOtherPhoto($event)"></app-photo-array>
-</div>
+            <mat-accordion class="events-accordion">
+                <mat-expansion-panel class="toolbar-lighter-color" [expanded]="true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ 'HOME_PAGE.FUTURE_EVENTS' | translate }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <app-event-array [events]="futureEvents" [lighterColors]="true"></app-event-array>
+
+                </mat-expansion-panel>
+
+                <mat-expansion-panel class="toolbar-lighter-color" [ngStyle]="{'margin-top': '4px'}">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ 'EVENT_ORGANIZER.PAST_EVENTS' | translate}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <app-event-array [events]="pastEvents" [lighterColors]="true"></app-event-array>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="{{ 'EVENT_ORGANIZER.GALERY' | translate }}">
+        <app-photo-array class="profile-info" [(photoUrlArray)]="organizerProfile.otherPhotosUrl"
+            [isEditing]="isEditing" (requestPhotoChange)="changeOtherPhoto($event)"></app-photo-array>
+    </mat-tab>
+</mat-tab-group>

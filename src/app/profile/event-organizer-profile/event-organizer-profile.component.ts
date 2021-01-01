@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url'
+import { EventService } from 'src/app/events/event.service';
 
 @Component({
   selector: 'app-event-organizer-profile',
@@ -14,8 +15,18 @@ import { UNAVAILABLE_IMG_URL } from '../../unavailable_img_url'
 })
 export class EventOrganizerProfileComponent implements OnInit {
 
+  unavailableImageUrl = UNAVAILABLE_IMG_URL;
+
+  isEditing = false;
+  organizerProfile: EventOrganizerProfile;
+  isCurrentUser = false;
+
+  futureEvents;
+  pastEvents;
+
   constructor(public translate: TranslateService,
     private _authService: AuthenticationService,
+    private _eventService: EventService,
     private _profileService: ProfileService,
     private _route: ActivatedRoute,
     private _snackBar: MatSnackBar) { }
@@ -23,18 +34,11 @@ export class EventOrganizerProfileComponent implements OnInit {
 
   @ViewChild('profilePhotoFileInput') profilePhotoFileInput: ElementRef;
 
-  unavailableImageUrl = UNAVAILABLE_IMG_URL;
-
-  isEditing = false;
-  organizerProfile: EventOrganizerProfile;
-  isCurrentUser = false;
-
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
       const userId = params.get('userId');
       this._authService.checkIfIdBelongsToLoggedUser(userId)
         .subscribe(r => {
-          console.log(r)
           this.isCurrentUser = r;
         });
 
@@ -49,6 +53,15 @@ export class EventOrganizerProfileComponent implements OnInit {
               profilePhotoUrl: data.profilePhotoUrl ? data.profilePhotoUrl : "",
               otherPhotosUrl: data.otherPhotosUrl ? data.otherPhotosUrl : []
             };
+
+            this._eventService.getFutureEventsBelongingToOrganizer(userId).subscribe(events => {
+              this.futureEvents = events;
+            });
+
+            this._eventService.getPastEventsBelongingToOrganizer(userId).subscribe(events => {
+              this.pastEvents = events;
+            });
+
           } else {
             this.organizerProfile = undefined;
           }
