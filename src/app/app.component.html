@@ -2,17 +2,17 @@
   <a routerLink="/">{{title}}</a>
   <span fxFlex></span>
   <div>
-    <button *ngIf="!(authService.isLoggedIn | async) && (router.url == '/login' || router.url == '/register')"
+    <!-- <button *ngIf="!(authService.isLoggedIn | async) && (router.url == '/login' || router.url == '/register')"
       mat-button [routerLink]="['/']">
       <span>{{ 'AUTH.TO_MAIN_PAGE' | translate }}</span>
       <mat-icon class="margin-left-8">home</mat-icon>
-    </button>
+    </button> -->
     <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate
       }}</button>
     <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/register']">{{ 'AUTH.REGISTER' |
       translate }}</button>
 
-    <span *ngIf="(authService.isLoggedIn | async)">
+    <span *ngIf="(authService.isLoggedIn | async) && !isCurrentUserAnOrganizer">
       <button mat-button (click)="shoppingCartPreviewIsOpen = !shoppingCartPreviewIsOpen" cdkOverlayOrigin
         #trigger="cdkOverlayOrigin">
         <span>{{ 'SHOPPING.CART' | translate }}</span>
@@ -31,8 +31,7 @@
       <mat-icon class="margin-left-8">account_circle</mat-icon>
     </button>
 
-    <button *ngIf="(authService.isLoggedIn | async)" mat-icon-button [matMenuTriggerFor]="menu"
-      aria-label="Icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
 
@@ -49,7 +48,7 @@
         <mat-icon>language</mat-icon>
         <span>{{ 'SETTINGS.LANGUAGE' | translate }}</span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button *ngIf="(authService.isLoggedIn | async)" mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{ 'AUTH.LOGOUT' | translate }}</span>
       </button>

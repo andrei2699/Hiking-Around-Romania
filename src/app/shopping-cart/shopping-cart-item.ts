@@ -5,4 +5,5 @@ export class ShoppingCartItem {
     eventMainPhotoUrl: string;
     organizerName: string;
     organizerId: string;
+    reservedTickets: number;
 }
