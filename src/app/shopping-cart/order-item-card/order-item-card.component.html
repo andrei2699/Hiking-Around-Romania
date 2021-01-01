@@ -1,0 +1,55 @@
+<mat-card class="item-card" fxLayout="column">
+
+    <mat-card-title class="event-title" fxLayout="row" fxLayoutAlign="space-between center">
+        {{item.eventName}}
+
+        <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="space-evenly  center"
+            (click)="deleteCard()">
+            <mat-icon aria-hidden="false" aria-label="Edit Icon">delete</mat-icon>
+            <span>{{ 'SHOPPING_CART_PAGE.REMOVE' | translate }}</span>
+        </button>
+    </mat-card-title>
+
+    <mat-card-content fxLayout="row" fxLayoutAlign="start start">
+
+        <img *ngIf="item.eventMainPhotoUrl" class="main-event-photo" [src]="item.eventMainPhotoUrl">
+
+        <div class="details" fxLayout="column" fxLayoutAlign="space-between start">
+
+            <div fxLayout="row">
+                <mat-card-subtitle class="info-element-row">
+                    {{ 'EVENT_DETAILS.ORGANIZER_NAME' | translate}}:
+                </mat-card-subtitle>
+                <div>
+                    {{item.organizerName}}
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <mat-card-subtitle class="info-element-row">
+                    {{ 'EVENT_DETAILS.TOTAL_PRICE' | translate}}:
+                </mat-card-subtitle>
+                <div>
+                    {{reservationTotalPrice()}} LEI
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <mat-card-subtitle class="info-element-row">
+                    {{ 'EVENT_DETAILS.AVAILABLE_TICKETS' | translate}}:
+                </mat-card-subtitle>
+                <div>
+                    {{item.availableTickets}}
+                </div>
+            </div>
+
+            <mat-card-subtitle class="info-element-row">
+                {{ 'SHOPPING_CART_PAGE.NUMBER_OF_SELECTED_TICKETS' | translate}}:
+            </mat-card-subtitle>
+
+            <app-change-ticket-number [(ticketNumber)]="item.reservedTickets" [minNumber]="1"
+                [maxNumber]="item.availableTickets"></app-change-ticket-number>
+
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -71,7 +71,7 @@ export class EventDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result > 0) {
-        this._shoppingCartService.addItemToShoppingCart(this.eventDetails, result);
+        this._shoppingCartService.addItemToShoppingCart(this.eventDetails, result, this.pricesCalculatorService.getTotalPriceEvent(this.eventDetails));
       }
       this.numberOfTickets = result;
     });

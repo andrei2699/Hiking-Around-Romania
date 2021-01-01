@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ShoppingCartItem } from '../shopping-cart-item';
 import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
@@ -9,10 +10,15 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class ShoppingCartNavbarPreviewComponent implements OnInit {
 
+  shoppingCartItems;
+
   constructor(public shoppingCartService: ShoppingCartService,
     public translate: TranslateService) { }
 
   ngOnInit(): void {
+    this.shoppingCartService.getShoppingCartItems().subscribe(items => {
+      this.shoppingCartItems = items;
+    })
   }
 
 }

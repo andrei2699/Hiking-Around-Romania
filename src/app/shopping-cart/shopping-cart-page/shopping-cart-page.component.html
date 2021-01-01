@@ -1,1 +1,31 @@
-<p>shopping-cart-page works!</p>
+<div *ngIf="!shoppingCartItems || shoppingCartItems.length == 0">
+    <mat-card class="empty-card">
+        <mat-card-title class="move-right"> {{ 'SHOPPING_CART_PAGE.EMPTY_CART' | translate}}</mat-card-title>
+    </mat-card>
+</div>
+
+<div *ngIf="shoppingCartItems && shoppingCartItems.length > 0" fxLayout="column" fxLayoutAlign="space-evenly center">
+    <app-order-item-card class="item-card" *ngFor="let cartItem of shoppingCartItems" [item]="cartItem"
+        (deleteEvent)="removeCard($event)">
+    </app-order-item-card>
+
+    <mat-card class="order-card item-card">
+        <mat-card-title class="move-right"> {{ 'SHOPPING_CART_PAGE.ORDER_SUMMARY' | translate}}</mat-card-title>
+
+        <div fxLayout="row" class="info-element-row move-right">
+            <mat-card-subtitle>
+                {{ 'SHOPPING_CART_PAGE.TOTAL_ORDER_PRICE' | translate}}:
+            </mat-card-subtitle>
+            <div class="price">
+                {{totalOrderPrice()}} LEI
+            </div>
+        </div>
+
+        <mat-card-actions class="move-right">
+            <button mat-raised-button color="primary" (click)="placeOrder()">
+                {{ 'SHOPPING_CART_PAGE.PLACE_ORDER' | translate}}
+            </button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

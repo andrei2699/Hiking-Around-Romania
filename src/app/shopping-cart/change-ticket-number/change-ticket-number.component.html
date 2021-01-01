@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <button mat-mini-fab color="primary" aria-label="Decrease button" (click)="onMinusButtonClick()">
+        <mat-icon aria-hidden="false" aria-label="Edit Icon">remove</mat-icon>
+    </button>
+
+    <span class="span">{{ticketNumber}}</span>
+
+    <button mat-mini-fab color="primary" aria-label="Increase button" (click)="onPlusButtonClick()">
+        <mat-icon aria-hidden="false" aria-label="Edit Icon">add</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,36 @@
+@import '../../../custom-app-theme.scss';
+
+.item-card {
+    width:850px;
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+
+.order-card {
+    background-color: mat-color($candy-app-primary, lighter) !important;
+    height: 140px;
+    margin-bottom: 40px;
+    width: 826px;
+}
+
+.move-right{
+    margin-left: 20px;
+}
+
+.info-element-row {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.price {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.empty-card {
+    background-color: mat-color($candy-app-primary, lighter) !important;
+    width: 90%;
+    margin-left: 20px;
+    margin-top: 40px;
+}

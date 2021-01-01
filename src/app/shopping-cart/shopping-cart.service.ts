@@ -1,71 +1,137 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { ReplaySubject } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { EventDetails } from '../events/event-details';
+import { EventService } from '../events/event.service';
 import { ShoppingCartItem } from './shopping-cart-item'
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ShoppingCartService {
 
-  private orderedEvents: ShoppingCartItem[] = [
-    // {
-    //   eventId: "1444",
-    //   eventMainPhotoUrl: "https://firebasestorage.googleapis.com/v0/b/hiking-around-romania.appspot.com/o/profilePhotos%2FZTRhJ9YdxNbNtDsFKMi259FfMU63_2?alt=media&token=480a84a5-ceaa-43d2-841f-90e5c1ed6a3a",
-    //   eventName: "EventName1",
-    //   eventTotalPrice: 40,
-    //   organizerId: "4551515",
-    //   organizerName: "John Doe",
-    //   reservedTickets: 1
-    // },
-    // {
-    //   eventId: "1444",
-    //   eventMainPhotoUrl: "https://firebasestorage.googleapis.com/v0/b/hiking-around-romania.appspot.com/o/profilePhotos%2FZTRhJ9YdxNbNtDsFKMi259FfMU63_2?alt=media&token=480a84a5-ceaa-43d2-841f-90e5c1ed6a3a",
-    //   eventName: "EventName1",
-    //   eventTotalPrice: 40,
-    //   organizerId: "4551515",
-    //   organizerName: "John Doe",
-    //   reservedTickets: 30
-    // }
-  ];
+	cartItemsSubject = new ReplaySubject(1);
 
-  constructor(private _firestore: AngularFirestore,
-    private _authenticationService: AuthenticationService) { }
+	constructor(private _firestore: AngularFirestore,
+		private eventService: EventService,
+		private _authenticationService: AuthenticationService) { }
 
-  getShoppingCartItemCount() {
-    return this.orderedEvents.length;
-  }
+	getShoppingCartItems() {
 
-  getShoppingCartItems() {
-    return this.orderedEvents;
-  }
+		this._authenticationService.getCurrentUserId().subscribe(id => {
+			if (id) {
+				this._firestore.doc(`orders/${id}`).get().subscribe(res => {
+					if (res.data()) {
+						this.cartItemsSubject.next(res.data().events);
+					} else {
+						this.cartItemsSubject.next([]);
+					}
+				})
+			} else {
+				this.cartItemsSubject.next([]);
+			}
+		})
+		return this.cartItemsSubject;
+	}
 
-  hasItems() {
-    return this.orderedEvents.length > 0;
-  }
+	addItemToShoppingCart(event: EventDetails, ticketCount: number, totalPrice: number) {
+		const shoppingCartItem: ShoppingCartItem = {
+			eventId: event.eventId,
+			eventMainPhotoUrl: event.eventMainPhotoUrl,
+			eventName: event.eventName,
+			eventTotalPrice: totalPrice,
+			organizerId: event.organizerId,
+			organizerName: event.organizerName,
+			reservedTickets: ticketCount,
+			availableTickets: this.eventService.getAvailableTickets(event)
+		}
 
-  addItemToShoppingCart(event: EventDetails, ticketCount: number) {
-    const shoppingCartItem: ShoppingCartItem = {
-      eventId: event.eventId,
-      eventMainPhotoUrl: event.eventMainPhotoUrl,
-      eventName: event.eventName,
-      eventTotalPrice: event.eventPrice + event.transportPrice + event.accomodationPrice,
-      organizerId: event.organizerId,
-      organizerName: event.organizerName,
-      reservedTickets: ticketCount
-    }
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					var found = false;
+					if (!order) {
+						order = {};
+					}
+					if (order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							if (shoppingCartItem.eventId === order.events[i].eventId) {
+								order.events[i].reservedTickets += shoppingCartItem.reservedTickets;
+								found = true;
+								break;
+							}
+						}
+						if (!found) {
+							order.events.push(shoppingCartItem);
+						}
+					} else {
+						order.events = [];
+						order.events.push(shoppingCartItem);
+					}
 
-    this.orderedEvents.push(shoppingCartItem);
-    // this._authenticationService.getCurrentUserId().subscribe(userid => {
-    //   if (userid) {
-    //     this._firestore.doc(`orders/${userid}`).set(this.orderedEvents);
-    //   }
-    // })
-  }
+					this._firestore.doc(`orders/${userid}`).set(order).then();
+					this.cartItemsSubject.next(order.events);
+				});
+			}
+		})
+	}
 
-  completeOrder() {
-    this.orderedEvents = [];
-    console.log('Order Sent');
-  }
+	removeItem(shoppingCartItem: ShoppingCartItem) {
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					var found = false;
+					if (order && order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							if (shoppingCartItem.eventId === order.events[i].eventId) {
+								order.events.splice(i, 1);
+								found = true;
+								break;
+							}
+						}
+						if (found) {
+							this._firestore.doc(`orders/${userid}`).set(order).then(() => {
+
+								this.cartItemsSubject.next(order.events);
+
+							});
+						}
+					}
+				});
+			}
+		})
+	}
+
+	completeOrder() {
+		this._authenticationService.getCurrentUserId().subscribe(userid => {
+			if (userid) {
+				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
+					var order = o.data();
+					if (order && order.events) {
+						for (let i = 0; i < order.events.length; i++) {
+							this.eventService.updateEventReservedTickets(order.events[i].eventId, order.events[i].reservedTickets).subscribe();
+						}
+
+						this._firestore.doc(`completedOrders/${userid}`).get().subscribe(d => {
+							var data = d.data();
+							if (!data) {
+								data = { orders: [] };
+							}
+
+							data.orders.push(order);
+
+							this._firestore.doc(`completedOrders/${userid}`).set(data).then(() => {
+								this._firestore.doc(`orders/${userid}`).delete();
+								this.cartItemsSubject.next([]);
+							});
+						});
+					}
+				});
+			}
+		})
+	}
 }

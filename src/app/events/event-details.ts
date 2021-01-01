@@ -19,4 +19,5 @@ export class EventDetails {
     startDate: Date;
     endDate: Date;
     region: string;
+
 }

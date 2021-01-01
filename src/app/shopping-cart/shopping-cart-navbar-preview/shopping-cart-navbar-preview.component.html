@@ -2,16 +2,17 @@
 
 
     <cdk-virtual-scroll-viewport itemSize="20" class="preview-viewport">
-        <div *ngIf="!shoppingCartService.hasItems()" class="preview-item" fxLayout="row" fxLayoutAlign="center stretch">
+        <div *ngIf="!shoppingCartItems || shoppingCartItems.length == 0" class="preview-item" fxLayout="row"
+            fxLayoutAlign="center stretch">
             {{'SHOPPING.NO_ITEMS_IN_CART' | translate }}
         </div>
-        <div *cdkVirtualFor="let item of shoppingCartService.getShoppingCartItems()" class="preview-item">
+        <div *cdkVirtualFor="let item of shoppingCartItems" class="preview-item">
             <app-shopping-cart-item-preview [shoppingCartItem]="item">
             </app-shopping-cart-item-preview>
         </div>
     </cdk-virtual-scroll-viewport>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button [routerLink]="['/shopping-cart']" color="primary"
-            mat-raised-button>{{ 'SHOPPING.TO_SHOPPING_CART' | translate | uppercase}}</button>
+        <button [routerLink]="['/shopping-cart']" color="primary" mat-raised-button>{{ 'SHOPPING.TO_SHOPPING_CART' |
+            translate | uppercase}}</button>
     </mat-card-actions>
 </mat-card>
