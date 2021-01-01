@@ -39,10 +39,6 @@ export class EventService {
     }));
   }
 
-  getAvailableTickets(eventDetails) {
-    return eventDetails.totalTickets - eventDetails.reservedTickets;
-  }
-
   getAllEvents() {
     return this._firestore.collection('events').get().pipe(map(collection => collection.docs.map(document => {
       var eventDetails = <EventDetails>document.data();
