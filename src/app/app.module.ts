@@ -59,6 +59,8 @@ import { EventFilterPipe } from './pipes/event-filter.pipe';
 import { OrganizerFilterPipe } from './pipes/organizer-filter.pipe';
 import { RegionFilterPipe } from './pipes/region-filter.pipe';
 import { AddToShoppingCartDialogComponent } from './events/event-details/add-to-shopping-cart-dialog/add-to-shopping-cart-dialog.component';
+import { OrderItemCardComponent } from './shopping-cart/order-item-card/order-item-card.component';
+import { ChangeTicketNumberComponent } from './shopping-cart/change-ticket-number/change-ticket-number.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -87,6 +89,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     OrganizerFilterPipe,
     RegionFilterPipe,
     AddToShoppingCartDialogComponent,
+    OrderItemCardComponent,
+    ChangeTicketNumberComponent,
   ],
   imports: [
     BrowserAnimationsModule,

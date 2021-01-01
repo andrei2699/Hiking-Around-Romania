@@ -120,5 +120,13 @@
         "HOW_MANY_TICKETS": "Câte locuri doriți să selectați?",
         "SELECT_NUMBER_OF_TICKETS": "Alegeți numărul de locuri",
         "SELECT_TICKETS": "Selectați locuri"
+    },
+    "SHOPPING_CART_PAGE": {
+        "REMOVE": "Elimină",
+        "NUMBER_OF_SELECTED_TICKETS": "Numărul de locuri selectate",
+        "TOTAL_ORDER_PRICE": "Prețul total al comenzii",
+        "PLACE_ORDER": "Plasează comanda",
+        "ORDER_SUMMARY": "Sumarul comenzii",
+        "EMPTY_CART": "Coșul de cumpărături este gol"
     }
 }

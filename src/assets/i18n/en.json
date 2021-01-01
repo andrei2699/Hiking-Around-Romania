@@ -120,5 +120,13 @@
         "HOW_MANY_TICKETS": "How many tickets would you like to select?",
         "SELECT_NUMBER_OF_TICKETS": "Select number of tickets",
         "SELECT_TICKETS": "Select Tickets"
+    },
+    "SHOPPING_CART_PAGE": {
+        "REMOVE": "Remove",
+        "NUMBER_OF_SELECTED_TICKETS": "Number of selected tickets",
+        "TOTAL_ORDER_PRICE": "Total order price",
+        "PLACE_ORDER": "Place order",
+        "ORDER_SUMMARY": "Order summary",
+        "EMPTY_CART": "Empty cart"
     }
 }

@@ -1,0 +1,32 @@
+@import '../../../custom-app-theme.scss';
+
+.item-card {
+    background-color: mat-color($candy-app-primary, lighter) !important;
+    height: 400px;
+}
+
+.main-event-photo {
+    
+    max-height: 300px;
+    max-width:400px;
+    height:auto;
+    width:auto;
+    margin:20px !important;
+}
+
+.info-element-title {
+    margin-top: 0px;
+}
+
+.info-element-row {
+    margin-right: 10px;
+}
+
+.event-title {
+    margin-left:20px;
+}
+
+.details {
+    margin-top:20px;
+    margin-left: 20px;
+}
