@@ -36,6 +36,7 @@ export class CreateUpdateEventComponent implements OnInit {
 	markerCenter: google.maps.LatLngLiteral;
 	mapClicked = false;
 	regionNames = [];
+	waitingForImage = false;
 
 	constructor(
 		private _eventService: EventService,
@@ -58,7 +59,7 @@ export class CreateUpdateEventComponent implements OnInit {
 
 		this.createEventForm = this._formBuilder.group({
 			eventName: ['', [Validators.required]],
-			eventPrice: [''],
+			eventPrice: ['', [Validators.required]],
 			eventMainPhotoUrl: [''],
 			description: [''],
 			transport: ['', Validators.required],
@@ -106,6 +107,7 @@ export class CreateUpdateEventComponent implements OnInit {
 	}
 
 	uploadPhoto(files) {
+		this.waitingForImage = true;
 
 		if (this.eventDetails.eventId) {
 			this._eventService.uploadPhoto(this.eventDetails, files[0])
@@ -113,6 +115,7 @@ export class CreateUpdateEventComponent implements OnInit {
 					this._eventService.getPhoto(this.eventDetails)
 						.subscribe(res => {
 							this.eventDetails.eventMainPhotoUrl = res;
+							this.waitingForImage = false;
 						})
 				});
 		}
@@ -130,6 +133,7 @@ export class CreateUpdateEventComponent implements OnInit {
 							this._eventService.getPhoto(this.eventDetails)
 								.subscribe(res => {
 									this.eventDetails.eventMainPhotoUrl = res;
+									this.waitingForImage = false;
 								})
 						});
 				})

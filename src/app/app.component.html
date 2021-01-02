@@ -26,7 +26,7 @@
       </ng-template>
     </span>
 
-    <button *ngIf="(authService.isLoggedIn | async)" mat-button (click)="goToProfile()">
+    <button *ngIf="(authService.isLoggedIn | async) && isCurrentUserAnOrganizer" mat-button (click)="goToProfile()">
       <span>{{ 'PROFILE.VIEW' | translate }}</span>
       <mat-icon class="margin-left-8">account_circle</mat-icon>
     </button>

@@ -36,7 +36,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import * as firebase from 'firebase';
 import { AuthenticationService } from './authentication.service';
@@ -137,6 +137,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     CookieService,
