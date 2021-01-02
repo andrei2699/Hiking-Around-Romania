@@ -24,6 +24,8 @@ export class EventDetailsComponent implements OnInit {
   unavailablePhotoUrl = UNAVAILABLE_IMG_URL;
   showAddToCartButton = true;
   isCurrentUser = false;
+  hasReservations = false;
+  hasNoMoreAvailableTickets = false;
 
   constructor(
     public translate: TranslateService,
@@ -48,6 +50,10 @@ export class EventDetailsComponent implements OnInit {
       this.eventService.getEvent(eventId)
         .subscribe(eventDetails => {
           this.eventDetails = eventDetails;
+
+          this.hasReservations = this.eventDetails.reservedTickets > 0;
+          this.hasNoMoreAvailableTickets = this.eventService.getAvailableTickets(this.eventDetails) <= 0;
+
           var userId = this.eventDetails.organizerId;
           this._authService.checkIfIdBelongsToLoggedUser(userId)
             .subscribe(r => {

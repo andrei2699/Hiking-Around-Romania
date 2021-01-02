@@ -24,9 +24,12 @@
 
                         <mat-form-field appearance="fill" fxFlex=40>
                             <mat-label>{{ 'CREATE_EVENT.EVENT_PRICE' | translate }}</mat-label>
-                            <input matInput type="number" autocomplete="off" [formControlName]="'eventPrice'"
-                                name='eventPrice' [(ngModel)]='eventDetails.eventPrice'>
+                            <input matInput min="0" type="number" autocomplete="off" [formControlName]="'eventPrice'"
+                                name='eventPrice' [(ngModel)]='eventDetails.eventPrice' required>
                             <span matSuffix>RON</span>
+                            <mat-error *ngIf="createEventForm.get('eventPrice').errors?.required">{{
+                                'AUTH.ENTER_VALUE' | translate }}
+                            </mat-error>
                         </mat-form-field>
 
                     </div>
@@ -40,19 +43,18 @@
                                 <mat-option value="by_car">{{ 'CREATE_EVENT.BY_CAR' | translate }}</mat-option>
                                 <mat-option value="by_bus">{{ 'CREATE_EVENT.BY_BUS' | translate }}</mat-option>
                                 <mat-option value="by_train">{{ 'CREATE_EVENT.BY_TRAIN' | translate }}</mat-option>
-                                <mat-option value="individual">{{ 'CREATE_EVENT.INDIVIDUAL' | translate }}</mat-option>
+                                <!-- <mat-option value="individual">{{ 'CREATE_EVENT.INDIVIDUAL' | translate }}</mat-option> -->
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field appearance="fill" fxFlex=40>
                             <mat-label>{{ 'EVENT_DETAILS.TRANSPORT_PRICE' | translate }}</mat-label>
-                            <input matInput type="number" class="example-right-align" autocomplete="off"
+                            <input matInput min="0" type="number" class="example-right-align" autocomplete="off"
                                 [formControlName]="'transportPrice'" required name='transportPrice'
                                 [(ngModel)]='eventDetails.transportPrice'>
                             <span matSuffix>RON</span>
                             <mat-error *ngIf="createEventForm.get('transportPrice').errors?.required">{{
-                                'AUTH.ENTER_VALUE'
-                                | translate }}
+                                'AUTH.ENTER_VALUE' | translate }}
                             </mat-error>
                         </mat-form-field>
 
@@ -72,7 +74,7 @@
 
                         <mat-form-field appearance="fill" fxFlex=40>
                             <mat-label>{{ 'EVENT_DETAILS.ACCOMODATION_PRICE' | translate }}</mat-label>
-                            <input matInput type="number" class="example-right-align" autocomplete="off"
+                            <input matInput min="0" type="number" class="example-right-align" autocomplete="off"
                                 [formControlName]="'accomodationPrice'" required name='accomodationPrice'
                                 [(ngModel)]='eventDetails.accomodationPrice'>
                             <span matSuffix>RON</span>
@@ -91,7 +93,7 @@
 
                     <mat-form-field appearance="fill">
                         <mat-label>{{ 'EVENT_DETAILS.TOTAL_TICKETS' | translate }}</mat-label>
-                        <input matInput type="number" class="example-right-align" autocomplete="off"
+                        <input matInput min="1" type="number" class="example-right-align" autocomplete="off"
                             [formControlName]="'totalTickets'" required name='totalTickets'
                             [(ngModel)]='eventDetails.totalTickets'>
                         <mat-error *ngIf="createEventForm.get('totalTickets').errors?.required">{{ 'AUTH.ENTER_VALUE' |
@@ -146,7 +148,8 @@
         <mat-card class="lighter-card">
             <ng-template matStepLabel>{{ 'CREATE_EVENT.CHOOSE_PHOTO' | translate }}</ng-template>
             <div fxLayout="column" fxLayoutAlign="start center">
-                <img class="event-photo"
+                <mat-spinner class="spinner" *ngIf="waitingForImage"></mat-spinner>
+                <img *ngIf="!waitingForImage" class="event-photo"
                     src="{{eventDetails.eventMainPhotoUrl? eventDetails.eventMainPhotoUrl : unavailableImageUrl}}">
                 <input #eventPhotoFileInput id="uploadEventPhoto" mat-raised-button
                     (change)="uploadPhoto($event.target.files)" hidden type="file"

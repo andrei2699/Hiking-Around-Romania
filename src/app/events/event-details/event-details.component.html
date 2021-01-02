@@ -9,8 +9,8 @@
         <mat-card-title class="event-title" fxLayout="row" fxLayoutAlign="space-between center">
             {{eventDetails.eventName}}
 
-            <button mat-raised-button color="primary" *ngIf="isCurrentUser" (click)="updateEvent()" fxLayout="row"
-                fxLayoutAlign="space-evenly  center">
+            <button mat-raised-button [disabled]="hasReservations" color="primary" *ngIf="isCurrentUser"
+                (click)="updateEvent()" fxLayout="row" fxLayoutAlign="space-evenly  center">
                 <mat-icon aria-hidden="false" aria-label="Edit Icon">create</mat-icon>
                 <span>{{ 'PROFILE.EDIT' | translate }}</span>
             </button>
@@ -140,7 +140,8 @@
                     </mat-card-content>
 
                     <mat-card-actions *ngIf="showAddToCartButton" fxLayoutAlign="end stretch">
-                        <button mat-raised-button color="primary" (click)="openDialog()">
+                        <button mat-raised-button [disabled]="hasNoMoreAvailableTickets" color="primary"
+                            (click)="openDialog()">
                             {{ 'SHOPPING_CART_DIALOG.SELECT_TICKETS' | translate}}
                         </button>
                     </mat-card-actions>
