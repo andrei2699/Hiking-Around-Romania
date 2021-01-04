@@ -6,7 +6,8 @@
         "LOGIN": "Login",
         "REGISTER": "Register",
         "LOGOUT": "Logout",
-        "TO_MAIN_PAGE": "To Main Page"
+        "TO_MAIN_PAGE": "To Main Page",
+        "GOOGLE_LOGIN": "Sign In With Google"
     },
     "REGISTER": {
         "ENTER_NAME": "Enter your name",

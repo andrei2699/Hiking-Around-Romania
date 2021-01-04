@@ -2,11 +2,8 @@
   <a routerLink="/">{{title}}</a>
   <span fxFlex></span>
   <div>
-    <!-- <button *ngIf="!(authService.isLoggedIn | async) && (router.url == '/login' || router.url == '/register')"
-      mat-button [routerLink]="['/']">
-      <span>{{ 'AUTH.TO_MAIN_PAGE' | translate }}</span>
-      <mat-icon class="margin-left-8">home</mat-icon>
-    </button> -->
+    <button *ngIf="!(authService.isLoggedIn | async)" mat-button (click)="loginWithGoogle()">{{ 'AUTH.GOOGLE_LOGIN' |
+      translate }}</button>
     <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/login']">{{ 'AUTH.LOGIN' | translate
       }}</button>
     <button *ngIf="!(authService.isLoggedIn | async)" mat-button [routerLink]="['/register']">{{ 'AUTH.REGISTER' |
