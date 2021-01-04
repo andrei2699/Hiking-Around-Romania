@@ -41,23 +41,24 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.authSerivice.register(this.registerForm.get('name').value, this.registerForm.get('email').value, this.registerForm.get('password').value, this.registerForm.get('userType').value)
-      .then(() => {
+      .then((u) => {
         this._router.navigate(['/']);
-
         let successful_register_message;
-        this.translate.get('REGISTER.SUCCESSFUL_REGISTRATION').subscribe(msg => {successful_register_message = msg });
+        this.translate.get('REGISTER.SUCCESSFUL_REGISTRATION').subscribe(msg => { successful_register_message = msg });
         let end_message;
-        this.translate.get('SNACKBAR.END_NOW').subscribe(msg => {end_message = msg });
+        this.translate.get('SNACKBAR.END_NOW').subscribe(msg => { end_message = msg });
         this.openSnackBar(successful_register_message, end_message);
+        console.log(u);
+        this.authSerivice.updateUser();
       })
       .catch((error) => {
         if (error.code == "auth/email-already-in-use") {
           // this.showEmailInUseError();
 
           let register_error;
-          this.translate.get('REGISTER.EMAIL_USED').subscribe(msg => {register_error = msg });
+          this.translate.get('REGISTER.EMAIL_USED').subscribe(msg => { register_error = msg });
           let end_message;
-          this.translate.get('SNACKBAR.END_NOW').subscribe(msg => {end_message = msg });
+          this.translate.get('SNACKBAR.END_NOW').subscribe(msg => { end_message = msg });
           this.openSnackBar(register_error, end_message);
         }
       });
@@ -90,8 +91,7 @@ export class RegisterComponent implements OnInit {
     control.setErrors({ emailInUse: true });
   }
 
-  openSnackBar(success, end_now)
-  {
+  openSnackBar(success, end_now) {
     this._snackBar.open(success, end_now, {
       duration: 3000,
       horizontalPosition: this.horizontalPosition,

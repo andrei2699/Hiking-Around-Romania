@@ -6,7 +6,8 @@
         "LOGIN": "Autentificare",
         "REGISTER": "Înregistrare",
         "LOGOUT": "Delogare",
-        "TO_MAIN_PAGE": "Spre Pagina Principală"
+        "TO_MAIN_PAGE": "Spre Pagina Principală",
+        "GOOGLE_LOGIN": "Autentificare cu Google"
     },
     "REGISTER": {
         "ENTER_NAME": "Introduceți numele ",

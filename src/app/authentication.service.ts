@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { filter, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -19,6 +19,7 @@ export class AuthenticationService {
     private firestore: AngularFirestore) {
 
     firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
       this.currentUserBehaviorSubject.next(user);
       if (user) {
         // User is signed in.
@@ -40,6 +41,10 @@ export class AuthenticationService {
 
   }
 
+  updateUser() {
+    this.currentUserBehaviorSubject.next(firebase.auth().currentUser);
+  }
+
   checkIfIdBelongsToLoggedUser(idToBeTested) {
     return this.currentUserBehaviorSubject.pipe(map(user => {
       return user && user.uid == idToBeTested;
@@ -47,7 +52,38 @@ export class AuthenticationService {
   }
 
   login(email, password) {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return firebase.auth().signInWithEmailAndPassword(email, password).catch(er => console.log(er));
+  }
+
+  loginWithGoogle() {
+    return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(res => {
+        const userData = res.user;
+
+        return this.firestore.doc(`profiles/${userData.uid}`).get().pipe(switchMap(doc => {
+          const data = doc.data();
+          if (!data) {
+            return this.firebaseFunctions.httpsCallable('writeUserProfile')({
+              userId: userData.uid,
+              name: userData.displayName,
+              type: 'regular_user'
+            });
+          } else {
+            return of(null);
+          }
+        }));
+      });
+
+    // return this.firestore.doc(`profiles/${userData.uid}`).get().pipe(switchMap(profile => {
+    //   console.log(profile);
+    //   if (!profile) {
+    //     // return this.firebaseFunctions.httpsCallable('writeUserProfile')({
+    //     //   userId: userData.uid,
+    //     //   name: userData.displayName,
+    //     //   type: 'regular_user'
+    //     // })
+    //   }
+    // }));
   }
 
   register(name, email, password, userType) {

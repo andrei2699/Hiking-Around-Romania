@@ -56,6 +56,7 @@ export class AppComponent {
     })
 
     this.authService.isCurrentUserOrganizer().subscribe(isOrganizer => {
+      console.log(isOrganizer)
       this.isCurrentUserAnOrganizer = isOrganizer;
     })
   }
@@ -80,4 +81,14 @@ export class AppComponent {
     this.translate.use(lang)
     this._cookieService.set('language', lang);
   }
+
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle().then(obs => {
+      this.router.navigate(['/']);
+      obs.subscribe(r => {
+      })
+    });
+  }
+
 }

@@ -48,7 +48,7 @@ export class ShoppingCartService {
 			availableTickets: this.eventService.getAvailableTickets(event)
 		}
 
-		this._authenticationService.getCurrentUserId().subscribe(userid => {
+		const currentUserId = this._authenticationService.getCurrentUserId().subscribe(userid => {
 			if (userid) {
 				this._firestore.doc(`orders/${userid}`).get().subscribe(o => {
 					var order = o.data();
@@ -75,6 +75,9 @@ export class ShoppingCartService {
 					this._firestore.doc(`orders/${userid}`).set(order).then();
 					this.cartItemsSubject.next(order.events);
 				});
+			}
+			if (currentUserId) {
+				currentUserId.unsubscribe();
 			}
 		})
 	}
