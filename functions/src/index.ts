@@ -1,6 +1,5 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin'
-require('dotenv').config();
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 
